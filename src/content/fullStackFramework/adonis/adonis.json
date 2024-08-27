@@ -1,0 +1,8 @@
+{
+  "slug": "adonis",
+  "website": "https://adonisjs.com/",
+  "name": "Adonis",
+  "description": "Adonis is a fullstack framework that is built with Node.js. It is a MVC framework that is built on solid foundations and has a great community.",
+  "logo": "./adonis.png",
+  "language": "TypeScript"
+}
