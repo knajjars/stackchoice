@@ -17,7 +17,7 @@ const pageTitle = title ? title : `${SITE_TITLE} | ${SITE_SLOGAN}`;
 <!doctype html>
 <html lang="en">
   <Head title={pageTitle} description={description} image={image} />
-  <body class="p-4 min-h-screen flex flex-col">
+  <body class="flex min-h-screen flex-col p-4">
     <main class="flex-grow">
       <slot />
     </main>
