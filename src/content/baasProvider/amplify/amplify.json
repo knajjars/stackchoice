@@ -1,0 +1,7 @@
+{
+  "slug": "amplify",
+  "website": "https://aws.amazon.com/amplify/",
+  "name": "AWS Amplify",
+  "description": "AWS Amplify is a set of tools and services that enables mobile and front-end web developers to build secure, scalable full stack applications, powered by AWS.",
+  "logo": "./amplify.png"
+}

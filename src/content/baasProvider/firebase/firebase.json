@@ -1,0 +1,7 @@
+{
+  "slug": "firebase",
+  "website": "https://firebase.google.com/",
+  "name": "Firebase",
+  "description": "Firebase is a platform developed by Google for creating mobile and web applications.",
+  "logo": "./firebase.png"
+}

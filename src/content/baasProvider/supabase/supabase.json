@@ -1,0 +1,7 @@
+{
+  "slug": "supabase",
+  "website": "https://supabase.com/",
+  "name": "Supabase",
+  "description": "Supabase is an open-source Firebase alternative. Supabase adds realtime and restful APIs to Postgres without a single line of backend code.",
+  "logo": "./supabase.png"
+}

@@ -1,0 +1,7 @@
+{
+  "slug": "appwrite",
+  "website": "https://appwrite.io/",
+  "name": "Appwrite",
+  "description": "Appwrite is a secure end-to-end backend server for Web, Mobile, and Flutter developers that is packaged as a set of Docker containers for easy deployment.",
+  "logo": "./appwrite.png"
+}

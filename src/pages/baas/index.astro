@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 
 import MainLayout from "~/layouts/Layout.astro";
@@ -9,16 +10,27 @@ const baasProviders = (await getCollection("baasProvider")).sort((a, b) =>
 ---
 
 <MainLayout>
-  {
-    baasProviders.map((baasProvider) => (
-      <article class="prose overflow-visible">
-        <h2>
-          <a href={`/baas/${baasProvider.data.slug}`}>
-            {baasProvider.data.name}
-          </a>
-        </h2>
-        <p>{baasProvider.data.description}</p>
-      </article>
-    ))
-  }
+  <ul class="flex flex-col gap-y-5">
+    {
+      baasProviders.map((baasProvider) => (
+        <li>
+          <article class="overflow-visible">
+            <header class="flex items-center gap-x-2">
+              <Image
+                src={baasProvider.data.logo}
+                alt={baasProvider.data.name}
+                width={18}
+              />
+              <h2 class="text-lg font-bold">
+                <a href={`/baas/${baasProvider.data.slug}`}>
+                  {baasProvider.data.name}
+                </a>
+              </h2>
+            </header>
+            <p>{baasProvider.data.description}</p>
+          </article>
+        </li>
+      ))
+    }
+  </ul>
 </MainLayout>
