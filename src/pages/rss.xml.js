@@ -1,6 +1,7 @@
 import rss from "@astrojs/rss";
 import { getCollection } from "astro:content";
-import { SITE_TITLE, SITE_DESCRIPTION } from "~/consts";
+
+import { SITE_DESCRIPTION, SITE_TITLE } from "~/consts";
 
 export async function GET(context) {
   const baasProviders = await getCollection("baasProvider");
@@ -10,7 +11,7 @@ export async function GET(context) {
     site: context.site,
     items: baasProviders.map((baas) => ({
       ...baas.data,
-      link: `/blog/${post.slug}/`,
+      link: `/baas/${baas.data.slug}/`,
     })),
   });
 }
