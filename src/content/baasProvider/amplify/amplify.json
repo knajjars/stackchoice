@@ -2,6 +2,6 @@
   "slug": "amplify",
   "website": "https://aws.amazon.com/amplify/",
   "name": "AWS Amplify",
-  "description": "AWS Amplify is a set of tools and services that enables mobile and front-end web developers to build secure, scalable full stack applications, powered by AWS.",
+  "description": "AWS Amplify is one of the most complete backend as a service platforms that provides a set of tools and services for mobile and front-end web developers to build secure, scalable full stack applications, powered by AWS.",
   "logo": "./amplify.png"
 }

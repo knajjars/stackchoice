@@ -1,0 +1,39 @@
+---
+import { cn } from "~/lib/cn";
+
+const currentPath = Astro.url.pathname;
+
+const navItems = [
+  { href: "/baas-providers", label: "Backend Providers" },
+  { href: "/full-stack-frameworks", label: "Full-Stack Frameworks" },
+];
+---
+
+<header class="container mx-auto border-b-2 border-gray-200 py-6">
+  <nav class="flex flex-col items-center justify-between gap-y-4 sm:flex-row">
+    <a
+      href="/"
+      class="text-3xl font-bold text-purple-600 transition-colors hover:text-purple-700"
+      >StackChoice.dev</a
+    >
+    <ul class="flex space-x-6">
+      {
+        navItems.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class={cn(
+                "text-lg font-medium transition-colors hover:text-purple-500",
+                {
+                  "text-purple-500": currentPath.startsWith(item.href),
+                },
+              )}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>

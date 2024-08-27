@@ -1,0 +1,29 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+
+type Props = {
+  fullStackFramework: CollectionEntry<"fullStackFramework">;
+};
+
+const { fullStackFramework } = Astro.props;
+---
+
+<a href={`/full-stack-frameworks/${fullStackFramework.data.slug}`}>
+  <article
+    class="h-full overflow-visible rounded-lg border-2 p-3 transition-colors hover:border-purple-400 hover:bg-purple-300"
+  >
+    <header class="flex items-center gap-x-2 pb-4">
+      <Image
+        src={fullStackFramework.data.logo}
+        alt={fullStackFramework.data.name}
+        width={18}
+        loading="eager"
+      />
+      <h2 class="text-lg font-bold">
+        {fullStackFramework.data.name}
+      </h2>
+    </header>
+    <p>{fullStackFramework.data.description}</p>
+  </article>
+</a>

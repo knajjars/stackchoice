@@ -2,6 +2,6 @@
   "slug": "appwrite",
   "website": "https://appwrite.io/",
   "name": "Appwrite",
-  "description": "Appwrite is a secure end-to-end backend server for Web, Mobile, and Flutter developers that is packaged as a set of Docker containers for easy deployment.",
+  "description": "Appwrite is an open-source platform that provides authentication, databse, functions, storage and messaging for your project using your framework of choice.",
   "logo": "./appwrite.png"
 }

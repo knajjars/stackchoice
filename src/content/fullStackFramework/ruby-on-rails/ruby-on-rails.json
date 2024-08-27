@@ -1,0 +1,8 @@
+{
+  "slug": "ruby-on-rails",
+  "website": "https://rubyonrails.org/",
+  "name": "Ruby on Rails",
+  "description": "Ruby on Rails is a full-stack web framework that allows developers to build web applications from start to finish.",
+  "logo": "./ruby-on-rails.png",
+  "language": "Ruby"
+}

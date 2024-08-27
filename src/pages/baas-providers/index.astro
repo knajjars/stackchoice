@@ -1,14 +1,17 @@
 ---
 import { getCollection } from "astro:content";
-import BaaSProviderCard from "~/components/Baas/BaaSProviderCard.astro";
+import BaaSProviderCard from "~/components/BaaSProviderCard.astro";
 import MainLayout from "~/layouts/Layout.astro";
 
 const baasProviders = (await getCollection("baasProvider")).sort((a, b) =>
   a.data.name.localeCompare(b.data.name),
 );
+
+const pageTitle =
+  "Baas Providers" + " | List of Backend as a Service Providers";
 ---
 
-<MainLayout>
+<MainLayout title={pageTitle}>
   <div class="flex flex-col gap-y-5">
     <h1 class="text-2xl font-bold">Backend as a Service Providers</h1>
     <p>

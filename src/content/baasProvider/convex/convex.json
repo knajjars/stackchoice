@@ -2,6 +2,6 @@
   "slug": "convex",
   "website": "https://convex.dev/",
   "name": "Convex",
-  "description": "Convex is the open-source backend for application builders. An all-in-one platform with thoughtful, product-centric APIs.",
+  "description": "Convex is an open-source backend for application builders that want to focus on building their applications without having to worry about the underlying infrastructure.",
   "logo": "./convex.png"
 }

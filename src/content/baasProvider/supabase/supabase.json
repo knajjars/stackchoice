@@ -2,6 +2,6 @@
   "slug": "supabase",
   "website": "https://supabase.com/",
   "name": "Supabase",
-  "description": "Supabase is an open-source Firebase alternative. Supabase adds realtime and restful APIs to Postgres without a single line of backend code.",
+  "description": "Supabase is an open-source Firebase alternative. Supabase is a set of open-source tools and services that enables mobile and front-end web developers to build secure, scalable full stack applications, powered by Postgres.",
   "logo": "./supabase.png"
 }

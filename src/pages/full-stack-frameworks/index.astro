@@ -1,0 +1,31 @@
+---
+import { getCollection } from "astro:content";
+import FullStackFrameworkCard from "~/components/FullStackFrameworkCard.astro";
+import MainLayout from "~/layouts/Layout.astro";
+
+const fullStackFrameworks = (await getCollection("fullStackFramework")).sort(
+  (a, b) => a.data.name.localeCompare(b.data.name),
+);
+
+const pageTitle = "Full-Stack Frameworks" + " | List of Full-Stack Frameworks";
+---
+
+<MainLayout title={pageTitle}>
+  <div class="flex flex-col gap-y-5">
+    <h1 class="text-2xl font-bold">Full-Stack Frameworks</h1>
+    <p>
+      A full-stack framework is a collection of tools and technologies that
+      enable developers to build web applications from start to finish,
+      including the backend, frontend, and database.
+    </p>
+    <ul class="grid grid-cols-1 gap-5 md:grid-cols-3 xl:grid-cols-4">
+      {
+        fullStackFrameworks.map((fullStackFramework) => (
+          <li>
+            <FullStackFrameworkCard fullStackFramework={fullStackFramework} />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</MainLayout>
