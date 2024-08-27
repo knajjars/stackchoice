@@ -1,0 +1,30 @@
+---
+import { Image } from "astro:assets";
+
+type Props = {
+  url: string;
+  title: string;
+  image: {
+    src: string;
+    width: number;
+    height: number;
+    format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
+  };
+};
+
+const { url, title, image } = Astro.props;
+---
+
+<a href={url}>
+  <article
+    class="h-full overflow-visible rounded-lg border-2 p-3 transition-colors hover:border-purple-400 hover:bg-purple-300"
+  >
+    <header class="flex items-center gap-x-2 pb-4">
+      <Image src={image} alt={title} width={18} loading="eager" />
+      <h2 class="text-lg font-bold">
+        {title}
+      </h2>
+    </header>
+    <slot />
+  </article>
+</a>

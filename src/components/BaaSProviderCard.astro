@@ -1,6 +1,6 @@
 ---
-import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
+import Card from "~/components/Card.astro";
 
 type Props = {
   baasProvider: CollectionEntry<"baasProvider">;
@@ -9,21 +9,10 @@ type Props = {
 const { baasProvider } = Astro.props;
 ---
 
-<a href={`/baas-providers/${baasProvider.data.slug}`}>
-  <article
-    class="h-full overflow-visible rounded-lg border-2 p-3 transition-colors hover:border-purple-400 hover:bg-purple-300"
-  >
-    <header class="flex items-center gap-x-2 pb-4">
-      <Image
-        src={baasProvider.data.logo}
-        alt={baasProvider.data.name}
-        width={18}
-        loading="eager"
-      />
-      <h2 class="text-lg font-bold">
-        {baasProvider.data.name}
-      </h2>
-    </header>
-    <p>{baasProvider.data.description}</p>
-  </article>
-</a>
+<Card
+  url={`/baas-providers/${baasProvider.data.slug}`}
+  title={baasProvider.data.name}
+  image={baasProvider.data.logo}
+>
+  <p>{baasProvider.data.description}</p>
+</Card>
