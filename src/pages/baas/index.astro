@@ -1,7 +1,6 @@
 ---
-import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-
+import BaaSProviderCard from "~/components/Baas/BaaSProviderCard.astro";
 import MainLayout from "~/layouts/Layout.astro";
 
 const baasProviders = (await getCollection("baasProvider")).sort((a, b) =>
@@ -10,27 +9,21 @@ const baasProviders = (await getCollection("baasProvider")).sort((a, b) =>
 ---
 
 <MainLayout>
-  <ul class="flex flex-col gap-y-5">
-    {
-      baasProviders.map((baasProvider) => (
-        <li>
-          <article class="overflow-visible">
-            <header class="flex items-center gap-x-2">
-              <Image
-                src={baasProvider.data.logo}
-                alt={baasProvider.data.name}
-                width={18}
-              />
-              <h2 class="text-lg font-bold">
-                <a href={`/baas/${baasProvider.data.slug}`}>
-                  {baasProvider.data.name}
-                </a>
-              </h2>
-            </header>
-            <p>{baasProvider.data.description}</p>
-          </article>
-        </li>
-      ))
-    }
-  </ul>
+  <div class="flex flex-col gap-y-5">
+    <h1 class="text-2xl font-bold">Backend as a Service Providers</h1>
+    <p>
+      Backend as a Service (BaaS) providers offer a range of backend services
+      that allow developers to focus on building their applications without
+      having to worry about the underlying infrastructure.
+    </p>
+    <ul class="grid grid-cols-1 gap-5 md:grid-cols-3 xl:grid-cols-4">
+      {
+        baasProviders.map((baasProvider) => (
+          <li>
+            <BaaSProviderCard baasProvider={baasProvider} />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
 </MainLayout>

@@ -1,0 +1,29 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+
+type Props = {
+  baasProvider: CollectionEntry<"baasProvider">;
+};
+
+const { baasProvider } = Astro.props;
+---
+
+<a href={`/baas/${baasProvider.data.slug}`}>
+  <article
+    class="h-full overflow-visible rounded-lg border p-3 transition-colors hover:bg-slate-100"
+  >
+    <header class="flex items-center gap-x-2">
+      <Image
+        src={baasProvider.data.logo}
+        alt={baasProvider.data.name}
+        width={18}
+        loading="eager"
+      />
+      <h2 class="text-lg font-bold">
+        {baasProvider.data.name}
+      </h2>
+    </header>
+    <p>{baasProvider.data.description}</p>
+  </article>
+</a>
