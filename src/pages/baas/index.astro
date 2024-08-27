@@ -1,0 +1,24 @@
+---
+import { getCollection } from "astro:content";
+
+import MainLayout from "~/layouts/Layout.astro";
+
+const baasProviders = (await getCollection("baasProvider")).sort((a, b) =>
+  a.data.name.localeCompare(b.data.name),
+);
+---
+
+<MainLayout>
+  {
+    baasProviders.map((baasProvider) => (
+      <article class="prose overflow-visible">
+        <h2>
+          <a href={`/baas/${baasProvider.data.slug}`}>
+            {baasProvider.data.name}
+          </a>
+        </h2>
+        <p>{baasProvider.data.description}</p>
+      </article>
+    ))
+  }
+</MainLayout>

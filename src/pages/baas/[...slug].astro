@@ -1,0 +1,34 @@
+---
+import { Image } from "astro:assets";
+import { type CollectionEntry, getCollection } from "astro:content";
+import MainLayout from "~/layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const baasProviders = await getCollection("baasProvider");
+  return baasProviders.map((baas) => ({
+    params: { slug: baas.data.slug },
+    props: baas,
+  }));
+}
+type Props = CollectionEntry<"baasProvider">;
+
+const baasProvider = Astro.props;
+const pageTitle = baasProvider.data.name + " | Features, overview, and pricing";
+---
+
+<MainLayout {...baasProvider.data} title={pageTitle}>
+  <div class="flex flex-col gap-y-3">
+    <h1>{baasProvider.data.name}</h1>
+    <Image
+      src={baasProvider.data.logo}
+      alt={baasProvider.data.name}
+      format="webp"
+      loading="eager"
+      width={80}
+    />
+    <a target="_blank" href={baasProvider.data.website}
+      >{baasProvider.data.website}</a
+    >
+    <p>{baasProvider.data.description}</p>
+  </div>
+</MainLayout>
