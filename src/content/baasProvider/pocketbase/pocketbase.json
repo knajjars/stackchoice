@@ -3,5 +3,28 @@
   "website": "https://pocketbase.io/",
   "name": "Pocketbase",
   "description": "PocketBase is an open source backend consisting of embedded database (SQLite) with realtime subscriptions, built-in auth management, convenient dashboard UI and simple REST-ish API.",
-  "logo": "./pocketbase.png"
+  "logo": "./pocketbase.png",
+  "sdks": [],
+  "features": {
+    "authentication": {
+      "social": true,
+      "email": true,
+      "phone": true,
+      "magicLinks": true,
+      "saml": true,
+      "oidc": true,
+      "userManagement": true,
+      "freeMonthlyActiveUsers": 50000,
+      "pricePerExtraActiveUser": 0.1
+    },
+    "database": {},
+    "realtime": {},
+    "functions": {},
+    "selfHosted": {},
+    "storage": {},
+    "vectorDatabase": {},
+    "scheduledJobs": {},
+    "pushNotifications": {},
+    "permissions": {}
+  }
 }

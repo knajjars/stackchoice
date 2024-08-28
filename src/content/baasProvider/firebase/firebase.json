@@ -3,5 +3,28 @@
   "website": "https://firebase.google.com/",
   "name": "Firebase",
   "description": "Firebase is one of the most popular BaaS out there, it is developed by Google and has a wide range of services that can be used to build mobile and web applications.",
-  "logo": "./firebase.png"
+  "logo": "./firebase.png",
+  "sdks": [],
+  "features": {
+    "authentication": {
+      "social": true,
+      "email": true,
+      "phone": true,
+      "magicLinks": true,
+      "saml": true,
+      "oidc": true,
+      "userManagement": true,
+      "freeMonthlyActiveUsers": 50000,
+      "pricePerExtraActiveUser": 0.1
+    },
+    "database": {},
+    "realtime": {},
+    "functions": {},
+    "selfHosted": {},
+    "storage": {},
+    "vectorDatabase": {},
+    "scheduledJobs": {},
+    "pushNotifications": {},
+    "permissions": {}
+  }
 }

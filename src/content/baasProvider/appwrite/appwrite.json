@@ -3,5 +3,28 @@
   "website": "https://appwrite.io/",
   "name": "Appwrite",
   "description": "Appwrite is an open-source platform that provides authentication, databse, functions, storage and messaging for your project using your framework of choice.",
-  "logo": "./appwrite.png"
+  "logo": "./appwrite.png",
+  "sdks": [],
+  "features": {
+    "authentication": {
+      "social": true,
+      "email": true,
+      "phone": true,
+      "magicLinks": true,
+      "saml": true,
+      "oidc": true,
+      "userManagement": true,
+      "freeMonthlyActiveUsers": 50000,
+      "pricePerExtraActiveUser": 0.1
+    },
+    "database": {},
+    "realtime": {},
+    "functions": {},
+    "selfHosted": {},
+    "storage": {},
+    "vectorDatabase": {},
+    "scheduledJobs": {},
+    "pushNotifications": {},
+    "permissions": {}
+  }
 }

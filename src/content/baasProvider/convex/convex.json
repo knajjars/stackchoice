@@ -3,5 +3,28 @@
   "website": "https://convex.dev/",
   "name": "Convex",
   "description": "Convex is an open-source backend for application builders that want to focus on building their applications without having to worry about the underlying infrastructure.",
-  "logo": "./convex.png"
+  "logo": "./convex.png",
+  "sdks": [],
+  "features": {
+    "authentication": {
+      "social": true,
+      "email": true,
+      "phone": true,
+      "magicLinks": true,
+      "saml": true,
+      "oidc": true,
+      "userManagement": true,
+      "freeMonthlyActiveUsers": 50000,
+      "pricePerExtraActiveUser": 0.1
+    },
+    "database": {},
+    "realtime": {},
+    "functions": {},
+    "selfHosted": {},
+    "storage": {},
+    "vectorDatabase": {},
+    "scheduledJobs": {},
+    "pushNotifications": {},
+    "permissions": {}
+  }
 }
