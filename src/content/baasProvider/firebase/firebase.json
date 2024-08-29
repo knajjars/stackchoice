@@ -11,8 +11,7 @@
       "email": true,
       "phone": true,
       "magicLinks": true,
-      "saml": true,
-      "oidc": true,
+      "sso": true,
       "userManagement": true,
       "freeMonthlyActiveUsers": 50000,
       "pricePerExtraActiveUser": 0.1

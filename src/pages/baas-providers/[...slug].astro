@@ -2,6 +2,10 @@
 import { Image } from "astro:assets";
 import { type CollectionEntry, getCollection } from "astro:content";
 import MainLayout from "~/layouts/Layout.astro";
+import Accordion from "~/components/Accordion.astro";
+import FeatureList from "~/components/FeatureList.astro";
+import startCase from "lodash/startCase";
+import { Icon } from "astro-icon/components";
 
 export async function getStaticPaths() {
   const baasProviders = await getCollection("baasProvider");
@@ -17,18 +21,46 @@ const pageTitle = baasProvider.data.name + " | Features, overview, and pricing";
 ---
 
 <MainLayout {...baasProvider.data} title={pageTitle}>
-  <div class="flex flex-col gap-y-3">
-    <h1>{baasProvider.data.name}</h1>
-    <Image
-      src={baasProvider.data.logo}
-      alt={baasProvider.data.name}
-      format="webp"
-      loading="eager"
-      width={80}
-    />
-    <a target="_blank" href={baasProvider.data.website}
-      >{baasProvider.data.website}</a
-    >
-    <p>{baasProvider.data.description}</p>
+  <div class="container mx-auto px-4 py-12">
+    <div class="grid grid-cols-1 gap-12 md:grid-cols-3">
+      <div class="flex flex-col items-center gap-y-3">
+        <Image
+          src={baasProvider.data.logo}
+          alt={baasProvider.data.name}
+          format="webp"
+          loading="eager"
+          width={200}
+          class="mb-6"
+        />
+        <a
+          target="_blank"
+          href={baasProvider.data.website}
+          class="flex items-center gap-2 text-lg text-blue-600 transition-colors duration-300 hover:text-blue-800 hover:underline"
+        >
+          Visit Website
+          <Icon name="mdi:external-link" class="size-5" />
+        </a>
+      </div>
+      <div class="md:col-span-2">
+        <h1 class="mb-6 text-4xl font-bold text-gray-800">
+          {baasProvider.data.name}
+        </h1>
+        <p class="mb-8 text-xl leading-relaxed text-gray-600">
+          {baasProvider.data.description}
+        </p>
+        <h2 class="mb-4 text-2xl font-semibold text-gray-700">Features</h2>
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+          {
+            Object.entries(baasProvider.data.features).map(
+              ([feature, details]) => (
+                <Accordion title={startCase(feature)}>
+                  <FeatureList features={details} />
+                </Accordion>
+              ),
+            )
+          }
+        </div>
+      </div>
+    </div>
   </div>
 </MainLayout>

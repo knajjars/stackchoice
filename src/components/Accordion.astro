@@ -1,0 +1,38 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<div
+  class="h-fit max-w-96 overflow-hidden rounded-lg border-2 border-gray-200 shadow-sm hover:border-purple-500"
+>
+  <input type="checkbox" id={`accordion-toggle/${title}`} class="peer hidden" />
+  <label
+    for={`accordion-toggle/${title}`}
+    class="relative block cursor-pointer p-3 font-semibold"
+  >
+    <span>{title}</span>
+    <Icon
+      name="mdi:chevron-down"
+      class="absolute right-4 top-1/2 -translate-y-1/2 transform transition-transform duration-200"
+    />
+  </label>
+  <div
+    class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out peer-checked:max-h-96"
+  >
+    <div class="p-3">
+      <slot />
+    </div>
+  </div>
+</div>
+
+<style>
+  .peer:checked ~ label > svg {
+    @apply rotate-180;
+  }
+</style>

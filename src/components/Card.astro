@@ -17,7 +17,7 @@ const { url, title, image } = Astro.props;
 
 <a href={url}>
   <article
-    class="h-full overflow-visible rounded-lg border-2 p-3 transition-colors hover:border-purple-400 hover:bg-purple-300"
+    class="h-full overflow-visible rounded-lg border-2 bg-purple-100 p-3 transition-colors duration-300 hover:border-purple-400 hover:bg-purple-300"
   >
     <header class="flex items-center gap-x-2 pb-4">
       <Image src={image} alt={title} width={18} loading="eager" />

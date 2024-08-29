@@ -1,0 +1,38 @@
+---
+import { Icon } from "astro-icon/components";
+import startCase from "lodash/startCase";
+
+type Props = {
+  features: Record<string, any>;
+};
+
+const { features } = Astro.props as Props;
+
+const featureKeys = Object.keys(features);
+---
+
+{
+  featureKeys.map((key) => {
+    return features[key] ? (
+      <div class="flex items-center gap-2">
+        <Icon name="mdi:check-all" class="text-purple-600" />
+        <span
+          class="text-purple-600"
+          aria-label={`${startCase(key)} is available`}
+        >
+          {startCase(key)}
+        </span>
+      </div>
+    ) : (
+      <div class="flex items-center gap-2">
+        <Icon name="mdi:cross-circle-outline" class="text-slate-400" />
+        <span
+          class="text-slate-400"
+          aria-label={`${startCase(key)} is not available`}
+        >
+          {startCase(key)}
+        </span>
+      </div>
+    );
+  })
+}

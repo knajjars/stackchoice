@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --open",
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
@@ -16,14 +16,18 @@
     "@astrojs/sitemap": "^3.1.6",
     "@astrojs/tailwind": "^5.1.0",
     "@fontsource-variable/quicksand": "^5.0.19",
+    "@iconify-json/mdi": "^1.1.68",
     "@tailwindcss/typography": "^0.5.14",
     "astro": "^4.14.5",
+    "astro-icon": "^1.1.1",
     "clsx": "^2.1.1",
+    "lodash": "^4.17.21",
     "tailwind-merge": "^2.5.2",
     "tailwindcss": "^3.4.10",
     "typescript": "^5.5.4"
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.7",
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.6.6"
