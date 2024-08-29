@@ -49,16 +49,38 @@ const pageTitle = baasProvider.data.name + " | Features, overview, and pricing";
           {baasProvider.data.description}
         </p>
         <h2 class="mb-4 text-2xl font-semibold text-gray-700">Features</h2>
-        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-          {
-            Object.entries(baasProvider.data.features).map(
-              ([feature, details]) => (
-                <Accordion title={startCase(feature)}>
-                  <FeatureList features={details} />
-                </Accordion>
-              ),
-            )
-          }
+        <div class="flex w-full flex-col gap-4 md:flex-row">
+          <div class="flex flex-1 flex-col gap-4">
+            {
+              Object.entries(baasProvider.data.features)
+                .slice(
+                  0,
+                  Math.ceil(
+                    Object.entries(baasProvider.data.features).length / 2,
+                  ),
+                )
+                .map(([feature, details]) => (
+                  <Accordion title={startCase(feature)}>
+                    <FeatureList features={details} />
+                  </Accordion>
+                ))
+            }
+          </div>
+          <div class="flex flex-1 flex-col gap-4">
+            {
+              Object.entries(baasProvider.data.features)
+                .slice(
+                  Math.ceil(
+                    Object.entries(baasProvider.data.features).length / 2,
+                  ),
+                )
+                .map(([feature, details]) => (
+                  <Accordion title={startCase(feature)}>
+                    <FeatureList features={details} />
+                  </Accordion>
+                ))
+            }
+          </div>
         </div>
       </div>
     </div>

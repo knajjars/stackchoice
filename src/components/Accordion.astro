@@ -9,7 +9,7 @@ const { title } = Astro.props;
 ---
 
 <div
-  class="h-fit max-w-96 overflow-hidden rounded-lg border-2 border-gray-200 shadow-sm hover:border-purple-500"
+  class="h-fit overflow-hidden rounded-lg border-2 border-gray-200 shadow-sm hover:border-purple-500 md:max-w-96"
 >
   <input type="checkbox" id={`accordion-toggle/${title}`} class="peer hidden" />
   <label
