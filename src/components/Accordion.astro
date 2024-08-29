@@ -8,20 +8,18 @@ interface Props {
 const { title } = Astro.props;
 ---
 
-<div
-  class="h-fit overflow-hidden rounded-lg border-2 border-gray-200 shadow-sm hover:border-purple-500 md:max-w-96"
+<label
+  class="h-fit cursor-pointer overflow-hidden rounded-lg border-2 border-gray-200 shadow-sm hover:border-purple-500 md:max-w-96"
+  for={`accordion-toggle/${title}`}
 >
   <input type="checkbox" id={`accordion-toggle/${title}`} class="peer hidden" />
-  <label
-    for={`accordion-toggle/${title}`}
-    class="relative block cursor-pointer p-3 font-semibold"
-  >
+  <div class="relative block p-3 font-semibold">
     <span>{title}</span>
     <Icon
       name="mdi:chevron-down"
       class="absolute right-4 top-1/2 -translate-y-1/2 transform transition-transform duration-200"
     />
-  </label>
+  </div>
   <div
     class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out peer-checked:max-h-96"
   >
@@ -29,7 +27,7 @@ const { title } = Astro.props;
       <slot />
     </div>
   </div>
-</div>
+</label>
 
 <style>
   .peer:checked ~ label > svg {
