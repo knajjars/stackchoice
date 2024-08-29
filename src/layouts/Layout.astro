@@ -51,7 +51,7 @@ const pageTitle = title ? title : `${SITE_TITLE} | ${SITE_SLOGAN}`;
     <meta property="twitter:image" content={new URL(image, Astro.url)} />
     <ViewTransitions />
   </head>
-  <body class="flex min-h-screen flex-col bg-purple-50">
+  <body class="flex min-h-screen flex-col overflow-x-hidden bg-purple-50">
     <Header />
     <main class="flex-grow overflow-y-auto">
       <div class="container mx-auto my-8 p-4">
