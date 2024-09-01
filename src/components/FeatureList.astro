@@ -15,9 +15,9 @@ const featureKeys = Object.keys(features);
   featureKeys.map((key) => {
     return features[key] ? (
       <div class="flex items-center gap-2">
-        <Icon name="mdi:check-all" class="text-purple-600" />
+        <Icon name="mdi:check-all" class="text-green-700" />
         <span
-          class="text-purple-600"
+          class="text-green-700"
           aria-label={`${startCase(key)} is available`}
         >
           {startCase(key)}

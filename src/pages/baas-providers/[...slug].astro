@@ -18,6 +18,10 @@ type Props = CollectionEntry<"baasProvider">;
 
 const baasProvider = Astro.props;
 const pageTitle = baasProvider.data.name + " | Features, overview, and pricing";
+
+function hasEnabledFeatures(details: Record<string, unknown>): boolean {
+  return Object.values(details).some((value) => value === true);
+}
 ---
 
 <MainLayout {...baasProvider.data} title={pageTitle}>
@@ -60,7 +64,21 @@ const pageTitle = baasProvider.data.name + " | Features, overview, and pricing";
                   ),
                 )
                 .map(([feature, details]) => (
-                  <Accordion title={startCase(feature)}>
+                  <Accordion
+                    key={feature}
+                    canOpen={hasEnabledFeatures(details)}
+                  >
+                    <slot slot="title">
+                      <Icon
+                        name={
+                          hasEnabledFeatures(details)
+                            ? "mdi:check-circle"
+                            : "mdi:close-circle"
+                        }
+                        class={`mr-2 inline-block ${hasEnabledFeatures(details) ? "text-green-500" : "text-red-500"}`}
+                      />
+                      <span>{startCase(feature)}</span>
+                    </slot>
                     <FeatureList features={details} />
                   </Accordion>
                 ))
@@ -75,7 +93,21 @@ const pageTitle = baasProvider.data.name + " | Features, overview, and pricing";
                   ),
                 )
                 .map(([feature, details]) => (
-                  <Accordion title={startCase(feature)}>
+                  <Accordion
+                    key={feature}
+                    canOpen={hasEnabledFeatures(details)}
+                  >
+                    <slot slot="title">
+                      <Icon
+                        name={
+                          hasEnabledFeatures(details)
+                            ? "mdi:check-circle"
+                            : "mdi:close-circle"
+                        }
+                        class={`mr-2 inline-block ${hasEnabledFeatures(details) ? "text-green-500" : "text-red-500"}`}
+                      />
+                      <span>{startCase(feature)}</span>
+                    </slot>
                     <FeatureList features={details} />
                   </Accordion>
                 ))

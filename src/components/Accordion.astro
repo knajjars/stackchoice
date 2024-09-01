@@ -1,29 +1,46 @@
 ---
 import { Icon } from "astro-icon/components";
+import { cn } from "~/lib/cn";
 
 interface Props {
-  title: string;
+  key: string;
+  canOpen?: boolean;
 }
 
-const { title } = Astro.props;
+const { key, canOpen = true } = Astro.props;
 ---
 
 <label
-  class="h-fit cursor-pointer overflow-hidden rounded-lg border-2 border-gray-200 shadow-sm hover:border-purple-500 md:max-w-96"
-  for={`accordion-toggle/${title}`}
+  class={cn(
+    "h-fit overflow-hidden rounded-lg border-2 border-gray-200 shadow-sm md:max-w-96",
+    {
+      "cursor-pointer hover:border-purple-500": canOpen,
+      "hover:border-slate-500": !canOpen,
+    },
+  )}
+  for={`accordion-toggle/${key}`}
 >
-  <input type="checkbox" id={`accordion-toggle/${title}`} class="peer hidden" />
+  <input
+    type="checkbox"
+    id={`accordion-toggle/${key}`}
+    class="peer hidden"
+    disabled={!canOpen}
+  />
   <div class="relative block select-none p-3 font-semibold">
-    <span>{title}</span>
-    <Icon
-      name="mdi:chevron-down"
-      class="absolute right-4 top-1/2 -translate-y-1/2 transform transition-transform duration-200"
-    />
+    <slot name="title" />
+    {
+      canOpen && (
+        <Icon
+          name="mdi:chevron-down"
+          class="absolute right-4 top-1/2 -translate-y-1/2 transform transition-transform duration-200"
+        />
+      )
+    }
   </div>
   <div
     class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out peer-checked:max-h-96"
   >
-    <div class="p-3">
+    <div class="px-3 pb-3">
       <slot />
     </div>
   </div>
