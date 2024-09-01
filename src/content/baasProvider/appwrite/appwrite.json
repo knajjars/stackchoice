@@ -5,7 +5,21 @@
   "description": "Appwrite is an open-source platform that provides authentication, databse, functions, storage and messaging for your project using your framework of choice.",
   "logo": "./appwrite.png",
   "repository": "https://github.com/appwrite/appwrite",
-  "sdks": [],
+  "sdks": [
+    "JavaScript",
+    "Flutter",
+    "React Native",
+    "Swift",
+    "Kotlin",
+    "Node",
+    "Python",
+    "Dart",
+    "PHP",
+    "Ruby",
+    ".NET",
+    "Deno",
+    "Go"
+  ],
   "features": {
     "authentication": {
       "social": true,

@@ -5,7 +5,14 @@
   "description": "Supabase is an open-source Firebase alternative. Supabase is a set of open-source tools and services that enables mobile and front-end web developers to build secure, scalable full stack applications, powered by Postgres.",
   "logo": "./supabase.png",
   "repository": "https://github.com/supabase/supabase",
-  "sdks": [],
+  "sdks": [
+    "JavaScript",
+    "C#",
+    "Flutter",
+    "Swift",
+    "Python",
+    "Kotlin"
+  ],
   "features": {
     "authentication": {
       "social": true,

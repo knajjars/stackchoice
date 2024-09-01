@@ -6,6 +6,7 @@ import Accordion from "~/components/Accordion.astro";
 import FeatureList from "~/components/FeatureList.astro";
 import startCase from "lodash/startCase";
 import { Icon } from "astro-icon/components";
+import Pill from "~/components/Pill.astro";
 
 export async function getStaticPaths() {
   const baasProviders = await getCollection("baasProvider");
@@ -64,6 +65,10 @@ function hasEnabledFeatures(details: Record<string, unknown>): boolean {
         <p class="mb-8 text-xl leading-relaxed text-gray-600">
           {baasProvider.data.description}
         </p>
+        <h2 class="mb-4 text-2xl font-semibold text-gray-700">Official SDKs</h2>
+        <div class="mb-8 flex flex-wrap gap-2">
+          {baasProvider.data.sdks.map((sdk) => <Pill text={sdk} />)}
+        </div>
         <h2 class="mb-4 text-2xl font-semibold text-gray-700">Features</h2>
         <div class="flex w-full flex-col gap-4 md:flex-row">
           <div class="flex flex-1 flex-col gap-4">

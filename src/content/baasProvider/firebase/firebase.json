@@ -5,9 +5,16 @@
   "description": "Firebase is one of the most popular BaaS out there, it is developed by Google and has a wide range of services that can be used to build mobile and web applications.",
   "logo": "./firebase.png",
   "sdks": [
+    "Node",
+    "Go",
+    "Python",
+    "Java",
+    "Angular",
+    "Vue",
+    "React Native",
+    "Embed",
     "JavaScript",
-    "Android",
-    "iOS",
+    "Swift",
     "Unity",
     "C++"
   ],

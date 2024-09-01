@@ -14,7 +14,7 @@ const featureKeys = Object.keys(features);
 {
   featureKeys.map((key) => {
     return features[key] ? (
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-x-3">
         <Icon name="mdi:check-all" class="flex-shrink-0 text-green-700" />
         <span
           class="text-green-700"
@@ -26,7 +26,7 @@ const featureKeys = Object.keys(features);
         </span>
       </div>
     ) : (
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-x-3">
         <Icon
           name="mdi:cross-circle-outline"
           class="flex-shrink-0 text-slate-400"
