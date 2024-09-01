@@ -39,7 +39,7 @@
     },
     "hosting": {
       "selfHosting": true,
-      "cloudHosting": false
+      "cloudHosting": true
     },
     "storage": {
       "fileUpload": true,
