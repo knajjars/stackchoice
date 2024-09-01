@@ -12,18 +12,57 @@
       "phone": true,
       "magicLinks": true,
       "sso": true,
-      "userManagement": true,
-      "freeMonthlyActiveUsers": 50000,
-      "pricePerExtraActiveUser": 0.1
+      "userManagement": true
     },
-    "database": {},
-    "realtime": {},
-    "functions": {},
-    "selfHosted": {},
-    "storage": {},
-    "vectorDatabase": {},
-    "scheduledJobs": {},
-    "pushNotifications": {},
-    "permissions": {}
+    "database": {
+      "relations": true,
+      "migrations": true,
+      "search": true
+    },
+    "realtime": {
+      "pubsub": true,
+      "realtimeDatabase": true
+    },
+    "functions": {
+      "triggers": true,
+      "runtime": [
+        "deno"
+      ]
+    },
+    "selfHosted": {
+      "repository": "https://github.com/supabase/supabase"
+    },
+    "storage": {
+      "fileUpload": true,
+      "cdn": true,
+      "imageProcessing": true
+    },
+    "vectorDatabase": {
+      "embedding": true,
+      "similarity": true
+    },
+    "jobs": {
+      "queueing": false,
+      "scheduling": false
+    },
+    "scheduledJobs": {
+      "queueing": false,
+      "scheduling": false
+    },
+    "pushNotifications": {
+      "ios": false,
+      "android": false
+    },
+    "permissions": {
+      "rbac": true,
+      "customRules": true,
+      "rowLevelSecurity": true
+    },
+    "compliances": {
+      "hipaa": true,
+      "gdpr": true,
+      "soc2": true,
+      "pci": true
+    }
   }
 }

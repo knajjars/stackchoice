@@ -11,19 +11,66 @@
       "email": true,
       "phone": true,
       "magicLinks": true,
-      "sso": true,
-      "userManagement": true,
-      "freeMonthlyActiveUsers": 50000,
-      "pricePerExtraActiveUser": 0.1
+      "sso": false,
+      "userManagement": true
     },
-    "database": {},
-    "realtime": {},
-    "functions": {},
-    "selfHosted": {},
-    "storage": {},
-    "vectorDatabase": {},
-    "scheduledJobs": {},
-    "pushNotifications": {},
-    "permissions": {}
+    "database": {
+      "relations": true,
+      "migrations": false,
+      "search": true
+    },
+    "realtime": {
+      "pubsub": true,
+      "realtimeDatabase": true
+    },
+    "functions": {
+      "triggers": true,
+      "runtime": [
+        "node",
+        "bun",
+        "deno",
+        "go",
+        "python",
+        "dart",
+        "php",
+        "ruby",
+        ".net",
+        "java",
+        "swift",
+        "kotlin",
+        "c++"
+      ]
+    },
+    "selfHosted": {
+      "repository": "https://github.com/appwrite/appwrite"
+    },
+    "vectorDatabase": {
+      "embedding": false,
+      "similarity": false
+    },
+    "storage": {
+      "fileUpload": true,
+      "cdn": true,
+      "imageProcessing": true
+    },
+    "jobs": {
+      "queueing": false,
+      "scheduling": true
+    },
+    "pushNotifications": {
+      "ios": true,
+      "android": true
+    },
+    "permissions": {
+      "rbac": true,
+      "customRules": true,
+      "rowLevelSecurity": true
+    },
+    "compliances": {
+      "hipaa": true,
+      "gdpr": true,
+      "soc2": true,
+      "pci": true
+    }
   }
 }

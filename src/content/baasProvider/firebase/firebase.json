@@ -4,7 +4,13 @@
   "name": "Firebase",
   "description": "Firebase is one of the most popular BaaS out there, it is developed by Google and has a wide range of services that can be used to build mobile and web applications.",
   "logo": "./firebase.png",
-  "sdks": [],
+  "sdks": [
+    "JavaScript",
+    "Android",
+    "iOS",
+    "Unity",
+    "C++"
+  ],
   "features": {
     "authentication": {
       "social": true,
@@ -12,18 +18,54 @@
       "phone": true,
       "magicLinks": true,
       "sso": true,
-      "userManagement": true,
-      "freeMonthlyActiveUsers": 50000,
-      "pricePerExtraActiveUser": 0.1
+      "userManagement": true
     },
-    "database": {},
-    "realtime": {},
-    "functions": {},
-    "selfHosted": {},
-    "storage": {},
-    "vectorDatabase": {},
-    "scheduledJobs": {},
-    "pushNotifications": {},
-    "permissions": {}
+    "database": {
+      "relations": true,
+      "migrations": false,
+      "search": false
+    },
+    "realtime": {
+      "pubsub": true,
+      "realtimeDatabase": true
+    },
+    "functions": {
+      "triggers": true,
+      "runtime": [
+        "node",
+        "python"
+      ]
+    },
+    "selfHosted": {
+      "repository": ""
+    },
+    "storage": {
+      "fileUpload": true,
+      "cdn": true,
+      "imageProcessing": true
+    },
+    "vectorDatabase": {
+      "embedding": true,
+      "similarity": true
+    },
+    "jobs": {
+      "queueing": true,
+      "scheduling": true
+    },
+    "pushNotifications": {
+      "ios": true,
+      "android": true
+    },
+    "permissions": {
+      "rbac": true,
+      "customRules": true,
+      "rowLevelSecurity": true
+    },
+    "compliances": {
+      "hipaa": true,
+      "gdpr": true,
+      "soc2": true,
+      "pci": true
+    }
   }
 }

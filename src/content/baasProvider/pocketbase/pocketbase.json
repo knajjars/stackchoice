@@ -4,26 +4,65 @@
   "name": "Pocketbase",
   "description": "PocketBase is an open source backend consisting of embedded database (SQLite) with realtime subscriptions, built-in auth management, convenient dashboard UI and simple REST-ish API.",
   "logo": "./pocketbase.png",
-  "sdks": [],
+  "sdks": [
+    "Go",
+    "JavaScript"
+  ],
   "features": {
     "authentication": {
       "social": true,
       "email": true,
-      "phone": true,
-      "magicLinks": true,
-      "sso": true,
-      "userManagement": true,
-      "freeMonthlyActiveUsers": 50000,
-      "pricePerExtraActiveUser": 0.1
+      "phone": false,
+      "magicLinks": false,
+      "sso": false,
+      "userManagement": true
     },
-    "database": {},
-    "realtime": {},
-    "functions": {},
-    "selfHosted": {},
-    "storage": {},
-    "vectorDatabase": {},
-    "scheduledJobs": {},
-    "pushNotifications": {},
-    "permissions": {}
+    "database": {
+      "relations": true,
+      "migrations": true,
+      "search": true
+    },
+    "realtime": {
+      "pubsub": true,
+      "realtimeDatabase": true
+    },
+    "functions": {
+      "triggers": false,
+      "runtime": [
+        "go",
+        "node"
+      ]
+    },
+    "selfHosted": {
+      "repository": "https://github.com/pocketbase/pocketbase"
+    },
+    "storage": {
+      "fileUpload": true,
+      "cdn": false,
+      "imageProcessing": false
+    },
+    "vectorDatabase": {
+      "embedding": false,
+      "similarity": false
+    },
+    "jobs": {
+      "queueing": false,
+      "scheduling": true
+    },
+    "pushNotifications": {
+      "ios": false,
+      "android": false
+    },
+    "permissions": {
+      "rbac": true,
+      "customRules": true,
+      "rowLevelSecurity": true
+    },
+    "compliances": {
+      "hipaa": true,
+      "gdpr": true,
+      "soc2": true,
+      "pci": true
+    }
   }
 }

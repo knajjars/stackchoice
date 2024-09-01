@@ -20,33 +20,20 @@ const baasProvider = defineCollection({
           userManagement: z.boolean(),
         }),
         database: z.object({
-          relational: z.boolean(),
+          relations: z.boolean(),
           migrations: z.boolean(),
-          backup: z.boolean(),
-          replication: z.boolean(),
           search: z.boolean(),
-          engine: z.enum([
-            "postgresql",
-            "mysql",
-            "mongodb",
-            "sqlite",
-            "firestore",
-            "custom",
-          ]),
         }),
         realtime: z.object({
-          websockets: z.boolean(),
-          presence: z.boolean(),
           pubsub: z.boolean(),
           realtimeDatabase: z.boolean(),
         }),
         functions: z.object({
           triggers: z.boolean(),
-          httpEndpoints: z.boolean(),
-          logging: z.boolean(),
+          runtime: z.array(z.string()),
         }),
         selfHosted: z.object({
-          licenseType: z.enum(["opensource", "commercial", "hybrid", "none"]),
+          repository: z.string(),
         }),
         storage: z.object({
           fileUpload: z.boolean(),
@@ -58,19 +45,23 @@ const baasProvider = defineCollection({
           similarity: z.boolean(),
         }),
         jobs: z.object({
-          cron: z.boolean(),
           queueing: z.boolean(),
           scheduling: z.boolean(),
         }),
         pushNotifications: z.object({
           ios: z.boolean(),
           android: z.boolean(),
-          web: z.boolean(),
         }),
         permissions: z.object({
           rbac: z.boolean(),
           customRules: z.boolean(),
           rowLevelSecurity: z.boolean(),
+        }),
+        compliances: z.object({
+          hipaa: z.boolean(),
+          gdpr: z.boolean(),
+          soc2: z.boolean(),
+          pci: z.boolean(),
         }),
       }),
     }),

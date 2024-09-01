@@ -20,7 +20,7 @@ const baasProvider = Astro.props;
 const pageTitle = baasProvider.data.name + " | Features, overview, and pricing";
 
 function hasEnabledFeatures(details: Record<string, unknown>): boolean {
-  return Object.values(details).some((value) => value === true);
+  return Object.values(details).some((value) => !!value);
 }
 ---
 
@@ -39,11 +39,23 @@ function hasEnabledFeatures(details: Record<string, unknown>): boolean {
         <a
           target="_blank"
           href={baasProvider.data.website}
-          class="flex items-center gap-2 text-lg text-blue-600 transition-colors duration-300 hover:text-blue-800 hover:underline"
+          class="flex items-center gap-2 text-lg text-purple-600 transition-colors duration-300 hover:text-purple-800 hover:underline"
         >
           Visit Website
           <Icon name="mdi:external-link" class="size-5" />
         </a>
+        {
+          baasProvider.data.features.selfHosted?.repository && (
+            <a
+              target="_blank"
+              href={baasProvider.data.features.selfHosted.repository}
+              class="flex items-center gap-2 text-lg text-purple-600 transition-colors duration-300 hover:text-purple-800 hover:underline"
+            >
+              View Repository
+              <Icon name="mdi:github" class="size-5" />
+            </a>
+          )
+        }
       </div>
       <div class="md:col-span-2">
         <h1 class="mb-6 text-4xl font-bold text-gray-800">

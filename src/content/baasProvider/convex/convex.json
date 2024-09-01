@@ -11,19 +11,55 @@
       "email": true,
       "phone": true,
       "magicLinks": true,
-      "sso": true,
-      "userManagement": true,
-      "freeMonthlyActiveUsers": 50000,
-      "pricePerExtraActiveUser": 0.1
+      "sso": false,
+      "userManagement": false
     },
-    "database": {},
-    "realtime": {},
-    "functions": {},
-    "selfHosted": {},
-    "storage": {},
-    "vectorDatabase": {},
-    "scheduledJobs": {},
-    "pushNotifications": {},
-    "permissions": {}
+    "database": {
+      "relations": true,
+      "migrations": true,
+      "search": true
+    },
+    "realtime": {
+      "pubsub": true,
+      "realtimeDatabase": true
+    },
+    "functions": {
+      "triggers": false,
+      "runtime": [
+        "node",
+        "convex"
+      ]
+    },
+    "selfHosted": {
+      "repository": "https://github.com/get-convex/convex-backend"
+    },
+    "storage": {
+      "fileUpload": true,
+      "cdn": true,
+      "imageProcessing": false
+    },
+    "vectorDatabase": {
+      "embedding": true,
+      "similarity": true
+    },
+    "jobs": {
+      "queueing": true,
+      "scheduling": true
+    },
+    "pushNotifications": {
+      "ios": false,
+      "android": false
+    },
+    "permissions": {
+      "rbac": false,
+      "customRules": false,
+      "rowLevelSecurity": false
+    },
+    "compliances": {
+      "hipaa": true,
+      "gdpr": true,
+      "soc2": true,
+      "pci": true
+    }
   }
 }

@@ -20,7 +20,7 @@ const featureKeys = Object.keys(features);
           class="text-green-700"
           aria-label={`${startCase(key)} is available`}
         >
-          {startCase(key)}
+          {typeof features[key] === "boolean" ? startCase(key) : features[key]}
         </span>
       </div>
     ) : (
