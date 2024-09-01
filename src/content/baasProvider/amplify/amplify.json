@@ -1,4 +1,5 @@
 {
+  "$schema": "../../../../.astro/collections/baasProvider.schema.json",
   "slug": "amplify",
   "website": "https://aws.amazon.com/amplify/",
   "name": "AWS Amplify",

@@ -1,4 +1,5 @@
 {
+  "$schema": "../../../../.astro/collections/baasProvider.schema.json",
   "slug": "firebase",
   "website": "https://firebase.google.com/",
   "name": "Firebase",

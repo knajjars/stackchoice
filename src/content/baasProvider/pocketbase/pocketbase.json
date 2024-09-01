@@ -1,4 +1,5 @@
 {
+  "$schema": "../../../../.astro/collections/baasProvider.schema.json",
   "slug": "pocketbase",
   "website": "https://pocketbase.io/",
   "name": "Pocketbase",

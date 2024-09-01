@@ -1,4 +1,5 @@
 {
+  "$schema": "../../../../.astro/collections/baasProvider.schema.json",
   "slug": "supabase",
   "website": "https://supabase.com/",
   "name": "Supabase",
