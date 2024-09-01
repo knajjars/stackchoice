@@ -4,6 +4,7 @@
   "name": "Pocketbase",
   "description": "PocketBase is an open source backend consisting of embedded database (SQLite) with realtime subscriptions, built-in auth management, convenient dashboard UI and simple REST-ish API.",
   "logo": "./pocketbase.png",
+  "repository": "https://github.com/pocketbase/pocketbase",
   "sdks": [
     "Go",
     "JavaScript"
@@ -33,8 +34,9 @@
         "node"
       ]
     },
-    "selfHosted": {
-      "repository": "https://github.com/pocketbase/pocketbase"
+    "hosting": {
+      "selfHosting": true,
+      "cloudHosting": false
     },
     "storage": {
       "fileUpload": true,

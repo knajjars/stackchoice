@@ -36,8 +36,9 @@
         "python"
       ]
     },
-    "selfHosted": {
-      "repository": ""
+    "hosting": {
+      "selfHosting": false,
+      "cloudHosting": true
     },
     "storage": {
       "fileUpload": true,

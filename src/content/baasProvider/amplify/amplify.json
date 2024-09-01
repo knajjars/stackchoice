@@ -4,7 +4,16 @@
   "name": "AWS Amplify",
   "description": "AWS Amplify is one of the most complete backend as a service platforms that provides a set of tools and services for mobile and front-end web developers to build secure, scalable full stack applications, powered by AWS.",
   "logo": "./amplify.png",
-  "sdks": [],
+  "sdks": [
+    "React",
+    "Angular",
+    "Vue",
+    "JavaScript",
+    "React Native",
+    "Flutter",
+    "Android",
+    "Swift"
+  ],
   "features": {
     "authentication": {
       "social": true,
@@ -29,8 +38,9 @@
         "nodejs"
       ]
     },
-    "selfHosted": {
-      "repository": ""
+    "hosting": {
+      "selfHosting": false,
+      "cloudHosting": true
     },
     "storage": {
       "fileUpload": true,

@@ -4,6 +4,7 @@
   "name": "Appwrite",
   "description": "Appwrite is an open-source platform that provides authentication, databse, functions, storage and messaging for your project using your framework of choice.",
   "logo": "./appwrite.png",
+  "repository": "https://github.com/appwrite/appwrite",
   "sdks": [],
   "features": {
     "authentication": {
@@ -41,8 +42,9 @@
         "c++"
       ]
     },
-    "selfHosted": {
-      "repository": "https://github.com/appwrite/appwrite"
+    "hosting": {
+      "selfHosting": true,
+      "cloudHosting": true
     },
     "vectorDatabase": {
       "embedding": false,

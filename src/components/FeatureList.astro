@@ -15,17 +15,22 @@ const featureKeys = Object.keys(features);
   featureKeys.map((key) => {
     return features[key] ? (
       <div class="flex items-center gap-2">
-        <Icon name="mdi:check-all" class="text-green-700" />
+        <Icon name="mdi:check-all" class="flex-shrink-0 text-green-700" />
         <span
           class="text-green-700"
           aria-label={`${startCase(key)} is available`}
         >
-          {typeof features[key] === "boolean" ? startCase(key) : features[key]}
+          {typeof features[key] === "boolean"
+            ? startCase(key)
+            : `${startCase(key)}: ${features[key]}`}
         </span>
       </div>
     ) : (
       <div class="flex items-center gap-2">
-        <Icon name="mdi:cross-circle-outline" class="text-slate-400" />
+        <Icon
+          name="mdi:cross-circle-outline"
+          class="flex-shrink-0 text-slate-400"
+        />
         <span
           class="text-slate-400"
           aria-label={`${startCase(key)} is not available`}

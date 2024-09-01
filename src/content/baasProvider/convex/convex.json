@@ -4,6 +4,7 @@
   "name": "Convex",
   "description": "Convex is an open-source backend for application builders that want to focus on building their applications without having to worry about the underlying infrastructure.",
   "logo": "./convex.png",
+  "repository": "https://github.com/get-convex/convex-backend",
   "sdks": [],
   "features": {
     "authentication": {
@@ -30,8 +31,9 @@
         "convex"
       ]
     },
-    "selfHosted": {
-      "repository": "https://github.com/get-convex/convex-backend"
+    "hosting": {
+      "selfHosting": true,
+      "cloudHosting": true
     },
     "storage": {
       "fileUpload": true,
