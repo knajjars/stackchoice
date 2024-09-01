@@ -61,7 +61,7 @@
     },
     "permissions": {
       "rbac": false,
-      "customRules": false,
+      "customRules": true,
       "rowLevelSecurity": false
     },
     "compliances": {
