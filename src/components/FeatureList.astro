@@ -11,33 +11,29 @@ const { features } = Astro.props as Props;
 const featureKeys = Object.keys(features);
 ---
 
-{
-  featureKeys.map((key) => {
-    return features[key] ? (
-      <div class="flex items-center gap-x-3">
-        <Icon name="mdi:check-all" class="flex-shrink-0 text-green-700" />
-        <span
-          class="text-green-700"
-          aria-label={`${startCase(key)} is available`}
-        >
+<ul class="space-y-2">
+  {
+    featureKeys.map((key) => (
+      <li
+        class={`flex items-center gap-x-3 rounded-lg p-2 transition-colors ${features[key] ? "bg-green-50 text-green-700" : "bg-gray-50 text-gray-500"}`}
+      >
+        {features[key] ? (
+          <Icon
+            name="mdi:check-circle"
+            class="h-5 w-5 flex-shrink-0 text-green-500"
+          />
+        ) : (
+          <Icon
+            name="mdi:close-circle"
+            class="h-5 w-5 flex-shrink-0 text-gray-400"
+          />
+        )}
+        <span class="font-medium">
           {typeof features[key] === "boolean"
             ? startCase(key)
             : `${startCase(key)}: ${features[key]}`}
         </span>
-      </div>
-    ) : (
-      <div class="flex items-center gap-x-3">
-        <Icon
-          name="mdi:cross-circle-outline"
-          class="flex-shrink-0 text-slate-400"
-        />
-        <span
-          class="text-slate-400"
-          aria-label={`${startCase(key)} is not available`}
-        >
-          {startCase(key)}
-        </span>
-      </div>
-    );
-  })
-}
+      </li>
+    ))
+  }
+</ul>
