@@ -10,6 +10,8 @@
     "Go",
     "JavaScript"
   ],
+  "selfHosted": true,
+  "cloudHosted": false,
   "features": {
     "authentication": {
       "social": true,
@@ -34,10 +36,6 @@
         "go",
         "node"
       ]
-    },
-    "hosting": {
-      "selfHosting": true,
-      "cloudHosting": false
     },
     "storage": {
       "fileUpload": true,

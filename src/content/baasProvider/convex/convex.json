@@ -14,6 +14,8 @@
     "Python",
     "Rust"
   ],
+  "cloudHosted": true,
+  "selfHosted": true,
   "features": {
     "authentication": {
       "social": true,
@@ -38,10 +40,6 @@
         "node",
         "convex"
       ]
-    },
-    "hosting": {
-      "selfHosting": true,
-      "cloudHosting": true
     },
     "storage": {
       "fileUpload": true,

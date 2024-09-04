@@ -1,13 +1,40 @@
 ---
+import { Icon } from "astro-icon/components";
+import { cn } from "~/lib/cn";
+
 type Props = {
   text: string;
+  type?: "default" | "success" | "empty";
 };
 
-const { text } = Astro.props as Props;
+const { text, type = "default" } = Astro.props as Props;
 ---
 
 <span
-  class="inline-block rounded-2xl bg-amber-500 px-3 py-1 text-sm font-semibold"
+  class={cn(
+    "inline-flex items-center rounded-full px-3 py-1 text-sm font-medium transition-colors duration-200",
+    {
+      "bg-amber-100 text-amber-800 hover:bg-amber-200": type === "default",
+      "bg-green-100 text-green-800 hover:bg-green-200": type === "success",
+      "bg-gray-100 text-gray-800 hover:bg-gray-200": type === "empty",
+    },
+  )}
 >
+  {
+    type === "success" && (
+      <Icon
+        name="mdi:check"
+        class="mr-1.5 inline-block h-4 w-4 text-green-600"
+      />
+    )
+  }
+  {
+    type === "empty" && (
+      <Icon
+        name="mdi:close"
+        class="mr-1.5 inline-block h-4 w-4 text-gray-600"
+      />
+    )
+  }
   {text}
 </span>

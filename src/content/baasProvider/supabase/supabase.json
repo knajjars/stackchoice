@@ -14,6 +14,8 @@
     "Python",
     "Kotlin"
   ],
+  "selfHosted": true,
+  "cloudHosted": true,
   "features": {
     "authentication": {
       "social": true,
@@ -38,10 +40,6 @@
         "deno"
       ]
     },
-    "hosting": {
-      "selfHosting": true,
-      "cloudHosting": true
-    },
     "storage": {
       "fileUpload": true,
       "cdn": true,
@@ -52,10 +50,6 @@
       "similarity": true
     },
     "jobs": {
-      "queueing": false,
-      "scheduling": false
-    },
-    "scheduledJobs": {
       "queueing": false,
       "scheduling": false
     },

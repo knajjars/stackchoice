@@ -10,44 +10,57 @@ interface Props {
 const { key, canOpen = true } = Astro.props;
 ---
 
-<label
+<div
   class={cn(
-    "h-fit overflow-hidden rounded-lg border-2 border-gray-200 shadow-sm md:max-w-96",
+    "overflow-hidden rounded-md border border-gray-200 bg-white shadow-sm transition-all duration-200 ease-in-out",
     {
-      "cursor-pointer hover:border-purple-500": canOpen,
-      "hover:border-slate-500": !canOpen,
+      "hover:border-purple-400 hover:shadow-md": canOpen,
+      "opacity-60": !canOpen,
     },
   )}
-  for={`accordion-toggle/${key}`}
 >
+  <label
+    class={cn(
+      "flex items-center justify-between p-3 font-medium text-gray-700",
+      canOpen && "cursor-pointer hover:bg-gray-50",
+    )}
+    for={`accordion-toggle/${key}`}
+  >
+    <span class="flex-grow">
+      <slot name="title" />
+    </span>
+    {
+      canOpen && (
+        <Icon
+          name="mdi:chevron-down"
+          class="h-4 w-4 transform transition-transform duration-200"
+        />
+      )
+    }
+  </label>
   <input
     type="checkbox"
     id={`accordion-toggle/${key}`}
     class="peer hidden"
     disabled={!canOpen}
   />
-  <div class="relative block select-none p-3 font-semibold">
-    <slot name="title" />
-    {
-      canOpen && (
-        <Icon
-          name="mdi:chevron-down"
-          class="absolute right-4 top-1/2 -translate-y-1/2 transform transition-transform duration-200"
-        />
-      )
-    }
-  </div>
   <div
-    class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out peer-checked:max-h-96"
+    class="max-h-0 overflow-hidden bg-gray-50 transition-all duration-200 ease-in-out peer-checked:max-h-[500px]"
   >
-    <div class="px-3 pb-3">
+    <div class="p-3 text-sm text-gray-600">
       <slot />
     </div>
   </div>
-</label>
+</div>
 
 <style>
-  .peer:checked ~ label > svg {
-    @apply rotate-180;
+  input:checked + div {
+    @apply border-t border-purple-200;
+  }
+  input:checked ~ label {
+    @apply bg-purple-50 text-purple-700;
+  }
+  input:checked ~ label > svg {
+    @apply rotate-180 text-purple-500;
   }
 </style>

@@ -11,6 +11,8 @@ const baasProvider = defineCollection({
       repository: z.string().optional(),
       logo: image(),
       sdks: z.array(z.string()),
+      selfHosted: z.boolean(),
+      cloudHosted: z.boolean(),
       features: z.object({
         authentication: z
           .object({
@@ -60,10 +62,6 @@ const baasProvider = defineCollection({
               }).format(runtime),
             };
           }),
-        hosting: z.object({
-          cloudHosting: z.boolean(),
-          selfHosting: z.boolean(),
-        }),
         storage: z
           .object({
             fileUpload: z.boolean(),

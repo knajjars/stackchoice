@@ -15,6 +15,8 @@
     "Android",
     "Swift"
   ],
+  "selfHosted": false,
+  "cloudHosted": true,
   "features": {
     "authentication": {
       "social": true,
@@ -38,10 +40,6 @@
       "runtime": [
         "nodejs"
       ]
-    },
-    "hosting": {
-      "selfHosting": false,
-      "cloudHosting": true
     },
     "storage": {
       "fileUpload": true,

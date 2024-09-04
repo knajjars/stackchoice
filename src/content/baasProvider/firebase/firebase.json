@@ -19,6 +19,8 @@
     "Unity",
     "C++"
   ],
+  "selfHosted": false,
+  "cloudHosted": true,
   "features": {
     "authentication": {
       "social": true,
@@ -43,10 +45,6 @@
         "node",
         "python"
       ]
-    },
-    "hosting": {
-      "selfHosting": false,
-      "cloudHosting": true
     },
     "storage": {
       "fileUpload": true,
