@@ -1,17 +1,59 @@
 ---
+import { Icon } from "astro-icon/components";
+
 const today = new Date();
 ---
 
-<footer class="border-t border-gray-200 py-6 text-center text-sm text-gray-600">
-  <div class="container mx-auto">
-    <p>
-      &copy; {today.getFullYear()}
-      {Astro.site?.hostname}. All rights reserved.
-    </p>
-    <nav class="mt-2">
-      <ul class="flex justify-center space-x-4">
-        <li><a href="/contact" class="hover:text-purple-500">Contact Us</a></li>
-      </ul>
-    </nav>
+<footer class="bg-gray-50 py-12 text-gray-600">
+  <div class="container mx-auto px-4">
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      <div>
+        <h3 class="mb-4 text-lg font-semibold text-gray-900">About Us</h3>
+        <p class="text-sm">
+          StackChoice.dev helps developers choose the best backend and
+          full-stack solutions for their projects.
+        </p>
+      </div>
+      <div>
+        <h3 class="mb-4 text-lg font-semibold text-gray-900">Quick Links</h3>
+        <ul class="space-y-2 text-sm">
+          <li>
+            <a href="/baas-providers" class="hover:text-purple-600"
+              >Backend Providers</a
+            >
+          </li>
+          <li>
+            <a href="/full-stack-frameworks" class="hover:text-purple-600"
+              >Full-Stack Frameworks</a
+            >
+          </li>
+          <li>
+            <a href="/contact" class="hover:text-purple-600">Contact Us</a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="mb-4 text-lg font-semibold text-gray-900">Newsletter</h3>
+        <form class="flex">
+          <input
+            type="email"
+            placeholder="Enter your email"
+            class="w-full rounded-l-md border border-gray-300 px-4 py-2 transition duration-200 focus:border-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-200 focus:ring-opacity-50"
+          />
+          <button
+            type="submit"
+            class="rounded-r-md bg-purple-600 px-4 py-2 text-white hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50"
+          >
+            Subscribe
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="mt-8 border-t border-gray-200 pt-8 text-center text-sm">
+      <p>
+        &copy; {today.getFullYear()}
+        {Astro.site?.hostname}. All rights reserved.
+      </p>
+    </div>
   </div>
 </footer>

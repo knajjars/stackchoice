@@ -1,36 +1,48 @@
 ---
 import { cn } from "~/lib/cn";
+import { Icon } from "astro-icon/components";
 
 const currentPath = Astro.url.pathname;
 
 const navItems = [
-  { href: "/baas-providers", label: "Backend Providers" },
-  { href: "/full-stack-frameworks", label: "Full-Stack Frameworks" },
+  {
+    href: "/baas-providers",
+    label: "Backend Providers",
+    icon: "mdi:server-network",
+  },
+  {
+    href: "/full-stack-frameworks",
+    label: "Full-Stack Frameworks",
+    icon: "mdi:layers-triple",
+  },
 ];
 ---
 
 <header
-  class="container sticky top-0 z-10 mx-auto border-b-2 border-gray-200 bg-purple-50 py-6"
+  class="container sticky top-0 z-10 mx-auto bg-white/80 py-4 backdrop-blur-md"
 >
-  <nav class="flex flex-col items-center justify-between gap-y-4 md:flex-row">
+  <nav class="flex items-center justify-between px-4">
     <a
       href="/"
-      class="text-3xl font-bold text-purple-600 transition-colors hover:text-purple-700"
-      >StackChoice.dev</a
+      class="flex items-center text-2xl font-extrabold text-purple-600 transition-colors hover:text-purple-700"
     >
-    <ul class="flex space-x-6">
+      <Icon name="mdi:alpha-s-box" class="mr-2 h-8 w-8" />
+      StackChoice<span class="text-gray-600">.dev</span>
+    </a>
+    <ul class="flex space-x-1">
       {
         navItems.map((item) => (
           <li>
             <a
               href={item.href}
               class={cn(
-                "text-lg font-medium transition-colors hover:text-purple-500",
-                {
-                  "text-purple-500": currentPath.startsWith(item.href),
-                },
+                "flex items-center rounded-full px-3 py-2 text-sm font-medium transition-colors",
+                currentPath.startsWith(item.href)
+                  ? "bg-purple-100 text-purple-700"
+                  : "text-gray-600 hover:bg-gray-100 hover:text-purple-600",
               )}
             >
+              <Icon name={item.icon} class="mr-2 h-5 w-5" />
               {item.label}
             </a>
           </li>
