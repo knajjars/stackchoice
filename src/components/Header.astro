@@ -29,7 +29,13 @@ const navItems = [
       <Icon name="mdi:alpha-s-box" class="mr-2 h-8 w-8" />
       StackChoice<span class="text-gray-600">.dev</span>
     </a>
-    <ul class="flex space-x-1">
+    <input type="checkbox" id="menu-toggle" class="hidden" />
+    <label for="menu-toggle" class="cursor-pointer md:hidden">
+      <Icon name="mdi:menu" class="h-6 w-6 text-purple-600" />
+    </label>
+    <ul
+      class="hidden space-y-2 bg-white/80 backdrop-blur-md md:flex md:space-x-1 md:space-y-0 md:bg-transparent md:backdrop-blur-0"
+    >
       {
         navItems.map((item) => (
           <li>
@@ -51,3 +57,25 @@ const navItems = [
     </ul>
   </nav>
 </header>
+
+<style>
+  #menu-toggle:checked + label + ul {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    #menu-toggle:checked + label + ul {
+      display: flex;
+      flex-direction: row;
+      position: static;
+      box-shadow: none;
+      padding: 0;
+    }
+  }
+</style>

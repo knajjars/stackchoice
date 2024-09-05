@@ -4,6 +4,7 @@
   "website": "https://appwrite.io/",
   "name": "Appwrite",
   "description": "Appwrite is an open-source platform that provides authentication, databse, functions, storage and messaging for your project using your framework of choice.",
+  "shortDescription": "An fully-featured open-source backend server for web, mobile & Flutter developers.",
   "logo": "./appwrite.png",
   "repository": "https://github.com/appwrite/appwrite",
   "sdks": [

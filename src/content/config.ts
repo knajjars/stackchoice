@@ -8,6 +8,7 @@ const baasProvider = defineCollection({
       website: z.string().url(),
       name: z.string(),
       description: z.string(),
+      shortDescription: z.string(),
       repository: z.string().optional(),
       logo: image(),
       sdks: z.array(z.string()),

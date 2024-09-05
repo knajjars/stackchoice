@@ -15,10 +15,11 @@ type Props = {
 const { url, title, image } = Astro.props;
 ---
 
-<a href={url} class="group block h-full">
-  <article
-    class="h-full rounded-xl bg-white p-6 shadow-md transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:shadow-lg"
-  >
+<a
+  href={url}
+  class="group block h-full transform rounded-lg border-2 border-purple-300 bg-purple-100 p-4 shadow-md transition duration-300 hover:scale-105 hover:border-purple-500"
+>
+  <article class="h-full">
     <header class="mb-4 flex items-center gap-x-4">
       <div class="flex h-12 w-12 items-center justify-center overflow-hidden">
         <Image
