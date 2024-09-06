@@ -16,7 +16,7 @@ const featureKeys = Object.keys(features);
   {
     featureKeys.map((key, i) => (
       <li
-        class={cn("flex items-center gap-x-3 px-2 py-4 transition-colors", {
+        class={cn("flex items-center gap-x-3 px-3 py-4 transition-colors", {
           "bg-green-50 text-green-700": features[key],
           "bg-gray-50 text-gray-500": !features[key],
           "rounded-t": i === 0,
@@ -26,12 +26,12 @@ const featureKeys = Object.keys(features);
         {features[key] ? (
           <Icon
             name="mdi:check-circle"
-            class="h-5 w-5 flex-shrink-0 text-green-500"
+            class="size-4 flex-shrink-0 text-green-500"
           />
         ) : (
           <Icon
             name="mdi:close-circle"
-            class="h-5 w-5 flex-shrink-0 text-gray-400"
+            class="size-4 flex-shrink-0 text-gray-400"
           />
         )}
         <span class="font-medium">
