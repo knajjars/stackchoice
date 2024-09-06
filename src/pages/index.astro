@@ -9,15 +9,15 @@ const baasProviders = await getCollection("baasProvider");
 
 <MainLayout>
   <section
-    class="hero relative overflow-hidden rounded bg-gradient-to-br from-purple-600 to-indigo-600 px-8 py-24 text-white md:px-12"
+    class="hero relative overflow-hidden rounded-lg bg-gradient-to-br from-purple-700 via-indigo-600 to-blue-500 px-8 py-32 text-white shadow-2xl md:px-12"
   >
     <div class="container relative z-10 mx-auto max-w-4xl text-center">
       <h1
-        class="animate-fade-in mb-6 text-4xl font-extrabold leading-tight md:text-5xl"
+        class="animate-fade-in mb-8 text-5xl font-extrabold leading-tight tracking-tight md:text-6xl"
       >
         Welcome to <span class="text-yellow-300">StackChoice.dev</span>
       </h1>
-      <p class="animate-fade-in mb-10 text-xl leading-relaxed">
+      <p class="animate-fade-in mb-12 text-xl leading-relaxed text-gray-100">
         Empowering developers worldwide to explore, evaluate, and choose the
         ideal tools for building their applications with confidence.
       </p>
@@ -39,9 +39,9 @@ const baasProviders = await getCollection("baasProvider");
         ></span>
         <Icon
           name="mdi:rocket-launch"
-          class="mr-2 h-5 w-5 transition-transform duration-300 group-hover:rotate-45"
+          class="mr-3 h-6 w-6 transition-transform duration-300 group-hover:rotate-45"
         />
-        <span class="relative">
+        <span class="relative text-lg">
           Explore Backend Providers
           <span
             class="absolute bottom-0 left-0 h-0.5 w-0 bg-purple-700 transition-all duration-300 group-hover:w-full"
@@ -50,57 +50,31 @@ const baasProviders = await getCollection("baasProvider");
       </a>
     </div>
     <div class="absolute inset-0 overflow-hidden">
-      <div
-        class="animate-float-slow absolute left-[22%] top-[13%] h-16 w-16 rounded-full bg-yellow-200 opacity-20"
-      >
-      </div>
-      <div
-        class="animate-float-medium absolute right-1/4 top-1/4 h-24 w-24 rounded-full bg-green-300 opacity-20"
-      >
-      </div>
-      <div
-        class="animate-float-fast absolute bottom-1/3 left-1/3 h-20 w-20 rounded-full bg-yellow-400 opacity-20"
-      >
-      </div>
-      <div
-        class="animate-float-slow absolute right-1/3 top-1/2 h-28 w-28 rounded-full bg-pink-400 opacity-20"
-      >
-      </div>
-      <div
-        class="animate-float-medium absolute left-[10%] top-[40%] h-12 w-12 rounded-full bg-blue-300 opacity-20"
-      >
-      </div>
-      <div
-        class="animate-float-fast h-18 w-18 absolute bottom-[20%] right-[15%] rounded-full bg-purple-300 opacity-20"
-      >
-      </div>
-      <div
-        class="animate-float-slow absolute left-[40%] top-[60%] h-14 w-14 rounded-full bg-red-300 opacity-20"
-      >
-      </div>
-      <div
-        class="animate-float-medium h-22 w-22 absolute right-[45%] top-[10%] rounded-full bg-indigo-300 opacity-20"
-      >
-      </div>
-      <div
-        class="animate-float-fast absolute bottom-[10%] left-[5%] h-16 w-16 rounded-full bg-teal-300 opacity-20"
-      >
-      </div>
-      <div
-        class="animate-float-slow absolute right-[8%] top-[35%] h-20 w-20 rounded-full bg-orange-300 opacity-20"
-      >
-      </div>
+      {
+        [...Array(100)].map((_, index) => (
+          <div
+            class={`animate-float-${["slow", "medium", "fast"][index % 3]} absolute rounded-full bg-white opacity-10`}
+            style={{
+              width: `${Math.random() * 20 + 10}px`,
+              height: `${Math.random() * 20 + 10}px`,
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+            }}
+          />
+        ))
+      }
     </div>
   </section>
-  <section class="relative mt-16 overflow-hidden py-12">
-    <h2 class="mb-8 text-center text-3xl font-bold text-gray-800">
+  <section class="relative mt-12 overflow-hidden py-12">
+    <h2 class="mb-12 text-center text-4xl font-bold text-gray-800">
       Featured Platforms
     </h2>
-    <div class="flex flex-wrap justify-center gap-6 md:gap-12">
+    <div class="flex flex-wrap justify-center gap-16">
       {
         baasProviders.map((provider, index) => (
-          <div class="group relative">
-            <a href={`/baas-providers/${provider.data.slug}`} class="block">
+          <div class="group relative transform transition-transform duration-300 hover:scale-110">
+            <a href={`/baas-providers/${provider.data.slug}`}>
               <Image
                 src={provider.data.logo}
                 alt={provider.data.name}
