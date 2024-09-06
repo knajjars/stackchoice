@@ -17,14 +17,19 @@ import { Icon } from "astro-icon/components";
       </p>
       <a
         href="/baas-providers"
-        class="inline-flex items-center rounded-full bg-white px-6 py-3 font-semibold text-purple-600 transition-all hover:bg-yellow-300 hover:text-purple-700 hover:shadow-lg"
+        class="group inline-flex items-center rounded-full bg-white px-6 py-3 font-semibold text-purple-600 transition-all duration-300 hover:scale-105 hover:bg-yellow-300 hover:text-purple-700 hover:shadow-lg"
       >
-        <Icon name="mdi:rocket-launch" class="mr-2 h-5 w-5" />
-        Explore Backend Providers
+        <Icon
+          name="mdi:rocket-launch"
+          class="mr-2 h-5 w-5 transition-transform duration-300 group-hover:rotate-45"
+        />
+        <span class="relative">
+          Explore Backend Providers
+          <span
+            class="absolute bottom-0 left-0 h-0.5 w-0 bg-purple-700 transition-all duration-300 group-hover:w-full"
+          ></span>
+        </span>
       </a>
-    </div>
-    <div class="absolute inset-0 opacity-10">
-      <Icon name="mdi:code-braces" class="h-full w-full" />
     </div>
   </section>
 </MainLayout>
