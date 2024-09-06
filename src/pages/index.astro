@@ -1,11 +1,30 @@
 ---
 import MainLayout from "~/layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
 ---
 
 <MainLayout>
-  Site under construction. If you want to compare cloud providers for your next
-  project visit
-  <a class="text-blue-500 underline" href="https://getdeploying.com"
-    >GetDeploying</a
+  <section
+    class="hero relative overflow-hidden rounded bg-gradient-to-br from-purple-600 to-indigo-700 px-8 py-24 text-white md:px-12"
   >
+    <div class="container relative z-10 mx-auto max-w-4xl text-center">
+      <h1 class="mb-6 text-5xl font-extrabold leading-tight">
+        Welcome to <span class="text-yellow-300">StackChoice.dev</span>
+      </h1>
+      <p class="mb-10 text-xl leading-relaxed">
+        Empowering developers worldwide to explore, evaluate, and choose the
+        ideal tools for building their applications with confidence.
+      </p>
+      <a
+        href="/baas-providers"
+        class="inline-flex items-center rounded-full bg-white px-6 py-3 font-semibold text-purple-600 transition-all hover:bg-yellow-300 hover:text-purple-700 hover:shadow-lg"
+      >
+        <Icon name="mdi:rocket-launch" class="mr-2 h-5 w-5" />
+        Explore Backend Providers
+      </a>
+    </div>
+    <div class="absolute inset-0 opacity-10">
+      <Icon name="mdi:code-braces" class="h-full w-full" />
+    </div>
+  </section>
 </MainLayout>
