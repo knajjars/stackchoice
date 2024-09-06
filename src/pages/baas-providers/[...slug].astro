@@ -95,11 +95,17 @@ function hasEnabledFeatures(details: Record<string, unknown>): boolean {
           </div>
         </div>
         <h2 class="mb-6 text-3xl font-bold text-gray-800">Features</h2>
-        <div class="grid gap-6 sm:grid-cols-2">
-          {
-            Object.entries(baasProvider.data.features).map(
-              ([feature, details]) => (
-                <div class="flex flex-col">
+        <div class="flex flex-col gap-6 md:flex-row">
+          <div class="flex flex-1 flex-col gap-6">
+            {
+              Object.entries(baasProvider.data.features)
+                .slice(
+                  0,
+                  Math.ceil(
+                    Object.entries(baasProvider.data.features).length / 2,
+                  ),
+                )
+                .map(([feature, details]) => (
                   <Accordion
                     key={feature}
                     canOpen={hasEnabledFeatures(details)}
@@ -117,10 +123,38 @@ function hasEnabledFeatures(details: Record<string, unknown>): boolean {
                     </slot>
                     <FeatureList features={details} />
                   </Accordion>
-                </div>
-              ),
-            )
-          }
+                ))
+            }
+          </div>
+          <div class="flex flex-1 flex-col gap-6">
+            {
+              Object.entries(baasProvider.data.features)
+                .slice(
+                  Math.ceil(
+                    Object.entries(baasProvider.data.features).length / 2,
+                  ),
+                )
+                .map(([feature, details]) => (
+                  <Accordion
+                    key={feature}
+                    canOpen={hasEnabledFeatures(details)}
+                  >
+                    <slot slot="title">
+                      <Icon
+                        name={
+                          hasEnabledFeatures(details)
+                            ? "mdi:check-circle"
+                            : "mdi:close-circle"
+                        }
+                        class={`mr-2 inline-block ${hasEnabledFeatures(details) ? "text-green-500" : "text-red-500"}`}
+                      />
+                      <span>{startCase(feature)}</span>
+                    </slot>
+                    <FeatureList features={details} />
+                  </Accordion>
+                ))
+            }
+          </div>
         </div>
       </div>
     </div>

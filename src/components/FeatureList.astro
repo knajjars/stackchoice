@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import startCase from "lodash/startCase";
+import { cn } from "~/lib/cn";
 
 type Props = {
   features: Record<string, any>;
@@ -11,11 +12,16 @@ const { features } = Astro.props as Props;
 const featureKeys = Object.keys(features);
 ---
 
-<ul class="space-y-2">
+<ul>
   {
-    featureKeys.map((key) => (
+    featureKeys.map((key, i) => (
       <li
-        class={`flex items-center gap-x-3 rounded-lg p-2 transition-colors ${features[key] ? "bg-green-50 text-green-700" : "bg-gray-50 text-gray-500"}`}
+        class={cn("flex items-center gap-x-3 px-2 py-4 transition-colors", {
+          "bg-green-50 text-green-700": features[key],
+          "bg-gray-50 text-gray-500": !features[key],
+          "rounded-t": i === 0,
+          "rounded-b": i === featureKeys.length - 1,
+        })}
       >
         {features[key] ? (
           <Icon
