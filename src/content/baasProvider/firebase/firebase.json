@@ -22,6 +22,39 @@
   ],
   "selfHosted": false,
   "cloudHosted": true,
+  "pricing": {
+    "freeTierLimits": {
+      "teamMembers": 1,
+      "projects": 1,
+      "authUsers": 1,
+      "dbStorage": 1,
+      "dbBandwidth": 1,
+      "fileStorage": 1,
+      "fileBandwidth": 1,
+      "functionCalls": 1
+    },
+    "overagePricing": {
+      "teamMembers": 1,
+      "projects": 1,
+      "authUsers": 1,
+      "dbStorage": 1,
+      "dbBandwidth": 1,
+      "fileStorage": 1,
+      "fileBandwidth": 1,
+      "functionCalls": 1
+    },
+    "pricingTier": {
+      "monthlyPrice": 1,
+      "teamMembers": 1,
+      "projects": 1,
+      "authUsers": 1,
+      "dbStorage": 1,
+      "dbBandwidth": 1,
+      "fileStorage": 1,
+      "fileBandwidth": 1,
+      "functionCalls": 1
+    }
+  },
   "features": {
     "authentication": {
       "social": true,

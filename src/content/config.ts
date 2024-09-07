@@ -14,6 +14,43 @@ const baasProvider = defineCollection({
       sdks: z.array(z.string()),
       selfHosted: z.boolean(),
       cloudHosted: z.boolean(),
+      pricing: z
+        .object({
+          freeTierLimits: z.object({
+            teamMembers: z.number(),
+            projects: z.number(),
+            authUsers: z.number(),
+            dbStorage: z.number(),
+            dbBandwidth: z.number(),
+            fileStorage: z.number(),
+            fileBandwidth: z.number(),
+            functionCalls: z.number(),
+          }),
+          pricingTier: z
+            .object({
+              monthlyPrice: z.number(),
+              teamMembers: z.number(),
+              projects: z.number(),
+              authUsers: z.number(),
+              dbStorage: z.number(),
+              dbBandwidth: z.number(),
+              fileStorage: z.number(),
+              fileBandwidth: z.number(),
+              functionCalls: z.number(),
+            })
+            .optional(),
+          overagePricing: z.object({
+            teamMembers: z.number(),
+            projects: z.number(),
+            authUsers: z.number(),
+            dbStorage: z.number(),
+            dbBandwidth: z.number(),
+            fileStorage: z.number(),
+            fileBandwidth: z.number(),
+            functionCalls: z.number(),
+          }),
+        })
+        .optional(),
       features: z.object({
         authentication: z
           .object({
