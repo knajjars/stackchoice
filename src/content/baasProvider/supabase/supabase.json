@@ -19,35 +19,36 @@
   "cloudHosted": true,
   "pricing": {
     "freeTierLimits": {
-      "teamMembers": 1,
-      "projects": 1,
-      "authUsers": 1,
-      "dbStorage": 1,
-      "dbBandwidth": 1,
+      "teamMembers": "unlimited",
+      "projects": 2,
+      "authUsers": 50000,
+      "dbStorage": 0.5,
+      "dbBandwidth": 5,
       "fileStorage": 1,
-      "fileBandwidth": 1,
-      "functionCalls": 1
+      "fileBandwidth": 5,
+      "functionCalls": 500000,
+      "note": "Database and file bandwidth are shared."
+    },
+    "pricedTier": {
+      "monthlyPrice": 25,
+      "teamMembers": "unlimited",
+      "projects": 1,
+      "authUsers": 100000,
+      "dbStorage": 8,
+      "dbBandwidth": 250,
+      "fileStorage": 100,
+      "fileBandwidth": 250,
+      "functionCalls": 2000000,
+      "note": "Database and file bandwidth are shared."
     },
     "overagePricing": {
-      "teamMembers": 1,
-      "projects": 1,
-      "authUsers": 1,
-      "dbStorage": 1,
-      "dbBandwidth": 1,
-      "fileStorage": 1,
-      "fileBandwidth": 1,
-      "functionCalls": 1
-    },
-    "pricingTier": {
-      "monthlyPrice": 1,
-      "teamMembers": 1,
-      "projects": 1,
-      "authUsers": 1,
-      "dbStorage": 1,
-      "dbBandwidth": 1,
-      "fileStorage": 1,
-      "fileBandwidth": 1,
-      "functionCalls": 1
+      "authUsers": 0.00325,
+      "dbStorage": 0.125,
+      "dbBandwidth": 0.09,
+      "fileStorage": 0.021,
+      "fileBandwidth": 0.09,
+      "functionCalls": 2,
+      "note": "Database and file bandwidth are shared."
     }
   },
   "features": {

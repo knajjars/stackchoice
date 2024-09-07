@@ -17,37 +17,56 @@ const baasProvider = defineCollection({
       pricing: z
         .object({
           freeTierLimits: z.object({
-            teamMembers: z.number(),
-            projects: z.number(),
-            authUsers: z.number(),
-            dbStorage: z.number(),
-            dbBandwidth: z.number(),
-            fileStorage: z.number(),
-            fileBandwidth: z.number(),
-            functionCalls: z.number(),
+            teamMembers: z
+              .union([z.number(), z.literal("unlimited")])
+              .optional(),
+            projects: z
+              .union([z.number().optional(), z.literal("unlimited")])
+              .optional(),
+            authUsers: z
+              .union([z.number().optional(), z.literal("unlimited")])
+              .optional(),
+            dbStorage: z.number().optional(),
+            dbBandwidth: z.number().optional(),
+            fileStorage: z.number().optional(),
+            fileBandwidth: z.number().optional(),
+            functionCalls: z.number().optional(),
+            note: z.string().optional(),
           }),
-          pricingTier: z
+          pricedTier: z
             .object({
-              monthlyPrice: z.number(),
-              teamMembers: z.number(),
-              projects: z.number(),
-              authUsers: z.number(),
-              dbStorage: z.number(),
-              dbBandwidth: z.number(),
-              fileStorage: z.number(),
-              fileBandwidth: z.number(),
-              functionCalls: z.number(),
+              monthlyPrice: z.number().optional(),
+              teamMembers: z
+                .union([z.number().optional(), z.literal("unlimited")])
+                .optional(),
+              projects: z
+                .union([z.number().optional(), z.literal("unlimited")])
+                .optional(),
+              authUsers: z
+                .union([z.number().optional(), z.literal("unlimited")])
+                .optional(),
+              dbStorage: z.number().optional(),
+              dbBandwidth: z.number().optional(),
+              fileStorage: z.number().optional(),
+              fileBandwidth: z.number().optional(),
+              functionCalls: z.number().optional(),
+              note: z.string().optional(),
             })
             .optional(),
           overagePricing: z.object({
-            teamMembers: z.number(),
-            projects: z.number(),
-            authUsers: z.number(),
-            dbStorage: z.number(),
-            dbBandwidth: z.number(),
-            fileStorage: z.number(),
-            fileBandwidth: z.number(),
-            functionCalls: z.number(),
+            teamMembers: z
+              .union([z.number(), z.literal("unlimited")])
+              .optional(),
+            projects: z
+              .union([z.number().optional(), z.literal("unlimited")])
+              .optional(),
+            authUsers: z.number().optional(),
+            dbStorage: z.number().optional(),
+            dbBandwidth: z.number().optional(),
+            fileStorage: z.number().optional(),
+            fileBandwidth: z.number().optional(),
+            functionCalls: z.number().optional(),
+            note: z.string().optional(),
           }),
         })
         .optional(),

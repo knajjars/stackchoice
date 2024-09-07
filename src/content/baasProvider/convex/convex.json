@@ -19,35 +19,34 @@
   "selfHosted": true,
   "pricing": {
     "freeTierLimits": {
-      "teamMembers": 1,
-      "projects": 1,
-      "authUsers": 1,
-      "dbStorage": 1,
+      "teamMembers": 2,
+      "projects": 20,
+      "authUsers": "unlimited",
+      "dbStorage": 0.5,
       "dbBandwidth": 1,
       "fileStorage": 1,
       "fileBandwidth": 1,
-      "functionCalls": 1
+      "functionCalls": 1000000
+    },
+    "pricedTier": {
+      "monthlyPrice": 25,
+      "teamMembers": 1,
+      "projects": 100,
+      "authUsers": "unlimited",
+      "dbStorage": 50,
+      "dbBandwidth": 50,
+      "fileStorage": 100,
+      "fileBandwidth": 50,
+      "functionCalls": 25000000,
+      "note": "Convex counts DB reads and writes towards the function call limit."
     },
     "overagePricing": {
-      "teamMembers": 1,
-      "projects": 1,
-      "authUsers": 1,
-      "dbStorage": 1,
-      "dbBandwidth": 1,
-      "fileStorage": 1,
-      "fileBandwidth": 1,
-      "functionCalls": 1
-    },
-    "pricingTier": {
-      "monthlyPrice": 1,
-      "teamMembers": 1,
-      "projects": 1,
-      "authUsers": 1,
-      "dbStorage": 1,
-      "dbBandwidth": 1,
-      "fileStorage": 1,
-      "fileBandwidth": 1,
-      "functionCalls": 1
+      "teamMembers": 25,
+      "dbStorage": 0.2,
+      "dbBandwidth": 0.2,
+      "fileStorage": 0.03,
+      "fileBandwidth": 0.3,
+      "functionCalls": 2
     }
   },
   "features": {
