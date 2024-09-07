@@ -16,6 +16,7 @@ const formatValue = (value: any, isPrice: boolean = false) => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
+      minimumFractionDigits: 0,
       maximumFractionDigits: 6,
     }).format(value);
   if (typeof value === "number")
@@ -37,7 +38,19 @@ const getOveragePricingUnit = (key: string) => {
     case "File bandwidth":
       return "per GB";
     case "Function calls":
-      return "per 1,000,000";
+      return "per million";
+    default:
+      return "";
+  }
+};
+
+const getResourceUnit = (key: string) => {
+  switch (key) {
+    case "DB storage":
+    case "DB bandwidth":
+    case "File storage":
+    case "File bandwidth":
+      return "GB";
     default:
       return "";
   }
@@ -45,17 +58,44 @@ const getOveragePricingUnit = (key: string) => {
 ---
 
 <div class="space-y-4">
+  <p class="mb-4 leading-relaxed text-gray-700">
+    Backend-as-a-Service (BaaS) providers typically offer a combination of free
+    resources and paid options:
+  </p>
+  <ul class="mb-4 list-disc pl-5 leading-relaxed text-gray-700">
+    <li>
+      <strong>Free monthly resources:</strong> Most providers include a set amount
+      of free resources each month, such as database storage, API calls, or user
+      authentication.
+    </li>
+    <li>
+      <strong>Subscription-based model:</strong> Some providers offer paid plans
+      with increased resource limits and additional features. These plans usually
+      charge a recurring monthly fee and may include overage charges for exceeding
+      limits.
+    </li>
+    <li>
+      <strong>Usage-based pricing:</strong> Other providers only offer a pay-as-you-go
+      model. You start with free resources and are charged for any usage beyond the
+      free tier. This can be more flexible but may be less predictable for budgeting.
+    </li>
+  </ul>
+  <p class="mb-4 leading-relaxed text-gray-700">
+    When choosing a BaaS provider, consider your project's needs, expected
+    growth, and budget constraints to find the best pricing model for your
+    situation.
+  </p>
   {
     Object.keys(pricing?.freeTierLimits ?? {}).map((key, index) => (
       <div class="overflow-hidden rounded-lg bg-white shadow">
         <div class="px-4 py-5 sm:p-6">
-          <h3 class="text-lg font-medium leading-6 text-gray-900">{key}</h3>
+          <h3 class="text-lg font-bold leading-6 text-gray-900">{key}</h3>
           <div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
             <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
               <dt class="truncate text-sm font-medium text-gray-500">
                 Free resources
               </dt>
-              <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
+              <dd class="mt-1 text-2xl font-semibold tracking-tight text-gray-900">
                 {key === "Price" ? (
                   pricing?.freeTierLimits[
                     key as keyof typeof pricing.freeTierLimits
@@ -70,19 +110,23 @@ const getOveragePricingUnit = (key: string) => {
                     )
                   )
                 ) : (
-                  formatValue(
-                    pricing?.freeTierLimits[
-                      key as keyof typeof pricing.freeTierLimits
-                    ],
-                  )
+                  (() => {
+                    const value =
+                      pricing?.freeTierLimits[
+                        key as keyof typeof pricing.freeTierLimits
+                      ];
+                    return value === null
+                      ? "-"
+                      : `${formatValue(value)} ${getResourceUnit(key)}`;
+                  })()
                 )}
               </dd>
             </div>
             <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
               <dt class="truncate text-sm font-medium text-gray-500">
-                Pricing plan
+                Priced plan
               </dt>
-              <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
+              <dd class="mt-1 text-2xl font-semibold tracking-tight text-gray-900">
                 {key === "Price"
                   ? pricing?.pricedTier[
                       key as keyof typeof pricing.pricedTier
@@ -93,19 +137,23 @@ const getOveragePricingUnit = (key: string) => {
                           key as keyof typeof pricing.pricedTier
                         ],
                         true,
-                      )}/month`
-                  : formatValue(
-                      pricing?.pricedTier[
-                        key as keyof typeof pricing.pricedTier
-                      ],
-                    )}
+                      )} per month`
+                  : (() => {
+                      const value =
+                        pricing?.pricedTier[
+                          key as keyof typeof pricing.pricedTier
+                        ];
+                      return value === null
+                        ? "-"
+                        : `${formatValue(value)} ${getResourceUnit(key)}`;
+                    })()}
               </dd>
             </div>
             <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
               <dt class="truncate text-sm font-medium text-gray-500">
                 Over-limit Fees
               </dt>
-              <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
+              <dd class="mt-1 text-2xl font-semibold tracking-tight text-gray-900">
                 {(() => {
                   const value =
                     pricing?.overagePricing[
