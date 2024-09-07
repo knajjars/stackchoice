@@ -26,20 +26,23 @@
   "selfHosted": true,
   "pricing": {
     "freeTierLimits": {
+      "price": null,
       "teamMembers": 1,
       "projects": "unlimited",
       "authUsers": 75000,
       "fileStorage": 2,
+      "dbStorage": null,
       "dbBandwidth": 10,
       "fileBandwidth": 10,
       "functionCalls": 750000,
       "note": "Database and file bandwidth are shared."
     },
     "pricedTier": {
-      "monthlyPrice": 15,
+      "price": 15,
       "teamMembers": 1,
       "projects": "unlimited",
       "authUsers": 200000,
+      "dbStorage": null,
       "dbBandwidth": 300,
       "fileStorage": 150,
       "fileBandwidth": 300,
@@ -47,8 +50,11 @@
       "note": "Database and file bandwidth are shared."
     },
     "overagePricing": {
+      "price": null,
+      "projects": null,
       "teamMembers": 15,
       "authUsers": 0.003,
+      "dbStorage": null,
       "dbBandwidth": 0.03,
       "fileStorage": 0.03,
       "fileBandwidth": 0.4,

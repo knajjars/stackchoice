@@ -1,5 +1,33 @@
 import { defineCollection, z } from "astro:content";
 
+const Pricing = z
+  .object({
+    price: z.number().nullable(),
+    teamMembers: z.union([z.number(), z.literal("unlimited")]).nullable(),
+    projects: z.union([z.number(), z.literal("unlimited")]).nullable(),
+    authUsers: z.union([z.number(), z.literal("unlimited")]).nullable(),
+    dbStorage: z.number().nullable(),
+    dbBandwidth: z.number().nullable(),
+    fileStorage: z.number().nullable(),
+    fileBandwidth: z.number().nullable(),
+    functionCalls: z.number().nullable(),
+    note: z.string().nullable(),
+  })
+  .transform((pricing) => {
+    return {
+      Price: pricing.price,
+      "Team members": pricing.teamMembers,
+      Projects: pricing.projects,
+      "Auth users": pricing.authUsers,
+      "DB storage": pricing.dbStorage,
+      "DB bandwidth": pricing.dbBandwidth,
+      "File storage": pricing.fileStorage,
+      "File bandwidth": pricing.fileBandwidth,
+      "Function calls": pricing.functionCalls,
+      Note: pricing.note,
+    };
+  });
+
 const baasProvider = defineCollection({
   type: "data",
   schema: ({ image }) =>
@@ -16,58 +44,9 @@ const baasProvider = defineCollection({
       cloudHosted: z.boolean(),
       pricing: z
         .object({
-          freeTierLimits: z.object({
-            teamMembers: z
-              .union([z.number(), z.literal("unlimited")])
-              .optional(),
-            projects: z
-              .union([z.number().optional(), z.literal("unlimited")])
-              .optional(),
-            authUsers: z
-              .union([z.number().optional(), z.literal("unlimited")])
-              .optional(),
-            dbStorage: z.number().optional(),
-            dbBandwidth: z.number().optional(),
-            fileStorage: z.number().optional(),
-            fileBandwidth: z.number().optional(),
-            functionCalls: z.number().optional(),
-            note: z.string().optional(),
-          }),
-          pricedTier: z
-            .object({
-              monthlyPrice: z.number().optional(),
-              teamMembers: z
-                .union([z.number().optional(), z.literal("unlimited")])
-                .optional(),
-              projects: z
-                .union([z.number().optional(), z.literal("unlimited")])
-                .optional(),
-              authUsers: z
-                .union([z.number().optional(), z.literal("unlimited")])
-                .optional(),
-              dbStorage: z.number().optional(),
-              dbBandwidth: z.number().optional(),
-              fileStorage: z.number().optional(),
-              fileBandwidth: z.number().optional(),
-              functionCalls: z.number().optional(),
-              note: z.string().optional(),
-            })
-            .optional(),
-          overagePricing: z.object({
-            teamMembers: z
-              .union([z.number(), z.literal("unlimited")])
-              .optional(),
-            projects: z
-              .union([z.number().optional(), z.literal("unlimited")])
-              .optional(),
-            authUsers: z.number().optional(),
-            dbStorage: z.number().optional(),
-            dbBandwidth: z.number().optional(),
-            fileStorage: z.number().optional(),
-            fileBandwidth: z.number().optional(),
-            functionCalls: z.number().optional(),
-            note: z.string().optional(),
-          }),
+          freeTierLimits: Pricing,
+          pricedTier: Pricing,
+          overagePricing: Pricing,
         })
         .optional(),
       features: z.object({

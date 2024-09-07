@@ -19,6 +19,7 @@
   "cloudHosted": true,
   "pricing": {
     "freeTierLimits": {
+      "price": null,
       "teamMembers": "unlimited",
       "projects": 2,
       "authUsers": 50000,
@@ -30,7 +31,7 @@
       "note": "Database and file bandwidth are shared."
     },
     "pricedTier": {
-      "monthlyPrice": 25,
+      "price": 25,
       "teamMembers": "unlimited",
       "projects": 1,
       "authUsers": 100000,
@@ -42,6 +43,9 @@
       "note": "Database and file bandwidth are shared."
     },
     "overagePricing": {
+      "price": null,
+      "teamMembers": null,
+      "projects": null,
       "authUsers": 0.00325,
       "dbStorage": 0.125,
       "dbBandwidth": 0.09,

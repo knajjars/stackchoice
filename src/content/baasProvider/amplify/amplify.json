@@ -20,6 +20,7 @@
   "cloudHosted": true,
   "pricing": {
     "freeTierLimits": {
+      "price": null,
       "teamMembers": "unlimited",
       "projects": "unlimited",
       "authUsers": 50000,
@@ -27,9 +28,23 @@
       "dbBandwidth": 100,
       "fileStorage": 5,
       "fileBandwidth": 15,
-      "functionCalls": 1000000
+      "functionCalls": 1000000,
+      "note": null
+    },
+    "pricedTier": {
+      "price": null,
+      "teamMembers": null,
+      "projects": null,
+      "authUsers": null,
+      "dbStorage": null,
+      "dbBandwidth": null,
+      "fileStorage": null,
+      "fileBandwidth": null,
+      "functionCalls": null,
+      "note": null
     },
     "overagePricing": {
+      "price": null,
       "teamMembers": "unlimited",
       "projects": "unlimited",
       "authUsers": 0.0046,
@@ -37,7 +52,8 @@
       "dbBandwidth": 0.09,
       "fileStorage": 0.023,
       "fileBandwidth": 0.15,
-      "functionCalls": 0.20
+      "functionCalls": 0.20,
+      "note": null
     }
   },
   "features": {

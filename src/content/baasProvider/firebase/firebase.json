@@ -24,6 +24,7 @@
   "cloudHosted": true,
   "pricing": {
     "freeTierLimits": {
+      "price": null,
       "teamMembers": "unlimited",
       "projects": 5,
       "authUsers": 50000,
@@ -32,16 +33,31 @@
       "fileStorage": 5,
       "fileBandwidth": 30,
       "functionCalls": 2000000,
-      "note": "Firebase has a limit for file bandwidth of 1gb per day."
+      "note": "Firebase has a limit for file bandwidth of 1 GB per day."
     },
     "overagePricing": {
-      "authUsers": 1,
+      "price": null,
+      "teamMembers": null,
+      "projects": null,
+      "authUsers": 0.0055,
       "dbStorage": 0.15,
       "dbBandwidth": 0.12,
       "fileStorage": 0.026,
       "fileBandwidth": 0.12,
       "functionCalls": 0.4,
       "note": "Firebase charges per DB read,write and delete operation on top of the bandwidth."
+    },
+    "pricedTier": {
+      "price": null,
+      "teamMembers": null,
+      "projects": null,
+      "authUsers": null,
+      "dbStorage": null,
+      "dbBandwidth": null,
+      "fileStorage": null,
+      "fileBandwidth": null,
+      "functionCalls": null,
+      "note": null
     }
   },
   "features": {

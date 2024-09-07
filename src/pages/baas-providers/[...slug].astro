@@ -3,10 +3,11 @@ import { Image } from "astro:assets";
 import { type CollectionEntry, getCollection } from "astro:content";
 import MainLayout from "~/layouts/Layout.astro";
 import Accordion from "~/components/Accordion.astro";
-import FeatureList from "~/components/FeatureList.astro";
+import FeatureList from "~/components/BaaS/FeatureList.astro";
 import startCase from "lodash/startCase";
 import { Icon } from "astro-icon/components";
 import Pill from "~/components/Pill.astro";
+import PricingCard from "~/components/BaaS/PricingCard.astro";
 
 export async function getStaticPaths() {
   const baasProviders = await getCollection("baasProvider");
@@ -156,6 +157,8 @@ function hasEnabledFeatures(details: Record<string, unknown>): boolean {
             }
           </div>
         </div>
+        <h2 class="mb-6 text-3xl font-bold text-gray-800">Pricing</h2>
+        <PricingCard baasProvider={baasProvider} />
       </div>
     </div>
   </div>

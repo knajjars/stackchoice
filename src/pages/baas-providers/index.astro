@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import BaaSProviderCard from "~/components/BaaSProviderCard.astro";
+import OverviewCard from "~/components/BaaS/OverviewCard.astro";
 import MainLayout from "~/layouts/Layout.astro";
 
 const baasProviders = (await getCollection("baasProvider")).sort((a, b) =>
@@ -30,7 +30,7 @@ const pageTitle = "BaaS Providers | List of Backend as a Service Providers";
       {
         baasProviders.map((baasProvider) => (
           <li>
-            <BaaSProviderCard baasProvider={baasProvider} />
+            <OverviewCard baasProvider={baasProvider} />
           </li>
         ))
       }

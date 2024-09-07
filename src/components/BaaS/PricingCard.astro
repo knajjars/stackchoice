@@ -1,0 +1,95 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+type Props = {
+  baasProvider: CollectionEntry<"baasProvider">;
+};
+
+const { baasProvider } = Astro.props;
+const pricing = baasProvider.data.pricing;
+
+const formatValue = (value: any, isPrice: boolean = false) => {
+  if (value === null) return "-";
+  if (value === "unlimited") return "Unlimited";
+  if (isPrice)
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 6,
+    }).format(value);
+  if (typeof value === "number")
+    return new Intl.NumberFormat("en-US").format(value);
+  return value;
+};
+
+const getOveragePricingUnit = (key: string) => {
+  switch (key) {
+    case "Team members":
+      return "per member";
+    case "Projects":
+      return "per project";
+    case "Auth users":
+      return "per user";
+    case "DB storage":
+      return "per GB";
+    case "DB bandwidth":
+      return "per GB";
+    case "File storage":
+      return "per GB";
+    case "File bandwidth":
+      return "per GB";
+    case "Function calls":
+      return "per 1,000,000";
+    default:
+      return "";
+  }
+};
+---
+
+<div class="overflow-x-auto">
+  <table class="min-w-full border border-gray-300 bg-white">
+    <thead>
+      <tr>
+        <th class="border-b px-4 py-2">Pricing Unit</th>
+        <th class="border-b px-4 py-2">Free Tier</th>
+        <th class="border-b px-4 py-2">Priced Tier</th>
+        <th class="border-b px-4 py-2">Overage Pricing</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        Object.keys(pricing?.freeTierLimits ?? {}).map((key) => (
+          <tr>
+            <td class="border-b px-4 py-2">{key}</td>
+            <td class="border-b px-4 py-2">
+              {formatValue(
+                pricing?.freeTierLimits[
+                  key as keyof typeof pricing.freeTierLimits
+                ],
+                key === "Price",
+              )}
+            </td>
+            <td class="border-b px-4 py-2">
+              {formatValue(
+                pricing?.pricedTier[key as keyof typeof pricing.pricedTier],
+                key === "Price",
+              )}
+            </td>
+            <td class="border-b px-4 py-2">
+              {(() => {
+                const value =
+                  pricing?.overagePricing[
+                    key as keyof typeof pricing.overagePricing
+                  ];
+                if (value !== null && key !== "Note") {
+                  return `${formatValue(value, true)} ${getOveragePricingUnit(key)}`;
+                }
+                return formatValue(value, key !== "Note");
+              })()}
+            </td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>
