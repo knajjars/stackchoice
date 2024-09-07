@@ -157,8 +157,20 @@ function hasEnabledFeatures(details: Record<string, unknown>): boolean {
             }
           </div>
         </div>
-        <h2 class="mb-6 text-3xl font-bold text-gray-800">Pricing</h2>
-        <PricingCard baasProvider={baasProvider} />
+        <h2 class="mb-6 mt-12 text-3xl font-bold text-gray-800">Pricing</h2>
+        <div class="space-y-8">
+          {
+            baasProvider.data.cloudHosted ? (
+              <PricingCard baasProvider={baasProvider} />
+            ) : (
+              <p class="text-lg text-gray-600">
+                This provider does not currently offer cloud hosting. Please
+                check their website for self-hosting options and pricing
+                details.
+              </p>
+            )
+          }
+        </div>
       </div>
     </div>
   </div>
