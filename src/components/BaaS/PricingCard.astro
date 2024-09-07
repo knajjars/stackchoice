@@ -124,7 +124,7 @@ const getResourceUnit = (key: string) => {
             </div>
             <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
               <dt class="truncate text-sm font-medium text-gray-500">
-                Priced plan
+                Subscription resources
               </dt>
               <dd class="mt-1 text-2xl font-semibold tracking-tight text-gray-900">
                 {key === "Price"
@@ -151,7 +151,7 @@ const getResourceUnit = (key: string) => {
             </div>
             <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
               <dt class="truncate text-sm font-medium text-gray-500">
-                Over-limit Fees
+                Usage-based resources
               </dt>
               <dd class="mt-1 text-2xl font-semibold tracking-tight text-gray-900">
                 {(() => {
@@ -159,12 +159,12 @@ const getResourceUnit = (key: string) => {
                     pricing?.overagePricing[
                       key as keyof typeof pricing.overagePricing
                     ];
-                  if (value === null) {
-                    return "-";
-                  } else if (key === "Price") {
+                  if (key === "Price") {
                     return (
                       <Icon name="mdi:check" class="h-8 w-8 text-green-500" />
                     );
+                  } else if (value === null) {
+                    return "-";
                   } else if (key !== "Note") {
                     return `${formatValue(value, true)} ${getOveragePricingUnit(key)}`;
                   }

@@ -28,7 +28,7 @@
       "fileStorage": 1,
       "fileBandwidth": 1,
       "functionCalls": 1000000,
-      "note": "Convex counts DB reads and writes towards the function call limit."
+      "note": "DB reads and writes count towards the function call limit."
     },
     "pricedTier": {
       "price": 25,
@@ -40,7 +40,7 @@
       "fileStorage": 100,
       "fileBandwidth": 50,
       "functionCalls": 25000000,
-      "note": "Convex counts DB reads and writes towards the function call limit."
+      "note": "DB reads and writes count towards the function call limit."
     },
     "overagePricing": {
       "price": null,
@@ -52,7 +52,7 @@
       "fileStorage": 0.03,
       "fileBandwidth": 0.3,
       "functionCalls": 2,
-      "note": null
+      "note": "DB reads and writes count towards the function call limit."
     }
   },
   "features": {
