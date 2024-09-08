@@ -3,8 +3,13 @@
   "slug": "amplify",
   "website": "https://aws.amazon.com/amplify/",
   "name": "AWS Amplify",
-  "description": "AWS Amplify is one of the most complete backend as a service platforms that provides a set of tools and services for mobile and front-end web developers to build secure, scalable full stack applications, powered by AWS.",
+  "description": "AWS Amplify is a full-stack platform by Amazon that provides tools and services for building scalable mobile and web applications. It integrates well with other AWS services like Lambda, S3, DynamoDB, and Cognito.",
   "shortDescription": "A comprehensive BaaS platform powered by AWS for building scalable and secure full-stack applications.",
+  "uniqueFeatures": [
+    "Strong integration with AWS ecosystem.",
+    "Offers both front-end (hosting) and back-end (authentication, APIs, storage) services.",
+    "Great for serverless and cloud-native apps, especially for teams already invested in AWS."
+  ],
   "logo": "./amplify.png",
   "sdks": [
     "React",

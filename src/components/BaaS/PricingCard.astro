@@ -57,50 +57,78 @@ const getResourceUnit = (key: string) => {
 };
 ---
 
-<div class="space-y-4">
-  <p class="mb-4 leading-relaxed text-gray-700">
-    Backend-as-a-Service (BaaS) providers typically offer a combination of free
-    resources and paid options:
-  </p>
-  <ul class="mb-4 list-disc pl-5 leading-relaxed text-gray-700">
-    <li>
-      <strong>Free monthly resources:</strong> Most providers include a set amount
-      of free resources each month, such as database storage, API calls, or user
-      authentication.
-    </li>
-    <li>
-      <strong>Subscription plan resources:</strong> Some providers offer paid plans
-      with increased resource limits and additional features. These plans usually
-      charge a recurring monthly fee and may include overage charges for exceeding
-      limits.
-    </li>
-    <li>
-      <strong>Usage-based pricing:</strong> Other providers only offer a pay-as-you-go
-      model. You start with free resources and are charged for any usage beyond the
-      free tier. This can be more flexible but may be less predictable for budgeting.
-    </li>
-  </ul>
-  <p class="mb-4 leading-relaxed text-gray-700">
-    When choosing a BaaS provider, consider your project's needs, expected
-    growth, and budget constraints to find the best pricing model for your
-    situation.
-  </p>
+<div class="space-y-8">
+  <div
+    class="rounded-xl bg-white p-8 shadow-lg transition-all duration-300 hover:shadow-xl"
+  >
+    <p class="mb-8 text-lg italic text-gray-700">
+      Dive into the world of Backend-as-a-Service pricing models and discover
+      the perfect fit for your project!
+    </p>
+    <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+      <div
+        class="rounded-lg bg-purple-200 p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+      >
+        <h4
+          class="mb-3 flex items-center text-xl font-semibold text-purple-800"
+        >
+          <Icon name="mdi:gift" class="mr-2 h-7 w-7 text-purple-600" /> Free resources
+        </h4>
+        <p class="leading-relaxed text-purple-700">
+          Kickstart your project with a treasure trove of free resources each
+          month. Think database storage, API calls, and user authentication –
+          all on the house!
+        </p>
+      </div>
+      <div
+        class="rounded-lg bg-amber-200 p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+      >
+        <h4 class="mb-3 flex items-center text-xl font-semibold text-amber-800">
+          <Icon name="mdi:briefcase" class="mr-2 h-7 w-7 text-amber-600" /> Subscription
+          plan resources
+        </h4>
+        <p class="leading-relaxed text-amber-700">
+          Level up with paid plans offering beefed-up resources and cool extra
+          features. Just watch out for those sneaky overage charges!
+        </p>
+      </div>
+      <div
+        class="rounded-lg bg-green-200 p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+      >
+        <h4 class="mb-3 flex items-center text-xl font-semibold text-green-800">
+          <Icon name="mdi:scale-balance" class="mr-2 h-7 w-7 text-green-600" /> Usage-based
+          resources
+        </h4>
+        <p class="leading-relaxed text-green-700">
+          Embrace the flexibility of pay-as-you-go! Start free and only pay for
+          what you use. It's like a buffet for your backend needs.
+        </p>
+      </div>
+    </div>
+    <p class="mt-8 text-center text-lg font-medium text-gray-700">
+      Ready to choose? Consider your project's appetite for resources, its
+      growth potential, and your wallet's comfort zone. The perfect BaaS pricing
+      model is out there waiting for you!
+    </p>
+  </div>
   {
     Object.keys(pricing?.freeTierLimits ?? {}).map((key, index) => (
-      <div class="overflow-hidden rounded-lg bg-white shadow">
-        <div class="px-4 py-5 sm:p-6">
-          <h3 class="text-lg font-bold leading-6 text-gray-900">{key}</h3>
-          <div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
-            <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-              <dt class="truncate text-sm font-medium text-gray-500">
+      <div class="overflow-hidden rounded-xl bg-white shadow-lg transition-all duration-300 hover:shadow-xl">
+        <div class="px-6 py-8">
+          <h3 class="mb-6 text-2xl font-bold leading-tight text-gray-900">
+            {key}
+          </h3>
+          <div class="grid grid-cols-1 gap-8 sm:grid-cols-3">
+            <div class="overflow-hidden rounded-lg bg-purple-200 p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+              <dt class="mb-2 text-sm font-medium text-purple-800">
                 Free resources
               </dt>
-              <dd class="mt-1 text-2xl font-semibold tracking-tight text-gray-900">
+              <dd class="text-2xl font-semibold tracking-tight text-purple-700">
                 {key === "Price" ? (
                   pricing?.freeTierLimits[
                     key as keyof typeof pricing.freeTierLimits
                   ] === null ? (
-                    <Icon name="mdi:check" class="h-8 w-8 text-green-500" />
+                    <Icon name="mdi:check" class="h-8 w-8 text-purple-700" />
                   ) : (
                     formatValue(
                       pricing?.freeTierLimits[
@@ -122,11 +150,11 @@ const getResourceUnit = (key: string) => {
                 )}
               </dd>
             </div>
-            <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-              <dt class="truncate text-sm font-medium text-gray-500">
+            <div class="overflow-hidden rounded-lg bg-amber-200 p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+              <dt class="mb-2 text-sm font-medium text-amber-800">
                 Subscription plan resources
               </dt>
-              <dd class="mt-1 text-2xl font-semibold tracking-tight text-gray-900">
+              <dd class="text-2xl font-semibold tracking-tight text-amber-700">
                 {key === "Price"
                   ? pricing?.pricedTier[
                       key as keyof typeof pricing.pricedTier
@@ -149,11 +177,11 @@ const getResourceUnit = (key: string) => {
                     })()}
               </dd>
             </div>
-            <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-              <dt class="truncate text-sm font-medium text-gray-500">
+            <div class="overflow-hidden rounded-lg bg-green-200 p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+              <dt class="mb-2 text-sm font-medium text-green-800">
                 Usage-based resources
               </dt>
-              <dd class="mt-1 text-2xl font-semibold tracking-tight text-gray-900">
+              <dd class="text-2xl font-semibold tracking-tight text-green-700">
                 {(() => {
                   const value =
                     pricing?.overagePricing[
@@ -161,7 +189,7 @@ const getResourceUnit = (key: string) => {
                     ];
                   if (key === "Price") {
                     return (
-                      <Icon name="mdi:check" class="h-8 w-8 text-green-500" />
+                      <Icon name="mdi:check" class="h-8 w-8 text-green-700" />
                     );
                   } else if (value === null) {
                     return "-";

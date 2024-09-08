@@ -3,8 +3,13 @@
   "slug": "convex",
   "website": "https://convex.dev/",
   "name": "Convex",
-  "description": "Convex is an open-source backend for application builders that want to focus on building their applications without having to worry about the underlying infrastructure.",
+  "description": "Convex is a new-age backend-as-a-service platform designed to simplify state management for real-time applications. It focuses on managing data and building reactive backends without needing a traditional database.",
   "shortDescription": "A serverless backend platform with real-time sync, global consistency, and automatic caching.",
+  "uniqueFeatures": [
+    "Emphasizes real-time data synchronization and collaborative apps.",
+    "Offers a serverless database with automatic scaling.",
+    "Strong focus on simplicity for developers with its functional API."
+  ],
   "logo": "./convex.png",
   "repository": "https://github.com/get-convex/convex-backend",
   "sdks": [

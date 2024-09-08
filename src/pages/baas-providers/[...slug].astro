@@ -16,6 +16,7 @@ export async function getStaticPaths() {
     props: baas,
   }));
 }
+
 type Props = CollectionEntry<"baasProvider">;
 
 const baasProvider = Astro.props;
@@ -30,7 +31,7 @@ function hasEnabledFeatures(details: Record<string, unknown>): boolean {
   <div class="container mx-auto px-4 py-16 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 gap-12 lg:grid-cols-3">
       <div
-        class="flex flex-col items-center space-y-6 lg:sticky lg:top-8 lg:self-start"
+        class="flex flex-col items-center space-y-8 lg:sticky lg:top-8 lg:self-start"
       >
         <Image
           src={baasProvider.data.logo}
@@ -64,18 +65,18 @@ function hasEnabledFeatures(details: Record<string, unknown>): boolean {
         </div>
       </div>
       <div class="lg:col-span-2">
-        <h1 class="mb-4 text-4xl font-extrabold text-gray-900 sm:text-5xl">
+        <h1 class="mb-6 text-4xl font-extrabold text-gray-900 sm:text-5xl">
           {baasProvider.data.name}
         </h1>
-        <p class="mb-8 text-xl leading-relaxed text-gray-600">
+        <p class="mb-10 text-xl leading-relaxed text-gray-600">
           {baasProvider.data.description}
         </p>
-        <div class="mb-12 space-y-8">
+        <div class="mb-14 space-y-10">
           <div>
-            <h2 class="mb-3 text-2xl font-semibold text-gray-800">
+            <h2 class="mb-4 text-2xl font-semibold text-gray-800">
               Hosting Options
             </h2>
-            <div class="flex flex-wrap gap-2">
+            <div class="flex flex-wrap gap-3">
               <Pill
                 text="Cloud Hosting"
                 type={baasProvider.data.cloudHosted ? "success" : "empty"}
@@ -87,16 +88,34 @@ function hasEnabledFeatures(details: Record<string, unknown>): boolean {
             </div>
           </div>
           <div>
-            <h2 class="mb-3 text-2xl font-semibold text-gray-800">
+            <h2 class="mb-4 text-2xl font-semibold text-gray-800">
               Official SDKs
             </h2>
-            <div class="flex flex-wrap gap-2">
+            <div class="flex flex-wrap gap-3">
               {baasProvider.data.sdks.map((sdk) => <Pill text={sdk} />)}
             </div>
           </div>
         </div>
-        <h2 class="mb-6 text-3xl font-bold text-gray-800">Features</h2>
-        <div class="flex flex-col gap-6 md:flex-row">
+        <div class="mb-14">
+          <h2 class="mb-6 text-3xl font-bold text-gray-800">Unique Features</h2>
+          <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {
+              baasProvider.data.uniqueFeatures.map((feature) => (
+                <li class="flex items-start space-x-3 rounded-lg bg-purple-50 p-4 transition-all hover:scale-105">
+                  <Icon
+                    name="mdi:star"
+                    class="mt-1 h-5 w-5 flex-shrink-0 text-purple-500"
+                  />
+                  <span class="text-base leading-relaxed text-purple-900">
+                    {feature}
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <h2 class="mb-8 text-3xl font-bold text-gray-800">Features</h2>
+        <div class="flex flex-col gap-8 md:flex-row">
           <div class="flex flex-1 flex-col gap-6">
             {
               Object.entries(baasProvider.data.features)
@@ -118,7 +137,11 @@ function hasEnabledFeatures(details: Record<string, unknown>): boolean {
                             ? "mdi:check-circle"
                             : "mdi:close-circle"
                         }
-                        class={`mr-2 inline-block ${hasEnabledFeatures(details) ? "text-green-500" : "text-red-500"}`}
+                        class={`mr-2 inline-block ${
+                          hasEnabledFeatures(details)
+                            ? "text-green-500"
+                            : "text-red-500"
+                        }`}
                       />
                       <span>{startCase(feature)}</span>
                     </slot>
@@ -147,7 +170,11 @@ function hasEnabledFeatures(details: Record<string, unknown>): boolean {
                             ? "mdi:check-circle"
                             : "mdi:close-circle"
                         }
-                        class={`mr-2 inline-block ${hasEnabledFeatures(details) ? "text-green-500" : "text-red-500"}`}
+                        class={`mr-2 inline-block ${
+                          hasEnabledFeatures(details)
+                            ? "text-green-500"
+                            : "text-red-500"
+                        }`}
                       />
                       <span>{startCase(feature)}</span>
                     </slot>
@@ -157,7 +184,7 @@ function hasEnabledFeatures(details: Record<string, unknown>): boolean {
             }
           </div>
         </div>
-        <h2 class="mb-6 mt-12 text-3xl font-bold text-gray-800">Pricing</h2>
+        <h2 class="mb-8 mt-14 text-3xl font-bold text-gray-800">Pricing</h2>
         <div class="space-y-8">
           {
             baasProvider.data.cloudHosted ? (

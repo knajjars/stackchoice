@@ -3,8 +3,13 @@
   "slug": "firebase",
   "website": "https://firebase.google.com/",
   "name": "Firebase",
-  "description": "Firebase is one of the most popular BaaS out there, it is developed by Google and has a wide range of services that can be used to build mobile and web applications.",
+  "description": "Firebase is a platform by Google that provides a variety of tools and services for developing mobile and web applications. It’s well-known for its real-time database, cloud storage, hosting, and robust user authentication.",
   "shortDescription": "A comprehensive mobile and web application development platform by Google, offering real-time database, authentication, and cloud functions.",
+  "uniqueFeatures": [
+    "Real-time database and Firestore (NoSQL).",
+    "Integrated machine learning APIs and Google Cloud integration.",
+    "Strong mobile app development support, especially for Android."
+  ],
   "logo": "./firebase.png",
   "sdks": [
     "Node",

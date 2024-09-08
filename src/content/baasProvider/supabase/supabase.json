@@ -5,6 +5,11 @@
   "name": "Supabase",
   "description": "Supabase is an open-source Firebase alternative. Supabase is a set of open-source tools and services that enables mobile and front-end web developers to build secure, scalable full stack applications, powered by Postgres.",
   "shortDescription": "An open-source Firebase alternative with a Postgres database, authentication, instant APIs, realtime subscriptions, and storage.",
+  "uniqueFeatures": [
+    "Powered by PostgreSQL, which gives it relational database capabilities.",
+    "Open-source, community-driven with a growing ecosystem.",
+    "Excellent support for SQL and real-time features like subscriptions."
+  ],
   "logo": "./supabase.png",
   "repository": "https://github.com/supabase/supabase",
   "sdks": [
