@@ -7,7 +7,7 @@
   "shortDescription": "A serverless backend platform with real-time sync, global consistency, and automatic caching.",
   "uniqueFeatures": [
     "Emphasizes real-time data synchronization and collaborative apps.",
-    "Offers a serverless database with automatic scaling.",
+    "Strong consistency, built with out of the box caching, ACID transactions and automatic retries.",
     "Strong focus on simplicity for developers with its functional API."
   ],
   "logo": "./convex.png",
