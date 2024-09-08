@@ -73,7 +73,9 @@
     "database": {
       "relations": true,
       "migrations": true,
-      "search": true
+      "fullTextSearch": true,
+      "vectorSearch": true,
+      "documents": true
     },
     "realtime": {
       "pubsub": true,
@@ -81,6 +83,8 @@
     },
     "functions": {
       "triggers": false,
+      "queueing": true,
+      "scheduling": true,
       "runtime": [
         "Node",
         "Convex"
@@ -88,16 +92,9 @@
     },
     "storage": {
       "fileUpload": true,
+      "resumeUpload": false,
       "cdn": true,
       "imageProcessing": false
-    },
-    "vectorDatabase": {
-      "embedding": true,
-      "similarity": true
-    },
-    "jobs": {
-      "queueing": true,
-      "scheduling": true
     },
     "pushNotifications": {
       "web": false,

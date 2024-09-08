@@ -74,7 +74,9 @@
     "database": {
       "relations": true,
       "migrations": true,
-      "search": true
+      "fullTextSearch": true,
+      "vectorSearch": false,
+      "documents": true
     },
     "realtime": {
       "pubsub": true,
@@ -82,22 +84,17 @@
     },
     "functions": {
       "triggers": true,
+      "queueing": true,
+      "scheduling": true,
       "runtime": [
         "Node"
       ]
     },
     "storage": {
       "fileUpload": true,
+      "resumeUpload": true,
       "cdn": true,
       "imageProcessing": true
-    },
-    "vectorDatabase": {
-      "embedding": false,
-      "similarity": false
-    },
-    "jobs": {
-      "queueing": true,
-      "scheduling": true
     },
     "pushNotifications": {
       "web": true,

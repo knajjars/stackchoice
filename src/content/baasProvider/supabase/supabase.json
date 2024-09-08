@@ -73,7 +73,9 @@
     "database": {
       "relations": true,
       "migrations": true,
-      "search": true
+      "fullTextSearch": true,
+      "documents": true,
+      "vectorSearch": true
     },
     "realtime": {
       "pubsub": true,
@@ -81,22 +83,17 @@
     },
     "functions": {
       "triggers": true,
+      "queueing": false,
+      "scheduling": false,
       "runtime": [
         "Deno"
       ]
     },
     "storage": {
       "fileUpload": true,
+      "resumeUpload": true,
       "cdn": true,
       "imageProcessing": true
-    },
-    "vectorDatabase": {
-      "embedding": true,
-      "similarity": true
-    },
-    "jobs": {
-      "queueing": false,
-      "scheduling": false
     },
     "pushNotifications": {
       "web": false,

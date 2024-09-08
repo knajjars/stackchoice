@@ -31,7 +31,9 @@
     "database": {
       "relations": true,
       "migrations": true,
-      "search": true
+      "fullTextSearch": true,
+      "documents": true,
+      "vectorSearch": false
     },
     "realtime": {
       "pubsub": true,
@@ -39,6 +41,8 @@
     },
     "functions": {
       "triggers": true,
+      "queueing": false,
+      "scheduling": true,
       "runtime": [
         "Go",
         "Node"
@@ -46,16 +50,9 @@
     },
     "storage": {
       "fileUpload": true,
+      "resumeUpload": false,
       "cdn": false,
       "imageProcessing": false
-    },
-    "vectorDatabase": {
-      "embedding": false,
-      "similarity": false
-    },
-    "jobs": {
-      "queueing": false,
-      "scheduling": true
     },
     "pushNotifications": {
       "web": false,
@@ -68,10 +65,10 @@
       "rowLevelSecurity": true
     },
     "compliances": {
-      "hipaa": true,
-      "gdpr": true,
-      "soc2": true,
-      "pci": true
+      "hipaa": null,
+      "gdpr": null,
+      "soc2": null,
+      "pci": null
     }
   }
 }

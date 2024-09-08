@@ -81,7 +81,9 @@
     "database": {
       "relations": true,
       "migrations": false,
-      "search": true
+      "fullTextSearch": true,
+      "vectorSearch": false,
+      "documents": true
     },
     "realtime": {
       "pubsub": true,
@@ -89,6 +91,8 @@
     },
     "functions": {
       "triggers": true,
+      "queueing": true,
+      "scheduling": true,
       "runtime": [
         "Node",
         "Bun",
@@ -105,18 +109,11 @@
         "C++"
       ]
     },
-    "vectorDatabase": {
-      "embedding": false,
-      "similarity": false
-    },
     "storage": {
       "fileUpload": true,
+      "resumeUpload": true,
       "cdn": true,
       "imageProcessing": true
-    },
-    "jobs": {
-      "queueing": true,
-      "scheduling": true
     },
     "pushNotifications": {
       "web": true,

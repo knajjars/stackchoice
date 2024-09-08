@@ -72,7 +72,9 @@ const baasProvider = defineCollection({
         database: z.object({
           relations: z.boolean(),
           migrations: z.boolean(),
-          search: z.boolean(),
+          documents: z.boolean(),
+          fullTextSearch: z.boolean(),
+          vectorSearch: z.boolean(),
         }),
         realtime: z
           .object({
@@ -89,6 +91,8 @@ const baasProvider = defineCollection({
         functions: z
           .object({
             triggers: z.boolean(),
+            queueing: z.boolean(),
+            scheduling: z.boolean(),
             runtime: z.array(z.string()),
           })
           .transform((input) => {
@@ -104,6 +108,7 @@ const baasProvider = defineCollection({
         storage: z
           .object({
             fileUpload: z.boolean(),
+            resumeUpload: z.boolean(),
             cdn: z.boolean(),
             imageProcessing: z.boolean(),
           })
@@ -111,14 +116,6 @@ const baasProvider = defineCollection({
             const { cdn, ...rest } = input;
             return { ...rest, CDN: cdn };
           }),
-        vectorDatabase: z.object({
-          embedding: z.boolean(),
-          similarity: z.boolean(),
-        }),
-        jobs: z.object({
-          queueing: z.boolean(),
-          scheduling: z.boolean(),
-        }),
         pushNotifications: z
           .object({
             web: z.boolean(),
@@ -147,10 +144,10 @@ const baasProvider = defineCollection({
           }),
         compliances: z
           .object({
-            hipaa: z.boolean(),
-            gdpr: z.boolean(),
-            soc2: z.boolean(),
-            pci: z.boolean(),
+            hipaa: z.boolean().nullable(),
+            gdpr: z.boolean().nullable(),
+            soc2: z.boolean().nullable(),
+            pci: z.boolean().nullable(),
           })
           .transform((input) => ({
             HIPAA: input.hipaa,
