@@ -7,7 +7,9 @@ import { Image } from "astro:assets";
 const baasProviders = await getCollection("baasProvider");
 ---
 
-<MainLayout>
+<MainLayout
+  description="Forget about decision paralysis. We help you find the best tech stack for your next project."
+>
   <section
     class="hero relative overflow-hidden rounded-lg bg-gradient-to-br from-purple-700 via-indigo-600 to-blue-500 px-8 py-32 text-white shadow-2xl md:px-12"
   >
@@ -17,9 +19,9 @@ const baasProviders = await getCollection("baasProvider");
       >
         Welcome to <span class="text-yellow-300">StackChoice.dev</span>
       </h1>
-      <p class="animate-fade-in mb-12 text-xl leading-relaxed text-gray-100">
-        Empowering developers worldwide to explore, evaluate, and choose the
-        ideal tools for building their applications with confidence.
+      <p class="animate-fade-in mb-12 text-2xl leading-relaxed text-gray-100">
+        Forget about <strong class="font-bold">decision paralysis.</strong> We help
+        you find the best tech stack for your next project.
       </p>
       <a
         href="/baas-providers"

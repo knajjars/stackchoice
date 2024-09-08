@@ -10,15 +10,18 @@ const baasProviders = (await getCollection("baasProvider")).sort((a, b) =>
 const pageTitle = "BaaS Providers | List of Backend as a Service Providers";
 ---
 
-<MainLayout title={pageTitle}>
+<MainLayout
+  title={pageTitle}
+  description="Discover BaaS solutions that allow developers to focus on building great applications without worrying about backend infrastructure."
+>
   <div class="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
     <header class="mb-12 text-center">
       <h1 class="mb-4 text-4xl font-extrabold text-gray-900 sm:text-5xl">
         Backend as a Service Providers
       </h1>
       <p class="mx-auto max-w-2xl text-xl text-gray-600">
-        Discover BaaS solutions that empower developers to focus on building
-        great applications without worrying about backend infrastructure.
+        Discover BaaS solutions that allow developers to focus on building great
+        applications without worrying about backend infrastructure.
       </p>
     </header>
 
