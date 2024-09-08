@@ -69,7 +69,7 @@ const getResourceUnit = (key: string) => {
       authentication.
     </li>
     <li>
-      <strong>Subscription-based model:</strong> Some providers offer paid plans
+      <strong>Subscription plan resources:</strong> Some providers offer paid plans
       with increased resource limits and additional features. These plans usually
       charge a recurring monthly fee and may include overage charges for exceeding
       limits.
@@ -124,7 +124,7 @@ const getResourceUnit = (key: string) => {
             </div>
             <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
               <dt class="truncate text-sm font-medium text-gray-500">
-                Subscription resources
+                Subscription plan resources
               </dt>
               <dd class="mt-1 text-2xl font-semibold tracking-tight text-gray-900">
                 {key === "Price"
@@ -165,7 +165,7 @@ const getResourceUnit = (key: string) => {
                     );
                   } else if (value === null) {
                     return "-";
-                  } else if (key !== "Note") {
+                  } else if (key !== "Note" && value !== "unlimited") {
                     return `${formatValue(value, true)} ${getOveragePricingUnit(key)}`;
                   }
                   return formatValue(value, key !== "Note");
