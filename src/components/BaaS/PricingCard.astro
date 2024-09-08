@@ -57,78 +57,67 @@ const getResourceUnit = (key: string) => {
 };
 ---
 
-<div class="space-y-8">
+<div class="space-y-5">
   <div
-    class="rounded-xl bg-white p-8 shadow-lg transition-all duration-300 hover:shadow-xl"
+    class="rounded-xl bg-white p-6 shadow-lg transition-all duration-300 hover:shadow-xl"
   >
     <p class="mb-8 text-lg italic text-gray-700">
       Dive into the world of Backend-as-a-Service pricing models and discover
       the perfect fit for your project!
     </p>
-    <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
       <div
-        class="rounded-lg bg-purple-200 p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+        class="rounded-lg bg-purple-200 p-4 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
       >
         <h4
-          class="mb-3 flex items-center text-xl font-semibold text-purple-800"
+          class="mb-2 flex items-center text-lg font-semibold text-purple-800"
         >
-          <Icon name="mdi:gift" class="mr-2 h-7 w-7 text-purple-600" /> Free resources
+          <Icon name="mdi:gift" class="mr-2 h-5 w-5 text-purple-600" /> Free resources
         </h4>
-        <p class="leading-relaxed text-purple-700">
-          Kickstart your project with a treasure trove of free resources each
-          month. Think database storage, API calls, and user authentication –
-          all on the house!
+        <p class="text-sm leading-relaxed text-purple-700">
+          Kickstart your project with free resources each month.
         </p>
       </div>
       <div
-        class="rounded-lg bg-amber-200 p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+        class="rounded-lg bg-amber-200 p-4 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
       >
-        <h4 class="mb-3 flex items-center text-xl font-semibold text-amber-800">
-          <Icon name="mdi:briefcase" class="mr-2 h-7 w-7 text-amber-600" /> Subscription
-          plan resources
+        <h4 class="mb-2 flex items-center text-lg font-semibold text-amber-800">
+          <Icon name="mdi:briefcase" class="mr-2 h-5 w-5 text-amber-600" /> Subscription
+          plan
         </h4>
-        <p class="leading-relaxed text-amber-700">
-          Level up with paid plans offering beefed-up resources and cool extra
-          features. Just watch out for those sneaky overage charges!
+        <p class="text-sm leading-relaxed text-amber-700">
+          Level up with paid plans offering more resources and features.
         </p>
       </div>
       <div
-        class="rounded-lg bg-green-200 p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+        class="rounded-lg bg-green-200 p-4 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
       >
-        <h4 class="mb-3 flex items-center text-xl font-semibold text-green-800">
-          <Icon name="mdi:scale-balance" class="mr-2 h-7 w-7 text-green-600" /> Usage-based
-          resources
+        <h4 class="mb-2 flex items-center text-lg font-semibold text-green-800">
+          <Icon name="mdi:scale-balance" class="mr-2 h-5 w-5 text-green-600" /> Usage-based
         </h4>
-        <p class="leading-relaxed text-green-700">
-          Embrace the flexibility of pay-as-you-go! Start free and only pay for
-          what you use. It's like a buffet for your backend needs.
+        <p class="text-sm leading-relaxed text-green-700">
+          After your free or subscription resources are used up, you pay only
+          for what you use.
         </p>
       </div>
     </div>
-    <p class="mt-8 text-center text-lg font-medium text-gray-700">
-      Ready to choose? Consider your project's appetite for resources, its
-      growth potential, and your wallet's comfort zone. The perfect BaaS pricing
-      model is out there waiting for you!
-    </p>
   </div>
   {
-    Object.keys(pricing?.freeTierLimits ?? {}).map((key, index) => (
+    Object.keys(pricing?.freeTierLimits ?? {}).map((key) => (
       <div class="overflow-hidden rounded-xl bg-white shadow-lg transition-all duration-300 hover:shadow-xl">
-        <div class="px-6 py-8">
-          <h3 class="mb-6 text-2xl font-bold leading-tight text-gray-900">
+        <div class="p-6">
+          <h3 class="mb-4 text-xl font-bold leading-tight text-gray-900">
             {key}
           </h3>
-          <div class="grid grid-cols-1 gap-8 sm:grid-cols-3">
-            <div class="overflow-hidden rounded-lg bg-purple-200 p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-              <dt class="mb-2 text-sm font-medium text-purple-800">
-                Free resources
-              </dt>
-              <dd class="text-2xl font-semibold tracking-tight text-purple-700">
+          <div class="grid grid-cols-3 gap-4">
+            <div class="rounded-lg bg-purple-100 p-4">
+              <dt class="mb-1 text-sm font-medium text-purple-800">Free</dt>
+              <dd class="text-lg font-semibold tracking-tight text-purple-700">
                 {key === "Price" ? (
                   pricing?.freeTierLimits[
                     key as keyof typeof pricing.freeTierLimits
                   ] === null ? (
-                    <Icon name="mdi:check" class="h-8 w-8 text-purple-700" />
+                    <Icon name="mdi:check" class="h-6 w-6 text-purple-700" />
                   ) : (
                     formatValue(
                       pricing?.freeTierLimits[
@@ -150,22 +139,17 @@ const getResourceUnit = (key: string) => {
                 )}
               </dd>
             </div>
-            <div class="overflow-hidden rounded-lg bg-amber-200 p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-              <dt class="mb-2 text-sm font-medium text-amber-800">
-                Subscription plan resources
+            <div class="rounded-lg bg-amber-100 p-4">
+              <dt class="mb-1 text-sm font-medium text-amber-800">
+                Subscription
               </dt>
-              <dd class="text-2xl font-semibold tracking-tight text-amber-700">
+              <dd class="text-lg font-semibold tracking-tight text-amber-700">
                 {key === "Price"
                   ? pricing?.pricedTier[
                       key as keyof typeof pricing.pricedTier
                     ] === null
                     ? `${baasProvider.data.name} offers usage-based pricing only`
-                    : `${formatValue(
-                        pricing?.pricedTier[
-                          key as keyof typeof pricing.pricedTier
-                        ],
-                        true,
-                      )} per month`
+                    : `${formatValue(pricing?.pricedTier[key as keyof typeof pricing.pricedTier], true)} per month`
                   : (() => {
                       const value =
                         pricing?.pricedTier[
@@ -177,11 +161,11 @@ const getResourceUnit = (key: string) => {
                     })()}
               </dd>
             </div>
-            <div class="overflow-hidden rounded-lg bg-green-200 p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-              <dt class="mb-2 text-sm font-medium text-green-800">
-                Usage-based resources
+            <div class="rounded-lg bg-green-100 p-4">
+              <dt class="mb-1 text-sm font-medium text-green-800">
+                Usage-based
               </dt>
-              <dd class="text-2xl font-semibold tracking-tight text-green-700">
+              <dd class="text-lg font-semibold tracking-tight text-green-700">
                 {(() => {
                   const value =
                     pricing?.overagePricing[
@@ -189,7 +173,7 @@ const getResourceUnit = (key: string) => {
                     ];
                   if (key === "Price") {
                     return (
-                      <Icon name="mdi:check" class="h-8 w-8 text-green-700" />
+                      <Icon name="mdi:check" class="h-6 w-6 text-green-700" />
                     );
                   } else if (value === null) {
                     return "-";
