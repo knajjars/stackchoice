@@ -20,6 +20,7 @@
   "cloudHosted": false,
   "features": {
     "authentication": {
+      "otp": false,
       "social": true,
       "email": true,
       "phone": false,
@@ -37,10 +38,10 @@
       "realtimeDatabase": true
     },
     "functions": {
-      "triggers": false,
+      "triggers": true,
       "runtime": [
-        "go",
-        "node"
+        "Go",
+        "Node"
       ]
     },
     "storage": {
@@ -57,6 +58,7 @@
       "scheduling": true
     },
     "pushNotifications": {
+      "web": false,
       "ios": false,
       "android": false
     },

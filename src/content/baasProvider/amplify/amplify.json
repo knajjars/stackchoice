@@ -63,6 +63,7 @@
   },
   "features": {
     "authentication": {
+      "otp": true,
       "social": true,
       "email": true,
       "phone": true,
@@ -82,7 +83,7 @@
     "functions": {
       "triggers": true,
       "runtime": [
-        "nodejs"
+        "Node"
       ]
     },
     "storage": {
@@ -99,6 +100,7 @@
       "scheduling": true
     },
     "pushNotifications": {
+      "web": true,
       "ios": true,
       "android": true
     },

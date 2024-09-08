@@ -58,13 +58,15 @@ const baasProvider = defineCollection({
             phone: z.boolean(),
             magicLinks: z.boolean(),
             sso: z.boolean(),
+            otp: z.boolean(),
             userManagement: z.boolean(),
           })
           .transform((input) => {
-            const { sso, ...rest } = input;
+            const { sso, otp, ...rest } = input;
             return {
               ...rest,
               SSO: sso,
+              OTP: otp,
             };
           }),
         database: z.object({
@@ -119,6 +121,7 @@ const baasProvider = defineCollection({
         }),
         pushNotifications: z
           .object({
+            web: z.boolean(),
             ios: z.boolean(),
             android: z.boolean(),
           })

@@ -6,13 +6,14 @@
   "description": "Appwrite is an open-source backend server that provides core APIs for web, mobile, and flutter developers. It allows for easy management of databases, authentication, file storage, and cloud functions.",
   "shortDescription": "An fully-featured open-source backend server for web, mobile & Flutter developers.",
   "uniqueFeatures": [
-    "Fully self-hostable with high customization.",
+    "Fully and easily self-hostable with high customization.",
     "Open-source and supports a variety of frontend platforms.",
     "Excellent developer experience, aimed at simplifying backend development."
   ],
   "logo": "./appwrite.png",
   "repository": "https://github.com/appwrite/appwrite",
   "sdks": [
+    "CLI",
     "JavaScript",
     "Flutter",
     "React Native",
@@ -69,6 +70,7 @@
   },
   "features": {
     "authentication": {
+      "otp": true,
       "social": true,
       "email": true,
       "phone": true,
@@ -88,19 +90,19 @@
     "functions": {
       "triggers": true,
       "runtime": [
-        "node",
-        "bun",
-        "deno",
-        "go",
-        "python",
-        "dart",
-        "php",
-        "ruby",
-        ".net",
-        "java",
-        "swift",
-        "kotlin",
-        "c++"
+        "Node",
+        "Bun",
+        "Deno",
+        "Go",
+        "Python",
+        "Dart",
+        "PHP",
+        "Ruby",
+        ".Net",
+        "Java",
+        "Swift",
+        "Kotlin",
+        "C++"
       ]
     },
     "vectorDatabase": {
@@ -113,10 +115,11 @@
       "imageProcessing": true
     },
     "jobs": {
-      "queueing": false,
+      "queueing": true,
       "scheduling": true
     },
     "pushNotifications": {
+      "web": true,
       "ios": true,
       "android": true
     },

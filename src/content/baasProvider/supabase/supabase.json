@@ -62,6 +62,7 @@
   },
   "features": {
     "authentication": {
+      "otp": true,
       "social": true,
       "email": true,
       "phone": true,
@@ -81,7 +82,7 @@
     "functions": {
       "triggers": true,
       "runtime": [
-        "deno"
+        "Deno"
       ]
     },
     "storage": {
@@ -98,6 +99,7 @@
       "scheduling": false
     },
     "pushNotifications": {
+      "web": false,
       "ios": false,
       "android": false
     },
