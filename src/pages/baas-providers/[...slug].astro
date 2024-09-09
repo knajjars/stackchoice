@@ -68,40 +68,36 @@ function hasEnabledFeatures(details: Record<string, unknown>): boolean {
           }
         </div>
       </div>
-      <div class="lg:col-span-2">
-        <h1 class="mb-6 text-4xl font-extrabold text-gray-900 sm:text-5xl">
-          {baasProvider.data.name}
-        </h1>
-        <p class="mb-10 text-xl leading-relaxed text-gray-600">
-          {baasProvider.data.description}
-        </p>
-        <div class="mb-14 space-y-10">
-          <div>
-            <h2 class="mb-4 text-2xl font-semibold text-gray-800">
-              Hosting Options
-            </h2>
-            <div class="flex flex-wrap gap-3">
-              <Pill
-                text="Cloud Hosting"
-                type={baasProvider.data.cloudHosted ? "success" : "empty"}
-              />
-              <Pill
-                text="Self Hosting"
-                type={baasProvider.data.selfHosted ? "success" : "empty"}
-              />
-            </div>
-          </div>
-          <div>
-            <h2 class="mb-4 text-2xl font-semibold text-gray-800">
-              Official SDKs
-            </h2>
-            <div class="flex flex-wrap gap-3">
-              {baasProvider.data.sdks.map((sdk) => <Pill text={sdk} />)}
-            </div>
+      <div class="flex flex-col gap-12 lg:col-span-2">
+        <div class="flex flex-col gap-4">
+          <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl">
+            {baasProvider.data.name}
+          </h1>
+          <p class="text-xl leading-relaxed text-gray-600">
+            {baasProvider.data.description}
+          </p>
+        </div>
+        <div class="flex flex-col gap-4">
+          <h2 class="text-2xl font-semibold text-gray-800">Hosting Options</h2>
+          <div class="flex flex-wrap gap-3">
+            <Pill
+              text="Cloud Hosting"
+              type={baasProvider.data.cloudHosted ? "success" : "empty"}
+            />
+            <Pill
+              text="Self Hosting"
+              type={baasProvider.data.selfHosted ? "success" : "empty"}
+            />
           </div>
         </div>
-        <div class="mb-14">
-          <h2 class="mb-6 text-3xl font-bold text-gray-800">Unique Features</h2>
+        <div class="flex flex-col gap-4">
+          <h2 class="text-2xl font-semibold text-gray-800">Official SDKs</h2>
+          <div class="flex flex-wrap gap-3">
+            {baasProvider.data.sdks.map((sdk) => <Pill text={sdk} />)}
+          </div>
+        </div>
+        <div class="flex flex-col gap-4">
+          <h2 class="text-2xl font-semibold text-gray-800">Unique Features</h2>
           <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {
               baasProvider.data.uniqueFeatures.map((feature) => (
@@ -118,89 +114,93 @@ function hasEnabledFeatures(details: Record<string, unknown>): boolean {
             }
           </ul>
         </div>
-        <h2 class="mb-8 text-3xl font-bold text-gray-800">Features</h2>
-        <div class="flex flex-col gap-8 md:flex-row">
-          <div class="flex flex-1 flex-col gap-6">
-            {
-              Object.entries(baasProvider.data.features)
-                .slice(
-                  0,
-                  Math.ceil(
-                    Object.entries(baasProvider.data.features).length / 2,
-                  ),
-                )
-                .map(([feature, details]) => (
-                  <Accordion
-                    key={feature}
-                    canOpen={hasEnabledFeatures(details)}
-                  >
-                    <slot slot="title">
-                      <Icon
-                        name={
-                          hasEnabledFeatures(details)
-                            ? "mdi:check-circle"
-                            : "mdi:close-circle"
-                        }
-                        class={`mr-2 inline-block ${
-                          hasEnabledFeatures(details)
-                            ? "text-green-500"
-                            : "text-red-500"
-                        }`}
-                      />
-                      <span>{startCase(feature)}</span>
-                    </slot>
-                    <FeatureList features={details} />
-                  </Accordion>
-                ))
-            }
-          </div>
-          <div class="flex flex-1 flex-col gap-6">
-            {
-              Object.entries(baasProvider.data.features)
-                .slice(
-                  Math.ceil(
-                    Object.entries(baasProvider.data.features).length / 2,
-                  ),
-                )
-                .map(([feature, details]) => (
-                  <Accordion
-                    key={feature}
-                    canOpen={hasEnabledFeatures(details)}
-                  >
-                    <slot slot="title">
-                      <Icon
-                        name={
-                          hasEnabledFeatures(details)
-                            ? "mdi:check-circle"
-                            : "mdi:close-circle"
-                        }
-                        class={`mr-2 inline-block ${
-                          hasEnabledFeatures(details)
-                            ? "text-green-500"
-                            : "text-red-500"
-                        }`}
-                      />
-                      <span>{startCase(feature)}</span>
-                    </slot>
-                    <FeatureList features={details} />
-                  </Accordion>
-                ))
-            }
+        <div class="flex flex-col gap-4">
+          <h2 class="text-2xl font-semibold text-gray-800">Features</h2>
+          <div class="flex flex-col gap-8 md:flex-row">
+            <div class="flex flex-1 flex-col gap-6">
+              {
+                Object.entries(baasProvider.data.features)
+                  .slice(
+                    0,
+                    Math.ceil(
+                      Object.entries(baasProvider.data.features).length / 2,
+                    ),
+                  )
+                  .map(([feature, details]) => (
+                    <Accordion
+                      key={feature}
+                      canOpen={hasEnabledFeatures(details)}
+                    >
+                      <slot slot="title">
+                        <Icon
+                          name={
+                            hasEnabledFeatures(details)
+                              ? "mdi:check-circle"
+                              : "mdi:close-circle"
+                          }
+                          class={`mr-2 inline-block ${
+                            hasEnabledFeatures(details)
+                              ? "text-green-500"
+                              : "text-red-500"
+                          }`}
+                        />
+                        <span>{startCase(feature)}</span>
+                      </slot>
+                      <FeatureList features={details} />
+                    </Accordion>
+                  ))
+              }
+            </div>
+            <div class="flex flex-1 flex-col gap-6">
+              {
+                Object.entries(baasProvider.data.features)
+                  .slice(
+                    Math.ceil(
+                      Object.entries(baasProvider.data.features).length / 2,
+                    ),
+                  )
+                  .map(([feature, details]) => (
+                    <Accordion
+                      key={feature}
+                      canOpen={hasEnabledFeatures(details)}
+                    >
+                      <slot slot="title">
+                        <Icon
+                          name={
+                            hasEnabledFeatures(details)
+                              ? "mdi:check-circle"
+                              : "mdi:close-circle"
+                          }
+                          class={`mr-2 inline-block ${
+                            hasEnabledFeatures(details)
+                              ? "text-green-500"
+                              : "text-red-500"
+                          }`}
+                        />
+                        <span>{startCase(feature)}</span>
+                      </slot>
+                      <FeatureList features={details} />
+                    </Accordion>
+                  ))
+              }
+            </div>
           </div>
         </div>
-        <h2 class="mb-8 mt-14 text-3xl font-bold text-gray-800">Pricing</h2>
-        <div class="space-y-8">
-          {
-            baasProvider.data.cloudHosted ? (
-              <PricingCard baasProvider={baasProvider} />
-            ) : (
-              <p class="text-lg text-gray-600">
-                This provider does not currently offer cloud hosting. Please
-                check their website for self-hosting options and pricing
-                details.
-              </p>
-            )
-          }
+        <div class="flex flex-col gap-4">
+          <h2 class="text-2xl font-semibold text-gray-800">Pricing</h2>
+          <div class="space-y-8">
+            {
+              baasProvider.data.cloudHosted ? (
+                <PricingCard baasProvider={baasProvider} />
+              ) : (
+                <p class="text-lg text-gray-600">
+                  This provider does not currently offer cloud hosting. Please
+                  check their website for self-hosting options and pricing
+                  details.
+                </p>
+              )
+            }
+          </div>
         </div>
       </div>
     </div>

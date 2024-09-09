@@ -33,7 +33,10 @@ const baasProvider = defineCollection({
   schema: ({ image }) =>
     z.object({
       slug: z.string(),
-      website: z.string().url(),
+      website: z
+        .string()
+        .url()
+        .transform((url) => url + "?ref=stackchoice.dev"),
       name: z.string(),
       description: z.string(),
       shortDescription: z.string(),
@@ -164,7 +167,10 @@ const fullStackFramework = defineCollection({
   schema: ({ image }) =>
     z.object({
       slug: z.string(),
-      website: z.string().url(),
+      website: z
+        .string()
+        .url()
+        .transform((url) => url + "?ref=stackchoice.dev"),
       name: z.string(),
       description: z.string(),
       logo: image(),
