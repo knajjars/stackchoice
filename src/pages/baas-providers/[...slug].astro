@@ -231,11 +231,13 @@ function hasEnabledFeatures(details: Record<string, unknown>): boolean {
           id="compare"
           class="flex flex-col gap-6 rounded-xl bg-gradient-to-br from-purple-100 to-indigo-100 p-8 shadow-lg"
         >
-          <h2 class="text-2xl font-semibold text-purple-800">
-            Compare with Other Providers
+          <h2 class="text-2xl font-semibold text-gray-700">
+            Compare <span class="text-purple-700">{baas.data.name}</span> with Other
+            Providers
           </h2>
           <p class="mb-4 text-lg text-gray-700">
-            Explore how {baas.data.name} stacks up against other BaaS solutions.
+            Explore how {baas.data.name} stacks up against other Backend as a Service
+            solutions.
           </p>
           <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {
