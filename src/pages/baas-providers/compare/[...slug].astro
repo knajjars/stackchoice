@@ -1,0 +1,269 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import MainLayout from "~/layouts/Layout.astro";
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import startCase from "lodash/startCase";
+import Pill from "~/components/Pill.astro";
+import { formatValue, getResourceUnit } from "~/lib/utils";
+import { getOveragePricingUnit } from "~/lib/utils";
+
+export async function getStaticPaths() {
+  const baasProviders = await getCollection("baasProvider");
+
+  const paths = baasProviders.flatMap((baasProvider1) =>
+    baasProviders
+      .filter(
+        (baasProvider2) => baasProvider1.data.slug !== baasProvider2.data.slug,
+      )
+      .map((baasProvider2) => ({
+        params: {
+          slug: `${baasProvider1.data.slug}-vs-${baasProvider2.data.slug}`,
+        },
+        props: { baasProvider1, baasProvider2 },
+      })),
+  );
+
+  return paths;
+}
+
+type Props = {
+  baasProvider1: CollectionEntry<"baasProvider">;
+  baasProvider2: CollectionEntry<"baasProvider">;
+};
+
+const { baasProvider1, baasProvider2 } = Astro.props as Props;
+const pageTitle = `${baasProvider1.data.name} vs ${baasProvider2.data.name} | Features, Overview, and Pricing`;
+const pageDescription = `Compare ${baasProvider1.data.name} and ${baasProvider2.data.name} to find which is the best Backend as a Service (BaaS) provider for your needs.`;
+
+const featureSets = Object.keys(baasProvider1.data.features);
+const pricingCategories = Object.keys(baasProvider1.data.pricing ?? {});
+
+function checkFeature<
+  K extends keyof CollectionEntry<"baasProvider">["data"]["features"],
+  F extends keyof CollectionEntry<"baasProvider">["data"]["features"][K],
+>(
+  providerFeatureSet: CollectionEntry<"baasProvider">["data"]["features"],
+  featureSet: K,
+  feature: F,
+) {
+  const featureValue = providerFeatureSet[featureSet][feature];
+  return featureValue as boolean | null;
+}
+---
+
+<MainLayout title={pageTitle} description={pageDescription}>
+  <div class="bg-gradient-to-b from-purple-50 to-white">
+    <div class="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
+      <h1
+        class="mb-4 text-center text-3xl font-bold text-purple-900 sm:text-4xl"
+      >
+        <span class="text-purple-600">{baasProvider1.data.name}</span> vs <span
+          class="text-purple-600">{baasProvider2.data.name}</span
+        >
+      </h1>
+      <p class="mb-8 text-center text-lg text-gray-700">
+        {pageDescription}
+      </p>
+
+      <div class="grid grid-cols-1 gap-8 sm:grid-cols-2">
+        {
+          [baasProvider1, baasProvider2].map((provider) => (
+            <div class="group flex flex-col items-center rounded-xl bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+              <Image
+                src={provider.data.logo}
+                alt={provider.data.name}
+                width={120}
+                height={120}
+                loading="eager"
+                class="mb-4 object-contain transition-transform duration-300 group-hover:scale-110"
+              />
+              <h2 class="mb-2 text-2xl font-bold text-gray-900 transition-colors duration-300 group-hover:text-purple-600">
+                {provider.data.name}
+              </h2>
+              <p class="mb-4 text-center text-gray-600 transition-colors duration-300 group-hover:text-gray-800">
+                {provider.data.shortDescription}
+              </p>
+              <div class="mb-4 flex flex-wrap justify-center gap-2">
+                <Pill
+                  text="Cloud Hosting"
+                  type={provider.data.cloudHosted ? "success" : "empty"}
+                />
+                <Pill
+                  text="Self Hosting"
+                  type={provider.data.selfHosted ? "success" : "empty"}
+                />
+              </div>
+              <div class="mt-auto flex gap-3">
+                <a
+                  href={`/baas-providers/${provider.data.slug}`}
+                  class="flex items-center gap-1 rounded-full bg-purple-100 px-4 py-2 text-sm font-medium text-purple-700 transition-colors duration-300 hover:bg-purple-200"
+                >
+                  Details
+                  <Icon name="mdi:arrow-right" class="size-4" />
+                </a>
+                <a
+                  href={provider.data.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex items-center gap-1 rounded-full bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 transition-colors duration-300 hover:bg-gray-200"
+                >
+                  Website
+                  <Icon name="mdi:external-link" class="size-4" />
+                </a>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+      <div class="mt-12 flex justify-center">
+        <a
+          href="#comparison"
+          class="flex items-center gap-2 rounded-full bg-purple-600 px-6 py-3 text-lg font-medium text-white transition-colors duration-300 hover:bg-purple-700"
+        >
+          Compare Features
+          <Icon name="mdi:arrow-down" class="size-5" />
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mx-auto px-4 py-16 sm:px-6 lg:px-8" id="comparison">
+    <div class="space-y-12">
+      {
+        featureSets.map((featureSet) => (
+          <div class="overflow-hidden rounded-xl bg-white shadow-lg transition-all duration-300 hover:shadow-xl">
+            <h2 class="bg-purple-100 p-4 text-2xl font-bold text-purple-900">
+              {startCase(featureSet)}
+            </h2>
+            <div class="overflow-x-auto">
+              <table class="w-full border-collapse">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th class="w-1/3 border-b p-3 text-left font-semibold text-gray-900">
+                      Feature
+                    </th>
+                    <th class="w-1/3 border-b p-3 text-left font-semibold text-gray-900">
+                      {baasProvider1.data.name}
+                    </th>
+                    <th class="w-1/3 border-b p-3 text-left font-semibold text-gray-900">
+                      {baasProvider2.data.name}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {Object.keys(
+                    baasProvider1.data.features[
+                      featureSet as keyof typeof baasProvider1.data.features
+                    ],
+                  ).map((feature, index) => (
+                    <tr class={index % 2 === 0 ? "bg-white" : "bg-gray-50"}>
+                      <td class="w-1/3 border-b p-3 font-medium text-gray-900">
+                        {startCase(feature)}
+                      </td>
+                      {[baasProvider1, baasProvider2].map((provider) => (
+                        <td class="w-1/3 border-b p-3">
+                          {(() => {
+                            const value = checkFeature(
+                              provider.data.features,
+                              featureSet as any,
+                              feature as any,
+                            );
+                            if (typeof value === "boolean") {
+                              return value ? (
+                                <Icon
+                                  name="mdi:check-circle"
+                                  class="h-6 w-6 text-green-500"
+                                />
+                              ) : (
+                                <Icon
+                                  name="mdi:close-circle"
+                                  class="h-6 w-6 text-red-500"
+                                />
+                              );
+                            }
+                            return (
+                              <span class="text-gray-700">{value ?? "-"}</span>
+                            );
+                          })()}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="container mx-auto px-4 py-16 sm:px-6 lg:px-8">
+    <h2 class="mb-8 text-center text-3xl font-bold text-purple-900">
+      Pricing Comparison
+    </h2>
+    <div class="space-y-8">
+      {
+        pricingCategories.map((category) => (
+          <div class="overflow-hidden rounded-xl bg-white shadow-lg transition-all duration-300 hover:shadow-xl">
+            <h3 class="bg-purple-100 p-4 text-2xl font-bold text-purple-900">
+              {startCase(category)}
+            </h3>
+            <div class="overflow-x-auto">
+              <table class="w-full border-collapse">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th class="w-1/3 border-b p-3 text-left font-semibold text-gray-900">
+                      Resource
+                    </th>
+                    <th class="w-1/3 border-b p-3 text-left font-semibold text-gray-900">
+                      {baasProvider1.data.name}
+                    </th>
+                    <th class="w-1/3 border-b p-3 text-left font-semibold text-gray-900">
+                      {baasProvider2.data.name}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {Object.keys(
+                    baasProvider1.data.pricing?.[
+                      category as keyof typeof baasProvider1.data.pricing
+                    ] ?? {},
+                  ).map((resource, index) => (
+                    <tr class={index % 2 === 0 ? "bg-white" : "bg-gray-50"}>
+                      <td class="w-1/3 border-b p-3 font-medium text-gray-900">
+                        {startCase(resource)}
+                      </td>
+                      {[baasProvider1, baasProvider2].map((provider) => (
+                        <td class="w-1/3 border-b p-3 text-gray-700">
+                          {(() => {
+                            const value =
+                              provider.data.pricing?.[
+                                category as keyof typeof baasProvider1.data.pricing
+                              ]?.[resource];
+
+                            return (
+                              formatValue(value, resource === "Price") +
+                              " " +
+                              (category === "overagePricing" && value
+                                ? getOveragePricingUnit(resource)
+                                : value
+                                  ? getResourceUnit(resource)
+                                  : "")
+                            ).trim();
+                          })()}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</MainLayout>
