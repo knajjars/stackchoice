@@ -76,7 +76,7 @@ const pricingDescriptions = {
       {
         [baasProvider1, baasProvider2].map((provider) => (
           <div class="group rounded-2xl bg-white p-6 shadow-lg">
-            <div class="mb-6 flex flex-col items-center justify-between gap-3 lg:flex-row">
+            <div class="mb-6 flex items-start justify-between gap-3">
               <Image
                 src={provider.data.logo}
                 alt={provider.data.name}
@@ -85,7 +85,7 @@ const pricingDescriptions = {
                 loading="eager"
                 class="object-contain transition-transform duration-300 group-hover:scale-105"
               />
-              <div class="flex gap-2">
+              <div class="flex flex-col gap-3 xl:flex-row">
                 <Pill
                   text="Cloud Hosting"
                   type={provider.data.cloudHosted ? "success" : "empty"}

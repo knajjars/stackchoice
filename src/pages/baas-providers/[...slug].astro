@@ -13,14 +13,22 @@ export async function getStaticPaths() {
   const baasProviders = await getCollection("baasProvider");
   return baasProviders.map((baas) => ({
     params: { slug: baas.data.slug },
-    props: baas,
+    props: {
+      baas,
+      otherBaasProviders: baasProviders.filter(
+        (b) => b.data.slug !== baas.data.slug,
+      ),
+    },
   }));
 }
 
-type Props = CollectionEntry<"baasProvider">;
+type Props = {
+  baas: CollectionEntry<"baasProvider">;
+  otherBaasProviders: CollectionEntry<"baasProvider">[];
+};
 
-const baasProvider = Astro.props;
-const pageTitle = `${baasProvider.data.name} | Features, Overview, and Pricing`;
+const { baas, otherBaasProviders } = Astro.props;
+const pageTitle = `${baas.data.name} | Features, Overview, and Pricing`;
 
 function hasEnabledFeatures(details: Record<string, unknown>): boolean {
   return Object.values(details).some((value) => !!value);
@@ -28,9 +36,9 @@ function hasEnabledFeatures(details: Record<string, unknown>): boolean {
 ---
 
 <MainLayout
-  {...baasProvider.data}
+  {...baas.data}
   title={pageTitle}
-  description={baasProvider.data.shortDescription}
+  description={baas.data.shortDescription}
 >
   <div class="container mx-auto px-4 py-16 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 gap-12 lg:grid-cols-3">
@@ -38,8 +46,8 @@ function hasEnabledFeatures(details: Record<string, unknown>): boolean {
         class="flex flex-col items-center space-y-8 lg:sticky lg:top-8 lg:self-start"
       >
         <Image
-          src={baasProvider.data.logo}
-          alt={baasProvider.data.name}
+          src={baas.data.logo}
+          alt={baas.data.name}
           format="webp"
           loading="eager"
           width={180}
@@ -48,33 +56,54 @@ function hasEnabledFeatures(details: Record<string, unknown>): boolean {
         <div class="flex flex-col items-center space-y-4">
           <a
             target="_blank"
-            href={baasProvider.data.website}
-            class="flex items-center gap-2 rounded-full bg-purple-100 px-4 py-2 text-sm font-medium text-purple-700 transition-colors duration-300 hover:bg-purple-200"
+            href={baas.data.website}
+            class="flex w-full items-center justify-center gap-2 rounded-full bg-purple-100 px-4 py-2 text-sm font-medium text-purple-700 transition-colors duration-300 hover:bg-purple-200"
           >
             Visit Website
             <Icon name="mdi:external-link" class="size-4" />
           </a>
           {
-            baasProvider.data.repository && (
+            baas.data.repository && (
               <a
                 target="_blank"
-                href={baasProvider.data.repository}
-                class="flex items-center gap-2 rounded-full bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 transition-colors duration-300 hover:bg-gray-200"
+                href={baas.data.repository}
+                class="flex w-full items-center justify-center gap-2 rounded-full bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 transition-colors duration-300 hover:bg-gray-200"
               >
                 View Source
                 <Icon name="mdi:github" class="size-4" />
               </a>
             )
           }
+          <a
+            href="#features"
+            class="flex w-full items-center justify-center gap-2 rounded-full bg-blue-100 px-4 py-2 text-sm font-medium text-blue-700 transition-colors duration-300 hover:bg-blue-200"
+          >
+            Features
+            <Icon name="mdi:star" class="size-4" />
+          </a>
+          <a
+            href="#pricing"
+            class="flex w-full items-center justify-center gap-2 rounded-full bg-green-100 px-4 py-2 text-sm font-medium text-green-700 transition-colors duration-300 hover:bg-green-200"
+          >
+            Pricing
+            <Icon name="mdi:currency-usd" class="size-4" />
+          </a>
+          <a
+            href="#compare"
+            class="flex w-full items-center justify-center gap-2 rounded-full bg-orange-100 px-4 py-2 text-sm font-medium text-orange-700 transition-colors duration-300 hover:bg-orange-200"
+          >
+            Compare
+            <Icon name="mdi:compare" class="size-4" />
+          </a>
         </div>
       </div>
       <div class="flex flex-col gap-12 lg:col-span-2">
         <div class="flex flex-col gap-4">
           <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl">
-            {baasProvider.data.name}
+            {baas.data.name}
           </h1>
           <p class="text-xl leading-relaxed text-gray-600">
-            {baasProvider.data.description}
+            {baas.data.description}
           </p>
         </div>
         <div class="flex flex-col gap-4">
@@ -82,25 +111,25 @@ function hasEnabledFeatures(details: Record<string, unknown>): boolean {
           <div class="flex flex-wrap gap-3">
             <Pill
               text="Cloud Hosting"
-              type={baasProvider.data.cloudHosted ? "success" : "empty"}
+              type={baas.data.cloudHosted ? "success" : "empty"}
             />
             <Pill
               text="Self Hosting"
-              type={baasProvider.data.selfHosted ? "success" : "empty"}
+              type={baas.data.selfHosted ? "success" : "empty"}
             />
           </div>
         </div>
         <div class="flex flex-col gap-4">
           <h2 class="text-2xl font-semibold text-gray-800">Official SDKs</h2>
           <div class="flex flex-wrap gap-3">
-            {baasProvider.data.sdks.map((sdk) => <Pill text={sdk} />)}
+            {baas.data.sdks.map((sdk) => <Pill text={sdk} />)}
           </div>
         </div>
         <div class="flex flex-col gap-4">
           <h2 class="text-2xl font-semibold text-gray-800">Unique Features</h2>
           <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {
-              baasProvider.data.uniqueFeatures.map((feature) => (
+              baas.data.uniqueFeatures.map((feature) => (
                 <li class="flex items-start space-x-3 rounded-lg bg-purple-100 p-4 transition-all hover:scale-105">
                   <Icon
                     name="mdi:star"
@@ -114,17 +143,15 @@ function hasEnabledFeatures(details: Record<string, unknown>): boolean {
             }
           </ul>
         </div>
-        <div class="flex flex-col gap-4">
+        <div id="features" class="flex flex-col gap-4">
           <h2 class="text-2xl font-semibold text-gray-800">Features</h2>
           <div class="flex flex-col gap-8 md:flex-row">
             <div class="flex flex-1 flex-col gap-6">
               {
-                Object.entries(baasProvider.data.features)
+                Object.entries(baas.data.features)
                   .slice(
                     0,
-                    Math.ceil(
-                      Object.entries(baasProvider.data.features).length / 2,
-                    ),
+                    Math.ceil(Object.entries(baas.data.features).length / 2),
                   )
                   .map(([feature, details]) => (
                     <Accordion
@@ -153,11 +180,9 @@ function hasEnabledFeatures(details: Record<string, unknown>): boolean {
             </div>
             <div class="flex flex-1 flex-col gap-6">
               {
-                Object.entries(baasProvider.data.features)
+                Object.entries(baas.data.features)
                   .slice(
-                    Math.ceil(
-                      Object.entries(baasProvider.data.features).length / 2,
-                    ),
+                    Math.ceil(Object.entries(baas.data.features).length / 2),
                   )
                   .map(([feature, details]) => (
                     <Accordion
@@ -186,12 +211,12 @@ function hasEnabledFeatures(details: Record<string, unknown>): boolean {
             </div>
           </div>
         </div>
-        <div class="flex flex-col gap-4">
+        <div id="pricing" class="flex flex-col gap-4">
           <h2 class="text-2xl font-semibold text-gray-800">Pricing</h2>
           <div class="space-y-8">
             {
-              baasProvider.data.cloudHosted ? (
-                <PricingCard baasProvider={baasProvider} />
+              baas.data.cloudHosted ? (
+                <PricingCard baasProvider={baas} />
               ) : (
                 <p class="text-lg text-gray-600">
                   This provider does not currently offer cloud hosting. Please
@@ -199,6 +224,38 @@ function hasEnabledFeatures(details: Record<string, unknown>): boolean {
                   details.
                 </p>
               )
+            }
+          </div>
+        </div>
+        <div
+          id="compare"
+          class="flex flex-col gap-6 rounded-xl bg-gradient-to-br from-purple-100 to-indigo-100 p-8 shadow-lg"
+        >
+          <h2 class="text-2xl font-semibold text-purple-800">
+            Compare with Other Providers
+          </h2>
+          <p class="mb-4 text-lg text-gray-700">
+            Explore how {baas.data.name} stacks up against other BaaS solutions.
+          </p>
+          <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {
+              otherBaasProviders.map((otherBaas) => (
+                <a
+                  href={`/baas-providers/compare/${baas.data.slug}-vs-${otherBaas.data.slug}`}
+                  class="group flex items-center justify-center gap-x-5 rounded-lg border border-purple-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-purple-300 hover:shadow-md"
+                >
+                  <Image
+                    src={otherBaas.data.logo}
+                    alt={`${otherBaas.data.name} logo`}
+                    width={40}
+                    height={40}
+                    loading="lazy"
+                  />
+                  <span class="text-center text-lg font-medium text-gray-900 transition-colors group-hover:text-purple-700">
+                    {otherBaas.data.name}
+                  </span>
+                </a>
+              ))
             }
           </div>
         </div>
