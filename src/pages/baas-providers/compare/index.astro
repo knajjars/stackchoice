@@ -14,20 +14,24 @@ const pageDescription =
 
 <MainLayout title={pageTitle} description={pageDescription}>
   <div class="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
-    <h1 class="mb-4 text-center text-3xl font-bold text-purple-900 sm:text-4xl">
-      {pageTitle}
-    </h1>
-    <p class="mb-8 text-center text-lg text-gray-700">
-      {pageDescription}
-    </p>
-  </div>
+    <header class="mb-12 text-center">
+      <h1 class="mb-4 text-4xl font-extrabold text-gray-900 sm:text-5xl">
+        Compare Backend as Service Providers
+      </h1>
+      <p class="mx-auto max-w-2xl text-xl text-gray-600">
+        {pageDescription}
+      </p>
+    </header>
 
-  <div class="container mx-auto px-4 pb-16 sm:px-6 lg:px-8">
+    <p class="mb-8 text-lg font-medium text-gray-700">
+      {baasProviders.length} providers available for comparison
+    </p>
+
     <div class="space-y-8">
       {
         baasProviders.map((provider) => (
-          <div class="rounded-lg bg-white p-6 shadow-md">
-            <h3 class="mb-4 flex items-center text-xl font-semibold text-purple-800">
+          <div class="flex flex-col gap-y-8 rounded-lg bg-purple-100 p-6 shadow-md">
+            <h3 class="flex items-center text-xl font-semibold text-purple-800">
               <Image
                 src={provider.data.logo}
                 alt={`${provider.data.name} logo`}
@@ -38,7 +42,7 @@ const pageDescription =
               />
               {provider.data.name} Comparisons
             </h3>
-            <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {baasProviders
                 .filter((p) => p.data.slug !== provider.data.slug)
                 .map((otherProvider) => (
