@@ -51,6 +51,19 @@ function checkFeature<
   const featureValue = providerFeatureSet[featureSet][feature];
   return featureValue as boolean | null;
 }
+
+function getPricingDescription(category: string) {
+  switch (category) {
+    case "freeTierLimits":
+      return "Free resources provided each month without any cost.";
+    case "pricedTier":
+      return "Paid plans offering increased resources and features.";
+    case "overagePricing":
+      return "Costs for usage beyond free or subscription limits.";
+    default:
+      return "";
+  }
+}
 ---
 
 <MainLayout title={pageTitle} description={pageDescription}>
@@ -117,26 +130,36 @@ function checkFeature<
           ))
         }
       </div>
-      <div class="mt-12 flex justify-center">
+      <div class="mt-12 flex justify-center gap-4">
         <a
           href="#comparison"
           class="flex items-center gap-2 rounded-full bg-purple-600 px-6 py-3 text-lg font-medium text-white transition-colors duration-300 hover:bg-purple-700"
         >
           Compare Features
-          <Icon name="mdi:arrow-down" class="size-5" />
+          <Icon name="mdi:star" class="size-5" />
+        </a>
+        <a
+          href="#pricing"
+          class="flex items-center gap-2 rounded-full bg-green-600 px-6 py-3 text-lg font-medium text-white transition-colors duration-300 hover:bg-green-700"
+        >
+          Compare Pricing
+          <Icon name="mdi:currency-usd" class="size-5" />
         </a>
       </div>
     </div>
   </div>
 
   <div class="container mx-auto px-4 py-16 sm:px-6 lg:px-8" id="comparison">
+    <h2 class="mb-8 text-center text-3xl font-bold text-purple-900">
+      Feature Comparison
+    </h2>
     <div class="space-y-12">
       {
         featureSets.map((featureSet) => (
           <div class="overflow-hidden rounded-xl bg-white shadow-lg transition-all duration-300 hover:shadow-xl">
-            <h2 class="bg-purple-100 p-4 text-2xl font-bold text-purple-900">
+            <h3 class="bg-purple-100 p-4 text-2xl font-bold text-purple-900">
               {startCase(featureSet)}
-            </h2>
+            </h3>
             <div class="overflow-x-auto">
               <table class="w-full border-collapse">
                 <thead class="bg-gray-50">
@@ -200,17 +223,20 @@ function checkFeature<
     </div>
   </div>
 
-  <div class="container mx-auto px-4 py-16 sm:px-6 lg:px-8">
+  <div class="container mx-auto px-4 py-16 sm:px-6 lg:px-8" id="pricing">
     <h2 class="mb-8 text-center text-3xl font-bold text-purple-900">
       Pricing Comparison
     </h2>
-    <div class="space-y-8">
+    <div class="space-y-12">
       {
         pricingCategories.map((category) => (
           <div class="overflow-hidden rounded-xl bg-white shadow-lg transition-all duration-300 hover:shadow-xl">
             <h3 class="bg-purple-100 p-4 text-2xl font-bold text-purple-900">
               {startCase(category)}
             </h3>
+            <p class="bg-purple-50 p-3 text-sm text-purple-700">
+              {getPricingDescription(category)}
+            </p>
             <div class="overflow-x-auto">
               <table class="w-full border-collapse">
                 <thead class="bg-gray-50">
@@ -231,33 +257,44 @@ function checkFeature<
                     baasProvider1.data.pricing?.[
                       category as keyof typeof baasProvider1.data.pricing
                     ] ?? {},
-                  ).map((resource, index) => (
-                    <tr class={index % 2 === 0 ? "bg-white" : "bg-gray-50"}>
-                      <td class="w-1/3 border-b p-3 font-medium text-gray-900">
-                        {startCase(resource)}
-                      </td>
-                      {[baasProvider1, baasProvider2].map((provider) => (
-                        <td class="w-1/3 border-b p-3 text-gray-700">
-                          {(() => {
-                            const value =
-                              provider.data.pricing?.[
-                                category as keyof typeof baasProvider1.data.pricing
-                              ]?.[resource];
-
-                            return (
-                              formatValue(value, resource === "Price") +
-                              " " +
-                              (category === "overagePricing" && value
-                                ? getOveragePricingUnit(resource)
-                                : value
-                                  ? getResourceUnit(resource)
-                                  : "")
-                            ).trim();
-                          })()}
+                  )
+                    .filter(
+                      (resource) =>
+                        !(
+                          category === "freeTierLimits" && resource === "Price"
+                        ),
+                    )
+                    .map((resource, index) => (
+                      <tr class={index % 2 === 0 ? "bg-white" : "bg-gray-50"}>
+                        <td class="w-1/3 border-b p-3 font-medium text-gray-900">
+                          {startCase(resource)}
                         </td>
-                      ))}
-                    </tr>
-                  ))}
+                        {[baasProvider1, baasProvider2].map((provider) => (
+                          <td class="w-1/3 border-b p-3 text-gray-700">
+                            {(() => {
+                              const value =
+                                provider.data.pricing?.[
+                                  category as keyof typeof baasProvider1.data.pricing
+                                ]?.[resource];
+
+                              return (
+                                formatValue(
+                                  value,
+                                  resource === "Price" ||
+                                    category === "overagePricing",
+                                ) +
+                                " " +
+                                (category === "overagePricing" && value
+                                  ? getOveragePricingUnit(resource)
+                                  : value
+                                    ? getResourceUnit(resource)
+                                    : "")
+                              ).trim();
+                            })()}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </div>

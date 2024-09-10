@@ -1,7 +1,7 @@
 export const formatValue = (value: any, isPrice: boolean = false) => {
   if (value === null || typeof value === "undefined") return "-";
   if (value === "unlimited") return "Unlimited";
-  if (isPrice)
+  if (isPrice && typeof value === "number")
     return new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
