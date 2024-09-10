@@ -130,6 +130,30 @@ function getPricingDescription(category: string) {
           ))
         }
       </div>
+
+      <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2">
+        {
+          [baasProvider1, baasProvider2].map((provider) => (
+            <div class="rounded-xl bg-white p-6 shadow-lg">
+              <h3 class="mb-4 text-xl font-bold text-purple-900">
+                {provider.data.name} Unique Features
+              </h3>
+              <ul class="space-y-2">
+                {provider.data.uniqueFeatures.map((feature) => (
+                  <li class="flex items-start">
+                    <Icon
+                      name="mdi:star"
+                      class="mr-2 mt-1 h-5 w-5 flex-shrink-0 text-yellow-500"
+                    />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+
       <div class="mt-12 flex justify-center gap-4">
         <a
           href="#comparison"
