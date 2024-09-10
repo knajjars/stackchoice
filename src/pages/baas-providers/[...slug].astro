@@ -8,6 +8,7 @@ import startCase from "lodash/startCase";
 import { Icon } from "astro-icon/components";
 import Pill from "~/components/Pill.astro";
 import PricingCard from "~/components/BaaS/PricingCard.astro";
+import CompareCard from "~/components/BaaS/CompareCard.astro";
 
 export async function getStaticPaths() {
   const baasProviders = await getCollection("baasProvider");
@@ -242,21 +243,7 @@ function hasEnabledFeatures(details: Record<string, unknown>): boolean {
           <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {
               otherBaasProviders.map((otherBaas) => (
-                <a
-                  href={`/baas-providers/compare/${baas.data.slug}-vs-${otherBaas.data.slug}`}
-                  class="group flex items-center justify-center gap-x-5 rounded-lg border border-purple-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-purple-300 hover:shadow-md"
-                >
-                  <Image
-                    src={otherBaas.data.logo}
-                    alt={`${otherBaas.data.name} logo`}
-                    width={40}
-                    height={40}
-                    loading="lazy"
-                  />
-                  <span class="text-center text-lg font-medium text-gray-900 transition-colors group-hover:text-purple-700">
-                    {otherBaas.data.name}
-                  </span>
-                </a>
+                <CompareCard provider={baas} otherProvider={otherBaas} />
               ))
             }
           </div>

@@ -7,14 +7,14 @@ const currentPath = Astro.url.pathname;
 const navItems = [
   {
     href: "/baas-providers",
-    label: "Backend Providers",
+    label: "List of Backend Providers",
     icon: "mdi:server-network",
   },
-  // {
-  //   href: "/full-stack-frameworks",
-  //   label: "Full-Stack Frameworks",
-  //   icon: "mdi:layers-triple",
-  // },
+  {
+    href: "/baas-providers/compare",
+    label: "Compare Providers",
+    icon: "mdi:boxing-glove",
+  },
 ];
 ---
 
@@ -43,7 +43,7 @@ const navItems = [
               href={item.href}
               class={cn(
                 "flex items-center rounded-full px-3 py-2 text-sm font-medium transition-colors",
-                currentPath.startsWith(item.href)
+                currentPath === item.href
                   ? "bg-purple-100 text-purple-700"
                   : "bg-white text-gray-600 hover:bg-gray-100 hover:text-purple-600",
               )}

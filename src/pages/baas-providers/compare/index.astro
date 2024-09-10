@@ -1,0 +1,56 @@
+---
+import { getCollection } from "astro:content";
+import MainLayout from "~/layouts/Layout.astro";
+import { Image } from "astro:assets";
+import CompareCard from "~/components/BaaS/CompareCard.astro";
+
+const baasProviders = await getCollection("baasProvider");
+
+const pageTitle =
+  "Compare BaaS Providers | Find the Best Backend as a Service (BaaS) Provider";
+const pageDescription =
+  "Compare different Backend as a Service (BaaS) providers to find the best solution for your project.";
+---
+
+<MainLayout title={pageTitle} description={pageDescription}>
+  <div class="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
+    <h1 class="mb-4 text-center text-3xl font-bold text-purple-900 sm:text-4xl">
+      {pageTitle}
+    </h1>
+    <p class="mb-8 text-center text-lg text-gray-700">
+      {pageDescription}
+    </p>
+  </div>
+
+  <div class="container mx-auto px-4 pb-16 sm:px-6 lg:px-8">
+    <div class="space-y-8">
+      {
+        baasProviders.map((provider) => (
+          <div class="rounded-lg bg-white p-6 shadow-md">
+            <h3 class="mb-4 flex items-center text-xl font-semibold text-purple-800">
+              <Image
+                src={provider.data.logo}
+                alt={`${provider.data.name} logo`}
+                width={32}
+                height={32}
+                class="mr-3"
+                loading="eager"
+              />
+              {provider.data.name} Comparisons
+            </h3>
+            <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {baasProviders
+                .filter((p) => p.data.slug !== provider.data.slug)
+                .map((otherProvider) => (
+                  <CompareCard
+                    provider={provider}
+                    otherProvider={otherProvider}
+                  />
+                ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</MainLayout>

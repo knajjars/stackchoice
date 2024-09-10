@@ -1,0 +1,35 @@
+---
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+
+type Props = {
+  provider: CollectionEntry<"baasProvider">;
+  otherProvider: CollectionEntry<"baasProvider">;
+};
+
+const { provider, otherProvider }: Props = Astro.props;
+---
+
+<a
+  href={`/baas-providers/compare/${provider.data.slug}-vs-${otherProvider.data.slug}`}
+  class="group flex items-center justify-between rounded-md bg-purple-50 p-3 transition-all duration-300 ease-in-out hover:scale-105 hover:bg-purple-200 hover:shadow-sm"
+>
+  <div class="flex items-center">
+    <Image
+      src={otherProvider.data.logo}
+      alt={`${otherProvider.data.name} logo`}
+      width={24}
+      height={24}
+      class="mr-2"
+      loading="eager"
+    />
+    <span class="text-base font-medium text-gray-900">
+      vs {otherProvider.data.name}
+    </span>
+  </div>
+  <Icon
+    name="mdi:arrow-right"
+    class="size-5 text-purple-600 transition-transform duration-300 group-hover:translate-x-1"
+  />
+</a>

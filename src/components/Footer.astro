@@ -1,5 +1,9 @@
 ---
+import { getCollection } from "astro:content";
+
 const today = new Date();
+
+const baasProviders = await getCollection("baasProvider");
 ---
 
 <footer class="py-12 text-gray-600">
@@ -14,25 +18,35 @@ const today = new Date();
       </div>
       <div>
         <h3 class="mb-4 text-lg font-semibold text-gray-900">Quick Links</h3>
-        <ul class="space-y-2 text-sm">
+        <ul class="grid grid-cols-2 gap-2 text-sm">
+          {
+            baasProviders.map((provider) => (
+              <li>
+                <a
+                  href={`/baas-providers/${provider.data.slug}`}
+                  class="hover:text-purple-600"
+                >
+                  {provider.data.name}
+                </a>
+              </li>
+            ))
+          }
           <li>
-            <a href="/baas-providers" class="hover:text-purple-600"
-              >Backend Providers</a
-            >
+            <a href="/baas-providers/compare" class="hover:text-purple-600">
+              Compare Providers
+            </a>
           </li>
-          <!-- <li>
-            <a href="/full-stack-frameworks" class="hover:text-purple-600"
-              >Full-Stack Frameworks</a
-            >
-          </li> -->
           <li>
-            <a href="/contact" class="hover:text-purple-600">Contact Us</a>
+            <a href="/baas-providers" class="hover:text-purple-600">
+              BaaS Providers index
+            </a>
           </li>
         </ul>
       </div>
       <div>
         <h3 class="mb-4 text-lg font-semibold text-gray-900">Newsletter</h3>
         <script
+          is:inline
           async
           data-uid="57df1b5fd2"
           src="https://stackchoice.ck.page/57df1b5fd2/index.js"></script>
