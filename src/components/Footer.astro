@@ -4,18 +4,12 @@ import { getCollection } from "astro:content";
 const today = new Date();
 
 const baasProviders = await getCollection("baasProvider");
+const fullstackFrameworks = await getCollection("fullStackFramework");
 ---
 
 <footer class="py-12 text-gray-600">
   <div class="container mx-auto px-4">
-    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-      <div>
-        <h3 class="mb-4 text-lg font-semibold text-gray-900">About Us</h3>
-        <p class="text-sm">
-          StackChoice.dev helps developers choose the best backend and
-          full-stack solutions for their projects.
-        </p>
-      </div>
+    <div class="grid gap-8 lg:grid-cols-2">
       <div>
         <h3 class="mb-4 text-lg font-semibold text-gray-900">Quick Links</h3>
         <ul class="grid grid-cols-2 gap-2 text-sm">
@@ -31,14 +25,39 @@ const baasProviders = await getCollection("baasProvider");
               </li>
             ))
           }
+          {
+            fullstackFrameworks.map((framework) => (
+              <li>
+                <a
+                  href={`/full-stack-frameworks/${framework.data.slug}`}
+                  class="hover:text-purple-600"
+                >
+                  {framework.data.name}
+                </a>
+              </li>
+            ))
+          }
           <li>
             <a href="/baas-providers/compare" class="hover:text-purple-600">
-              Compare Providers
+              Compare BaaS Providers
+            </a>
+          </li>
+          <li>
+            <a
+              href="/full-stack-frameworks/compare"
+              class="hover:text-purple-600"
+            >
+              Compare Fullstack Frameworks
             </a>
           </li>
           <li>
             <a href="/baas-providers" class="hover:text-purple-600">
-              BaaS Providers index
+              BaaS Providers
+            </a>
+          </li>
+          <li>
+            <a href="/full-stack-frameworks" class="hover:text-purple-600">
+              Fullstack Frameworks
             </a>
           </li>
         </ul>

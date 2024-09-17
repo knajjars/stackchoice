@@ -5,6 +5,7 @@ import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 
 const baasProviders = await getCollection("baasProvider");
+const fullstackFrameworks = await getCollection("fullStackFramework");
 ---
 
 <MainLayout
@@ -23,33 +24,38 @@ const baasProviders = await getCollection("baasProvider");
         Forget about <strong class="font-bold">decision paralysis.</strong> We help
         you find the best tech stack for your next project.
       </p>
-      <a
-        href="/baas-providers"
-        class="group relative inline-flex items-center rounded-full bg-white px-6 py-3 font-semibold text-purple-600 transition-all duration-300 hover:scale-105 hover:bg-yellow-300 hover:text-purple-700"
-      >
-        <span
-          class="particles particles-1 absolute left-0 top-1/2 -translate-y-1/2"
-        ></span>
-        <span
-          class="particles particles-2 absolute left-0 top-1/2 -translate-y-1/2"
-        ></span>
-        <span
-          class="particles particles-3 absolute left-0 top-1/2 -translate-y-1/2"
-        ></span>
-        <span
-          class="particles particles-4 absolute left-0 top-1/2 -translate-y-1/2"
-        ></span>
-        <Icon
-          name="mdi:rocket-launch"
-          class="mr-3 h-6 w-6 transition-transform duration-300 group-hover:rotate-45"
-        />
-        <span class="relative text-lg">
-          Explore Backend Providers
-          <span
-            class="absolute bottom-0 left-0 h-0.5 w-0 bg-purple-700 transition-all duration-300 group-hover:w-full"
-          ></span>
-        </span>
-      </a>
+      <div class="flex justify-center space-x-4">
+        <a
+          href="/baas-providers"
+          class="group inline-flex items-center rounded-full bg-white px-6 py-3 font-semibold text-purple-600 transition-all duration-300 hover:scale-105 hover:bg-yellow-300 hover:text-purple-700"
+        >
+          <Icon
+            name="mdi:rocket-launch"
+            class="mr-3 h-6 w-6 transition-transform duration-300 group-hover:rotate-45"
+          />
+          <span class="relative text-lg">
+            Explore Backend Providers
+            <span
+              class="absolute bottom-0 left-0 h-0.5 w-0 bg-purple-700 transition-all duration-300 group-hover:w-full"
+            ></span>
+          </span>
+        </a>
+        <a
+          href="/full-stack-frameworks"
+          class="group inline-flex items-center rounded-full bg-white px-6 py-3 font-semibold text-purple-600 transition-all duration-300 hover:scale-105 hover:bg-yellow-300 hover:text-purple-700"
+        >
+          <Icon
+            name="mdi:layers-triple"
+            class="mr-3 h-6 w-6 transition-transform duration-300 group-hover:rotate-45"
+          />
+          <span class="relative text-lg">
+            Explore Fullstack Frameworks
+            <span
+              class="absolute bottom-0 left-0 h-0.5 w-0 bg-purple-700 transition-all duration-300 group-hover:w-full"
+            ></span>
+          </span>
+        </a>
+      </div>
     </div>
     <div class="absolute inset-0 overflow-hidden">
       {
@@ -68,14 +74,14 @@ const baasProviders = await getCollection("baasProvider");
       }
     </div>
   </section>
-  <section class="relative mt-12 overflow-hidden py-12">
-    <h2 class="mb-12 text-center text-4xl font-bold text-gray-800">
-      Featured Platforms
+  <section class="relative overflow-hidden py-8">
+    <h2 class="mb-6 text-center text-3xl font-bold text-gray-800">
+      Featured Backend Providers
     </h2>
-    <div class="flex flex-wrap justify-center gap-16">
+    <div class="flex flex-wrap justify-center gap-8">
       {
         baasProviders.map((provider, index) => (
-          <div class="group relative transform transition-transform duration-300 hover:scale-110">
+          <div class="group relative transform transition-transform duration-300 hover:scale-105">
             <a href={`/baas-providers/${provider.data.slug}`}>
               <Image
                 src={provider.data.logo}
@@ -85,7 +91,32 @@ const baasProviders = await getCollection("baasProvider");
                 format="webp"
                 loading="eager"
                 class={`animate-fade-in opacity-0 transition-all duration-300`}
-                style={`animation-delay: ${index * 100}ms;`}
+                style={`animation-delay: ${index * 50}ms;`}
+              />
+            </a>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+  <section class="relative overflow-hidden py-8">
+    <h2 class="mb-6 text-center text-3xl font-bold text-gray-800">
+      Featured Fullstack Frameworks
+    </h2>
+    <div class="flex flex-wrap justify-center gap-8">
+      {
+        fullstackFrameworks.map((framework, index) => (
+          <div class="group relative transform transition-transform duration-300 hover:scale-105">
+            <a href={`/full-stack-frameworks/${framework.data.slug}`}>
+              <Image
+                src={framework.data.logo}
+                alt={framework.data.name}
+                width={60}
+                height={60}
+                format="webp"
+                loading="eager"
+                class={`animate-fade-in opacity-0 transition-all duration-300`}
+                style={`animation-delay: ${index * 50}ms;`}
               />
             </a>
           </div>
@@ -96,53 +127,6 @@ const baasProviders = await getCollection("baasProvider");
 </MainLayout>
 
 <style>
-  .particles {
-    width: 2px;
-    height: 2px;
-    background: transparent;
-    box-shadow:
-      0 0 #fde68a,
-      0 0 #fde68a,
-      0 0 #fde68a,
-      0 0 #fde68a,
-      0 0 #fde68a;
-  }
-
-  .group:hover .particles-1 {
-    animation: particles 0.6s ease-in-out infinite;
-  }
-
-  .group:hover .particles-2 {
-    animation: particles 0.6s ease-in-out infinite 0.2s;
-  }
-
-  .group:hover .particles-3 {
-    animation: particles 0.6s ease-in-out infinite 0.4s;
-  }
-
-  .group:hover .particles-4 {
-    animation: particles 0.6s ease-in-out infinite 0.6s;
-  }
-
-  @keyframes particles {
-    0% {
-      box-shadow:
-        0 0 #fde68a,
-        0 0 #fde68a,
-        0 0 #fde68a,
-        0 0 #fde68a,
-        0 0 #fde68a;
-    }
-    100% {
-      box-shadow:
-        -20px -8px 0 0 #fde68a,
-        -40px 0 0 0 #fde68a,
-        -60px 8px 0 0 #fde68a,
-        -80px -4px 0 0 #fde68a,
-        -100px 4px 0 0 #fde68a;
-    }
-  }
-
   @keyframes float {
     0%,
     100% {
