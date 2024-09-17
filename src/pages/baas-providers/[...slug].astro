@@ -47,6 +47,7 @@ function hasEnabledFeatures(details: Record<string, unknown>): boolean {
         class="flex flex-col items-center space-y-8 lg:sticky lg:top-8 lg:self-start"
       >
         <Image
+          decoding="async"
           src={baas.data.logo}
           alt={baas.data.name}
           format="webp"
