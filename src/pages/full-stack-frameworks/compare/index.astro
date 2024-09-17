@@ -4,19 +4,19 @@ import MainLayout from "~/layouts/Layout.astro";
 import { Image } from "astro:assets";
 import CompareCard from "~/components/CompareCard.astro";
 
-const baasProviders = await getCollection("baasProvider");
+const fullStackFrameworks = await getCollection("fullStackFramework");
 
 const pageTitle =
-  "Compare BaaS Providers | Find the Best Backend as a Service (BaaS) Provider";
+  "Compare Full-Stack Frameworks | Find the Best Full-Stack Framework";
 const pageDescription =
-  "Compare different Backend as a Service (BaaS) providers to find the best solution for your project.";
+  "Compare different Full-Stack Frameworks to find the best solution for your project.";
 ---
 
 <MainLayout title={pageTitle} description={pageDescription}>
   <div class="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
     <header class="mb-12 text-center">
       <h1 class="mb-4 text-4xl font-extrabold text-gray-900 sm:text-5xl">
-        Compare Backend as Service Providers
+        Compare Full-Stack Frameworks
       </h1>
       <p class="mx-auto max-w-2xl text-xl text-gray-600">
         {pageDescription}
@@ -24,32 +24,32 @@ const pageDescription =
     </header>
 
     <p class="mb-8 text-lg font-medium text-gray-700">
-      {baasProviders.length} providers available for comparison
+      {fullStackFrameworks.length} frameworks available for comparison
     </p>
 
     <div class="space-y-8">
       {
-        baasProviders.map((provider) => (
+        fullStackFrameworks.map((framework) => (
           <div class="flex flex-col gap-y-8 rounded-lg bg-purple-100 p-6 shadow-md">
             <h3 class="flex items-center text-xl font-semibold text-purple-800">
               <Image
-                src={provider.data.logo}
-                alt={`${provider.data.name} logo`}
+                src={framework.data.logo}
+                alt={`${framework.data.name} logo`}
                 width={32}
                 height={32}
                 class="mr-3"
                 loading="eager"
               />
-              {provider.data.name} Comparisons
+              {framework.data.name} Comparisons
             </h3>
             <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {baasProviders
-                .filter((p) => p.data.slug !== provider.data.slug)
-                .map((otherProvider) => (
+              {fullStackFrameworks
+                .filter((f) => f.data.slug !== framework.data.slug)
+                .map((otherFramework) => (
                   <CompareCard
-                    item={provider}
-                    otherItem={otherProvider}
-                    type="baasProvider"
+                    item={framework}
+                    otherItem={otherFramework}
+                    type="fullStackFramework"
                   />
                 ))}
             </div>

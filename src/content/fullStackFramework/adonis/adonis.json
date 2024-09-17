@@ -1,8 +1,38 @@
 {
+  "$schema": "../../../../.astro/collections/fullStackFramework.schema.json",
   "slug": "adonis",
   "website": "https://adonisjs.com/",
   "name": "Adonis",
-  "description": "Adonis is a fullstack framework that is built with Node.js. It is a MVC framework that is built on solid foundations and has a great community.",
+  "description": "AdonisJS is a Node.js web framework designed to bring simplicity and elegance to backend development, heavily inspired by Laravel. It provides a robust MVC architecture with support for features like ORM, authentication, and routing, making it easy to build scalable and maintainable applications. Adonis emphasizes developer productivity with its intuitive CLI, built-in validation, and middleware system. It also integrates smoothly with databases, has extensive support for testing, and encourages writing clean, modular code. With TypeScript as its native language, Adonis ensures type safety while maintaining performance. Whether you're building an API or a full-stack application, AdonisJS helps developers focus more on the business logic by abstracting many complexities of backend development.",
+  "shortDescription": "AdonisJS is a Node.js framework inspired by Laravel, offering a robust MVC architecture, built-in ORM, and TypeScript support for building scalable web apps.",
   "logo": "./adonis.png",
-  "language": "TypeScript"
+  "language": "TypeScript",
+  "uniqueFeatures": [
+    "Native TypeScript support for type safety and scalability",
+    "Lucid ORM provides an intuitive way to interact with databases",
+    "First-class authentication system with multiple strategies like JWT and sessions"
+  ],
+  "repository": "https://github.com/adonisjs/core",
+  "features": {
+    "adminInterface": false,
+    "routing": true,
+    "orm": true,
+    "authentication": true,
+    "authorization": true,
+    "templateEngine": true,
+    "assetPipeline": true,
+    "migrations": true,
+    "caching": true,
+    "testing": true,
+    "cli": true,
+    "restApi": true,
+    "websockets": true,
+    "queueing": false,
+    "scheduling": false,
+    "i18n": true,
+    "emailHandling": true,
+    "fileUploads": true,
+    "validation": true,
+    "logging": true
+  }
 }

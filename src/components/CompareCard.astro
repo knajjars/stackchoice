@@ -1,0 +1,42 @@
+---
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+
+type Props = {
+  item: CollectionEntry<"baasProvider" | "fullStackFramework">;
+  otherItem: CollectionEntry<"baasProvider" | "fullStackFramework">;
+  type: "baasProvider" | "fullStackFramework";
+};
+
+const { item, otherItem, type }: Props = Astro.props;
+
+const baseUrl =
+  type === "baasProvider" ? "/baas-providers" : "/full-stack-frameworks";
+---
+
+<a
+  href={`${baseUrl}/compare/${item.data.slug}-vs-${otherItem.data.slug}`}
+  class="group flex items-center justify-between rounded-lg bg-white p-2.5 shadow-sm transition-all duration-300 ease-in-out hover:bg-purple-50 hover:shadow-md"
+>
+  <div class="flex items-center space-x-3">
+    <div class="flex items-center space-x-2">
+      <Image
+        src={otherItem.data.logo}
+        alt={`${otherItem.data.name} logo`}
+        width={24}
+        height={24}
+        loading="eager"
+      />
+      <span class="text-sm font-medium text-gray-800">
+        {otherItem.data.name}
+      </span>
+    </div>
+  </div>
+  <div class="flex items-center space-x-1 text-purple-600">
+    <Icon
+      name="mdi:arrow-right"
+      class="size-4 transition-transform duration-300 group-hover:translate-x-0.5"
+    />
+  </div>
+</a>

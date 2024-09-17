@@ -1,8 +1,38 @@
 {
+  "$schema": "../../../../.astro/collections/fullStackFramework.schema.json",
   "slug": "ruby-on-rails",
   "website": "https://rubyonrails.org/",
   "name": "Ruby on Rails",
-  "description": "Ruby on Rails is a full-stack web framework that allows developers to build web applications from start to finish.",
+  "description": "Ruby on Rails, often simply referred to as Rails, is a highly opinionated web framework built using the Ruby programming language. Rails follows the convention over configuration (CoC) principle, meaning that developers can follow established best practices with minimal setup, speeding up the development process. The framework is known for its full-stack capabilities, handling everything from routing and database interactions to frontend rendering via its templating engine. Rails includes ActiveRecord, a powerful ORM, and encourages RESTful architecture, making it well-suited for building APIs. Its ecosystem includes a rich collection of gems (plugins) that extend functionality, allowing developers to add features like authentication, testing, and payment processing with ease. Rails is a great choice for developers who value developer happiness, rapid iteration, and building scalable applications with less boilerplate code.",
+  "shortDescription": "Ruby on Rails is a Ruby-based framework that promotes convention over configuration, offering tools like ActiveRecord ORM and a templating engine for building scalable apps efficiently.ç",
   "logo": "./ruby-on-rails.png",
-  "language": "Ruby"
+  "language": "Ruby",
+  "uniqueFeatures": [
+    "Convention over configuration simplifies the development process",
+    "Active Record ORM makes database queries and relationships effortless",
+    "Asset pipeline optimizes and manages front-end assets for better performance"
+  ],
+  "repository": "https://github.com/rails/rails",
+  "features": {
+    "adminInterface": false,
+    "routing": true,
+    "orm": true,
+    "authentication": true,
+    "authorization": true,
+    "templateEngine": true,
+    "assetPipeline": true,
+    "migrations": true,
+    "caching": true,
+    "testing": true,
+    "cli": true,
+    "restApi": true,
+    "websockets": true,
+    "queueing": true,
+    "scheduling": true,
+    "i18n": true,
+    "emailHandling": true,
+    "fileUploads": true,
+    "validation": true,
+    "logging": true
+  }
 }

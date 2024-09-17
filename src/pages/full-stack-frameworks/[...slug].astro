@@ -2,34 +2,163 @@
 import { Image } from "astro:assets";
 import { type CollectionEntry, getCollection } from "astro:content";
 import MainLayout from "~/layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+import Pill from "~/components/Pill.astro";
+import CompareCard from "~/components/CompareCard.astro";
 
 export async function getStaticPaths() {
   const fullStackFrameworks = await getCollection("fullStackFramework");
-  return fullStackFrameworks.map((fullStackFramework) => ({
-    params: { slug: fullStackFramework.data.slug },
-    props: fullStackFramework,
+  return fullStackFrameworks.map((framework) => ({
+    params: { slug: framework.data.slug },
+    props: {
+      framework,
+      otherFrameworks: fullStackFrameworks.filter(
+        (f) => f.data.slug !== framework.data.slug,
+      ),
+    },
   }));
 }
-type Props = CollectionEntry<"fullStackFramework">;
 
-const fullStackFramework = Astro.props;
-const pageTitle =
-  fullStackFramework.data.name + " | Features, overview, and more";
+type Props = {
+  framework: CollectionEntry<"fullStackFramework">;
+  otherFrameworks: CollectionEntry<"fullStackFramework">[];
+};
+
+const { framework, otherFrameworks } = Astro.props;
+const pageTitle = `${framework.data.name} | Features, Overview, and More`;
 ---
 
-<MainLayout {...fullStackFramework.data} title={pageTitle}>
-  <div class="flex flex-col gap-y-3">
-    <h1>{fullStackFramework.data.name}</h1>
-    <Image
-      src={fullStackFramework.data.logo}
-      alt={fullStackFramework.data.name}
-      format="webp"
-      loading="eager"
-      width={80}
-    />
-    <a target="_blank" href={fullStackFramework.data.website}
-      >{fullStackFramework.data.website}</a
-    >
-    <p>{fullStackFramework.data.description}</p>
+<MainLayout
+  {...framework.data}
+  title={pageTitle}
+  description={framework.data.shortDescription}
+>
+  <div class="container mx-auto px-4 py-16 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 gap-12 lg:grid-cols-3">
+      <div
+        class="flex flex-col items-center space-y-8 lg:sticky lg:top-8 lg:self-start"
+      >
+        <Image
+          src={framework.data.logo}
+          alt={framework.data.name}
+          format="webp"
+          loading="eager"
+          width={180}
+          class="transition-transform duration-300 hover:scale-105"
+        />
+        <div class="grid grid-cols-2 gap-4 lg:grid-cols-1">
+          <a
+            target="_blank"
+            href={framework.data.website}
+            class="flex w-full items-center justify-center gap-2 rounded-full bg-purple-100 px-4 py-2 text-sm font-medium text-purple-700 transition-colors duration-300 hover:bg-purple-200"
+          >
+            Visit Website
+            <Icon name="mdi:external-link" class="size-4" />
+          </a>
+          <a
+            target="_blank"
+            href={framework.data.repository}
+            class="flex w-full items-center justify-center gap-2 rounded-full bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 transition-colors duration-300 hover:bg-gray-200"
+          >
+            View Source
+            <Icon name="mdi:github" class="size-4" />
+          </a>
+          <a
+            href="#features"
+            class="flex w-full items-center justify-center gap-2 rounded-full bg-blue-100 px-4 py-2 text-sm font-medium text-blue-700 transition-colors duration-300 hover:bg-blue-200"
+          >
+            Features
+            <Icon name="mdi:star" class="size-4" />
+          </a>
+          <a
+            href="#compare"
+            class="flex w-full items-center justify-center gap-2 rounded-full bg-orange-100 px-4 py-2 text-sm font-medium text-orange-700 transition-colors duration-300 hover:bg-orange-200"
+          >
+            Compare
+            <Icon name="mdi:compare" class="size-4" />
+          </a>
+        </div>
+      </div>
+      <div class="flex flex-col gap-12 lg:col-span-2">
+        <div class="flex flex-col gap-4">
+          <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl">
+            {framework.data.name}
+          </h1>
+          <p class="text-xl leading-relaxed text-gray-600">
+            {framework.data.description}
+          </p>
+        </div>
+        <div class="flex flex-col gap-4">
+          <h2 class="text-2xl font-semibold text-gray-800">Language</h2>
+          <div class="flex flex-wrap gap-3">
+            <Pill text={framework.data.language} />
+          </div>
+        </div>
+        <div class="flex flex-col gap-4">
+          <h2 class="text-2xl font-semibold text-gray-800">Unique Features</h2>
+          <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {
+              framework.data.uniqueFeatures.map((feature) => (
+                <li class="flex items-start space-x-3 rounded-lg bg-purple-100 p-4 transition-all hover:scale-105">
+                  <Icon
+                    name="mdi:star"
+                    class="mt-1 h-5 w-5 flex-shrink-0 text-purple-500"
+                  />
+                  <span class="text-base leading-relaxed text-purple-900">
+                    {feature}
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div id="features" class="flex flex-col gap-4">
+          <h2 class="text-2xl font-semibold text-gray-800">Features</h2>
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {
+              Object.entries(framework.data.features)
+                .sort(([a], [b]) => a.localeCompare(b))
+                .map(([feature, enabled]) => (
+                  <div class="flex items-center space-x-3 rounded-lg bg-gray-100 p-4">
+                    <Icon
+                      name={enabled ? "mdi:check-circle" : "mdi:close-circle"}
+                      class={`h-6 w-6 ${
+                        enabled ? "text-green-500" : "text-red-500"
+                      }`}
+                    />
+                    <span class="text-base font-medium text-gray-800">
+                      {feature}
+                    </span>
+                  </div>
+                ))
+            }
+          </div>
+        </div>
+        <div
+          id="compare"
+          class="flex flex-col gap-6 rounded-xl bg-gradient-to-br from-purple-100 to-indigo-100 p-8 shadow-lg"
+        >
+          <h2 class="text-2xl font-semibold text-gray-700">
+            Compare <span class="text-purple-700">{framework.data.name}</span> with
+            Other Frameworks
+          </h2>
+          <p class="mb-4 text-lg text-gray-700">
+            Explore how {framework.data.name} stacks up against other Full-Stack
+            Framework solutions.
+          </p>
+          <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {
+              otherFrameworks.map((otherFramework) => (
+                <CompareCard
+                  item={framework}
+                  otherItem={otherFramework}
+                  type="fullStackFramework"
+                />
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </MainLayout>

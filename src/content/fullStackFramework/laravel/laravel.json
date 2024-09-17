@@ -1,8 +1,38 @@
 {
+  "$schema": "../../../../.astro/collections/fullStackFramework.schema.json",
   "slug": "laravel",
   "website": "https://laravel.com/",
   "name": "Laravel",
-  "description": "Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, and caching.",
+  "description": "Laravel is a powerful PHP framework known for its simplicity, elegant syntax, and developer-friendly features. It follows the MVC architecture and is designed to make development both enjoyable and efficient. Laravel includes built-in tools for common tasks such as routing, authentication, and caching, alongside a robust ORM called Eloquent that simplifies database interactions. Its Blade templating engine enables the creation of dynamic frontends, while Artisan, its command-line interface, offers automation for repetitive tasks like migrations and testing. Laravel also supports RESTful APIs, background job processing, and event broadcasting, making it versatile for a wide range of applications, from small websites to large-scale enterprise systems.",
+  "shortDescription": "Laravel is a PHP framework known for its elegant syntax and developer-friendly tools like Eloquent ORM, Blade templating, and Artisan CLI, perfect for modern web apps.",
   "logo": "./laravel.png",
-  "language": "PHP"
+  "language": "PHP",
+  "uniqueFeatures": [
+    "Eloquent ORM simplifies managing complex database relationships",
+    "Blade templating engine makes building dynamic front-end views easy",
+    "Massive ecosystem of tools, packages, and official extensions for scaling projects"
+  ],
+  "repository": "https://github.com/laravel/laravel",
+  "features": {
+    "adminInterface": false,
+    "routing": true,
+    "orm": true,
+    "authentication": true,
+    "authorization": true,
+    "templateEngine": true,
+    "assetPipeline": true,
+    "migrations": true,
+    "caching": true,
+    "testing": true,
+    "cli": true,
+    "restApi": true,
+    "websockets": true,
+    "queueing": true,
+    "scheduling": true,
+    "i18n": true,
+    "emailHandling": true,
+    "fileUploads": true,
+    "validation": true,
+    "logging": true
+  }
 }
