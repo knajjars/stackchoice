@@ -1,6 +1,6 @@
 {
   "$schema": "../../../../.astro/collections/fullStackFramework.schema.json",
-  "slug": "Django",
+  "slug": "django",
   "website": "https://www.djangoproject.com/",
   "name": "Django",
   "description": "Django is a high-level Python web framework that promotes rapid development and clean, pragmatic design. It follows the \"batteries-included\" philosophy, offering built-in tools for handling common web development tasks like authentication, routing, and database management, through its ORM. Django is widely known for its security features, such as protection against SQL injection, cross-site scripting (XSS), and cross-site request forgery (CSRF). The framework follows the DRY (Don't Repeat Yourself) principle, encouraging reusable code and simplifying the development process. Its templating engine helps create dynamic web pages, while the built-in admin interface offers an out-of-the-box solution for managing app data. Django is ideal for developers who want to build secure, scalable, and maintainable web applications quickly.",
