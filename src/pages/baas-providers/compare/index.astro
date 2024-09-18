@@ -31,7 +31,7 @@ const pageDescription =
       {
         baasProviders.map((provider) => (
           <div class="flex flex-col gap-y-8 rounded-lg bg-purple-100 p-6 shadow-md">
-            <h3 class="flex items-center text-xl font-semibold text-purple-800">
+            <h3 class="flex items-center gap-x-2">
               <Image
                 decoding="async"
                 src={provider.data.logo}
@@ -41,7 +41,10 @@ const pageDescription =
                 class="mr-3"
                 loading="eager"
               />
-              {provider.data.name} Comparisons
+              <span class="text-xl font-semibold text-purple-800">
+                {provider.data.name}
+              </span>
+              <span class="text-xl font-semibold">vs.</span>
             </h3>
             <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {baasProviders

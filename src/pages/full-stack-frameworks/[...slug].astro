@@ -92,7 +92,10 @@ const pageTitle = `${framework.data.name} | Features, Overview, and More`;
         <div class="flex flex-col gap-4">
           <h2 class="text-2xl font-semibold text-gray-800">Language</h2>
           <div class="flex flex-wrap gap-3">
-            <Pill text={framework.data.language} />
+            <Pill
+              icon={`mdi:language-${framework.data.language.toLowerCase()}`}
+              text={framework.data.language}
+            />
           </div>
         </div>
         <div class="flex flex-col gap-4">
@@ -114,7 +117,9 @@ const pageTitle = `${framework.data.name} | Features, Overview, and More`;
           </ul>
         </div>
         <div id="features" class="flex flex-col gap-4">
-          <h2 class="text-2xl font-semibold text-gray-800">Features</h2>
+          <h2 class="text-2xl font-semibold text-gray-800">
+            Built-in Features
+          </h2>
           <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {
               Object.entries(framework.data.features)

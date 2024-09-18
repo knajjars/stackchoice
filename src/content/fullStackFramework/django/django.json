@@ -26,7 +26,7 @@
     "testing": true,
     "cli": true,
     "restApi": true,
-    "websockets": false,
+    "websockets": true,
     "queueing": true,
     "scheduling": true,
     "i18n": true,
