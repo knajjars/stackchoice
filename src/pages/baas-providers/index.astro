@@ -1,8 +1,7 @@
 ---
 import { getCollection } from "astro:content";
-import OverviewCard from "~/components/BaaS/OverviewCard.astro";
 import MainLayout from "~/layouts/Layout.astro";
-import { Icon } from "astro-icon/components";
+import List from "~/components/BaaS/List.astro";
 
 const baasProviders = (await getCollection("baasProvider")).sort((a, b) =>
   a.data.name.localeCompare(b.data.name),
@@ -15,38 +14,5 @@ const pageTitle = "BaaS Providers | List of Backend as a Service Providers";
   title={pageTitle}
   description="Discover BaaS solutions that allow developers to focus on building great applications without worrying about backend infrastructure."
 >
-  <div class="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
-    <header class="mb-12 text-center">
-      <h1 class="mb-4 text-4xl font-extrabold text-gray-900 sm:text-5xl">
-        Backend as a Service Providers
-      </h1>
-      <p class="mx-auto max-w-2xl text-xl text-gray-600">
-        Discover BaaS solutions that allow developers to focus on building great
-        applications without worrying about backend infrastructure.
-      </p>
-    </header>
-
-    <div class="mb-8 flex items-center justify-between">
-      <p class="text-lg font-medium text-gray-700">
-        {baasProviders.length} providers available
-      </p>
-      <a
-        href="/baas-providers/compare"
-        class="flex items-center rounded-full bg-purple-100 px-4 py-2 text-sm font-medium text-purple-700 transition-colors hover:bg-purple-200"
-      >
-        <Icon name="mdi:boxing-glove" class="mr-2 h-5 w-5" />
-        Compare Providers
-      </a>
-    </div>
-
-    <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {
-        baasProviders.map((baasProvider) => (
-          <li>
-            <OverviewCard baasProvider={baasProvider} />
-          </li>
-        ))
-      }
-    </ul>
-  </div>
+  <List baasProviders={baasProviders} />
 </MainLayout>

@@ -1,8 +1,8 @@
 ---
 import MainLayout from "~/layouts/Layout.astro";
-import { Icon } from "astro-icon/components";
 import { getCollection } from "astro:content";
-import { Image } from "astro:assets";
+import ListBaaS from "~/components/BaaS/List.astro";
+import ListFullStackFramework from "~/components/FullStackFramework/List.astro";
 
 const baasProviders = await getCollection("baasProvider");
 const fullstackFrameworks = await getCollection("fullStackFramework");
@@ -12,50 +12,20 @@ const fullstackFrameworks = await getCollection("fullStackFramework");
   description="Forget about decision paralysis. We help you find the best tech stack for your next project."
 >
   <section
-    class="hero relative overflow-hidden rounded-lg bg-gradient-to-br from-purple-700 via-indigo-600 to-blue-500 px-8 py-32 text-white shadow-2xl md:px-12"
+    class="hero relative overflow-hidden rounded-lg bg-gradient-to-br from-purple-700 via-indigo-600 to-blue-500 px-8 py-24 text-white shadow-2xl md:px-12"
   >
     <div class="container relative z-10 mx-auto max-w-4xl text-center">
       <h1
         class="animate-fade-in mb-8 text-4xl font-extrabold leading-tight tracking-tight md:text-6xl"
       >
-        Welcome to <span class="text-yellow-300">StackChoice.dev</span>
+        <span class="text-white"
+          >StackChoice<span class="text-yellow-300">.dev</span></span
+        >
       </h1>
       <p class="animate-fade-in mb-12 text-2xl leading-relaxed text-gray-100">
         Forget about <strong class="font-bold">decision paralysis.</strong> We help
         you find the best tech stack for your next project.
       </p>
-      <div class="flex flex-col justify-center gap-4 md:flex-row">
-        <a
-          href="/baas-providers"
-          class="group inline-flex items-center justify-center rounded-full bg-white px-6 py-3 font-semibold text-purple-600 transition-all duration-300 hover:scale-105 hover:bg-yellow-300 hover:text-purple-700"
-        >
-          <Icon
-            name="mdi:rocket-launch"
-            class="mr-3 h-6 w-6 transition-transform duration-300 group-hover:rotate-45"
-          />
-          <span class="relative text-lg">
-            Explore Backend Providers
-            <span
-              class="absolute bottom-0 left-0 h-0.5 w-0 bg-purple-700 transition-all duration-300 group-hover:w-full"
-            ></span>
-          </span>
-        </a>
-        <a
-          href="/full-stack-frameworks"
-          class="group inline-flex items-center justify-center rounded-full bg-white px-6 py-3 font-semibold text-purple-600 transition-all duration-300 hover:scale-105 hover:bg-yellow-300 hover:text-purple-700"
-        >
-          <Icon
-            name="mdi:layers-triple"
-            class="mr-3 h-6 w-6 transition-transform duration-300 group-hover:rotate-45"
-          />
-          <span class="relative text-lg">
-            Explore Fullstack Frameworks
-            <span
-              class="absolute bottom-0 left-0 h-0.5 w-0 bg-purple-700 transition-all duration-300 group-hover:w-full"
-            ></span>
-          </span>
-        </a>
-      </div>
     </div>
     <div class="absolute inset-0 overflow-hidden">
       {
@@ -74,58 +44,8 @@ const fullstackFrameworks = await getCollection("fullStackFramework");
       }
     </div>
   </section>
-  <section class="relative overflow-hidden py-8">
-    <h2 class="mb-6 text-center text-3xl font-bold text-gray-800">
-      Featured Backend Providers
-    </h2>
-    <div class="flex flex-wrap justify-center gap-8">
-      {
-        baasProviders.map((provider, index) => (
-          <div class="group relative transform transition-transform duration-300 hover:scale-105">
-            <a href={`/baas-providers/${provider.data.slug}`}>
-              <Image
-                src={provider.data.logo}
-                alt={provider.data.name}
-                width={60}
-                height={60}
-                format="webp"
-                loading="eager"
-                class={`animate-fade-in opacity-0 transition-all duration-300`}
-                style={`animation-delay: ${index * 50}ms;`}
-                decoding="async"
-              />
-            </a>
-          </div>
-        ))
-      }
-    </div>
-  </section>
-  <section class="relative overflow-hidden py-8">
-    <h2 class="mb-6 text-center text-3xl font-bold text-gray-800">
-      Featured Fullstack Frameworks
-    </h2>
-    <div class="flex flex-wrap justify-center gap-8">
-      {
-        fullstackFrameworks.map((framework, index) => (
-          <div class="group relative transform transition-transform duration-300 hover:scale-105">
-            <a href={`/full-stack-frameworks/${framework.data.slug}`}>
-              <Image
-                src={framework.data.logo}
-                alt={framework.data.name}
-                width={60}
-                height={60}
-                format="webp"
-                loading="eager"
-                class={`animate-fade-in opacity-0 transition-all duration-300`}
-                style={`animation-delay: ${index * 50}ms;`}
-                decoding="async"
-              />
-            </a>
-          </div>
-        ))
-      }
-    </div>
-  </section>
+  <ListFullStackFramework fullStackFrameworks={fullstackFrameworks} />
+  <ListBaaS baasProviders={baasProviders} />
 </MainLayout>
 
 <style>

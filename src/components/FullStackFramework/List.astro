@@ -1,0 +1,47 @@
+---
+import { Icon } from "astro-icon/components";
+import type { CollectionEntry } from "astro:content";
+import OverviewCard from "~/components/FullStackFramework/OverviewCard.astro";
+
+type Props = {
+  fullStackFrameworks: CollectionEntry<"fullStackFramework">[];
+};
+
+const { fullStackFrameworks } = Astro.props;
+---
+
+<div class="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
+  <header class="mb-12 text-center">
+    <h2 class="mb-4 text-3xl font-extrabold text-gray-900 md:text-4xl">
+      Full-Stack Frameworks
+    </h2>
+    <p class="mx-auto max-w-2xl text-xl text-gray-600">
+      Discover comprehensive solutions that enable developers to build web
+      applications from start to finish, including backend, frontend, and
+      database integration.
+    </p>
+  </header>
+
+  <div class="mb-8 flex items-center justify-between">
+    <p class="text-lg font-medium text-gray-700">
+      {fullStackFrameworks.length} frameworks available
+    </p>
+    <a
+      href="/full-stack-frameworks/compare"
+      class="flex items-center rounded-full bg-purple-100 px-4 py-2 text-sm font-medium text-purple-700 transition-colors hover:bg-purple-200"
+    >
+      <Icon name="mdi:boxing-glove" class="mr-2 h-5 w-5" />
+      Compare Frameworks
+    </a>
+  </div>
+
+  <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    {
+      fullStackFrameworks.map((fullStackFramework) => (
+        <li>
+          <OverviewCard fullStackFramework={fullStackFramework} />
+        </li>
+      ))
+    }
+  </ul>
+</div>

@@ -4,7 +4,7 @@
   "website": "https://appwrite.io/",
   "name": "Appwrite",
   "description": "Appwrite is an open-source backend server that provides core APIs for web, mobile, and flutter developers. It allows for easy management of databases, authentication, file storage, and cloud functions.",
-  "shortDescription": "An fully-featured open-source backend server for web, mobile & Flutter developers.",
+  "shortDescription": "A fully-featured open-source backend server for web, mobile & Flutter developers.",
   "uniqueFeatures": [
     "Fully and easily self-hostable with high customization.",
     "Open-source and supports a variety of frontend platforms.",
