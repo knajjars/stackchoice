@@ -19,7 +19,7 @@
     "orm": true,
     "authentication": true,
     "authorization": true,
-    "templateEngine": true,
+    "templateEngine": false,
     "modernJavaScriptFrameworkIntegration": true,
     "migrations": true,
     "caching": true,
