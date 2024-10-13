@@ -9,46 +9,55 @@ type Props = {
 type Scenario = {
   name: string;
   description: string;
-  mau: number;
+  "Auth users": number;
   "DB storage": number;
   "DB bandwidth": number;
   "File storage": number;
   "File bandwidth": number;
-  "Function invocations": number;
+  "Function calls": number;
 };
 
-const scenarios: Scenario[] = [
+const defaultScenarios: Scenario[] = [
   {
     name: "Hobby/Starter",
     description: "For small projects or MVPs",
-    mau: 200,
+    "Auth users": 200,
     "DB storage": 0.5,
     "DB bandwidth": 1,
     "File storage": 1,
     "File bandwidth": 1,
-    "Function invocations": 1000000,
+    "Function calls": 1000000,
   },
   {
     name: "Mid-tier",
     description: "For growing applications with moderate usage",
-    mau: 10000,
+    "Auth users": 10000,
     "DB storage": 10,
     "DB bandwidth": 100,
     "File storage": 50,
     "File bandwidth": 100,
-    "Function invocations": 10000000,
+    "Function calls": 10000000,
   },
   {
     name: "High-tier",
     description: "For large-scale applications with high demand",
-    mau: 100000,
+    "Auth users": 100000,
     "DB storage": 100,
     "DB bandwidth": 1000,
     "File storage": 500,
     "File bandwidth": 1000,
-    "Function invocations": 100000000,
+    "Function calls": 100000000,
   },
 ];
+
+const maxValues = {
+  "Auth users": 1000000,
+  "DB storage": 5000, // 5TB
+  "DB bandwidth": 2000, // 2TB
+  "File storage": 2000, // 2TB
+  "File bandwidth": 10000, // 10TB
+  "Function calls": 1000000000, // 1 billion
+};
 
 const formatPrice = (price: number = 0) => {
   return Intl.NumberFormat("en-US", {
@@ -61,7 +70,10 @@ const formatPrice = (price: number = 0) => {
 
 const PricingCalculator: React.FC<Props> = ({ baasProviders }) => {
   const [selectedScenario, setSelectedScenario] = useState<Scenario>(
-    scenarios[0],
+    defaultScenarios[0],
+  );
+  const [customScenario, setCustomScenario] = useState<Scenario>(
+    defaultScenarios[0],
   );
 
   const calculatePrice = (
@@ -138,8 +150,8 @@ const PricingCalculator: React.FC<Props> = ({ baasProviders }) => {
       scenario["File bandwidth"],
     );
     totalPrice += calculateResourcePrice(
-      "Function invocations",
-      scenario["Function invocations"],
+      "Function calls",
+      scenario["Function calls"],
     );
 
     return totalPrice;
@@ -148,9 +160,13 @@ const PricingCalculator: React.FC<Props> = ({ baasProviders }) => {
   const providerPrices = useMemo(() => {
     return baasProviders.map((provider) => ({
       name: provider.data.name,
-      price: calculatePrice(provider, selectedScenario),
+      price: calculatePrice(provider, customScenario),
     }));
-  }, [baasProviders, selectedScenario]);
+  }, [baasProviders, customScenario]);
+
+  const handleSliderChange = (key: keyof Scenario, value: number) => {
+    setCustomScenario((prev) => ({ ...prev, [key]: value }));
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -158,10 +174,13 @@ const PricingCalculator: React.FC<Props> = ({ baasProviders }) => {
       <div className="mb-8">
         <h3 className="mb-4 text-xl font-semibold">Select a scenario:</h3>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-          {scenarios.map((scenario) => (
+          {defaultScenarios.map((scenario) => (
             <button
               key={scenario.name}
-              onClick={() => setSelectedScenario(scenario)}
+              onClick={() => {
+                setSelectedScenario(scenario);
+                setCustomScenario(scenario);
+              }}
               className={`group block h-full transform rounded-lg border-2 p-4 shadow-md transition duration-300 hover:scale-105 ${
                 selectedScenario.name === scenario.name
                   ? "border-purple-500 bg-purple-100"
@@ -180,36 +199,37 @@ const PricingCalculator: React.FC<Props> = ({ baasProviders }) => {
       </div>
       <div className="block h-full rounded-lg border border-purple-200 bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-md">
         <h3 className="mb-3 text-xl font-semibold text-gray-800">
-          {selectedScenario.name} Scenario
+          Customize Scenario
         </h3>
-        <p className="mb-4 text-gray-600">{selectedScenario.description}</p>
-        <ul className="space-y-2 text-gray-600">
-          <li>
-            <span className="font-medium">Monthly Active Users:</span>{" "}
-            {selectedScenario.mau.toLocaleString()}
-          </li>
-          <li>
-            <span className="font-medium">Database Storage:</span>{" "}
-            {selectedScenario["DB storage"]} {getResourceUnit("DB storage")}
-          </li>
-          <li>
-            <span className="font-medium">Database Bandwidth:</span>{" "}
-            {selectedScenario["DB bandwidth"]} {getResourceUnit("DB bandwidth")}
-          </li>
-          <li>
-            <span className="font-medium">File Storage:</span>{" "}
-            {selectedScenario["File storage"]} {getResourceUnit("File storage")}
-          </li>
-          <li>
-            <span className="font-medium">File Bandwidth:</span>{" "}
-            {selectedScenario["File bandwidth"]}{" "}
-            {getResourceUnit("File bandwidth")}
-          </li>
-          <li>
-            <span className="font-medium">Function Invocations:</span>{" "}
-            {selectedScenario["Function invocations"].toLocaleString()}
-          </li>
-        </ul>
+        <p className="mb-4 text-gray-600">Adjust the values to your needs</p>
+        <div className="space-y-6">
+          {Object.entries(customScenario).map(([key, value]) => {
+            if (key === "name" || key === "description") return null;
+            const max = maxValues[key as keyof typeof maxValues];
+            return (
+              <div key={key} className="flex flex-col">
+                <label htmlFor={key} className="mb-2 font-medium text-gray-700">
+                  {key}: {value.toLocaleString()} {getResourceUnit(key)}
+                </label>
+                <input
+                  type="range"
+                  id={key}
+                  name={key}
+                  min={0}
+                  max={max}
+                  value={value}
+                  onChange={(e) =>
+                    handleSliderChange(
+                      key as keyof Scenario,
+                      Number(e.target.value),
+                    )
+                  }
+                  className="w-full appearance-none rounded-lg bg-purple-200 accent-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50"
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
       <div className="mt-8">
         <h3 className="mb-4 text-xl font-semibold">
