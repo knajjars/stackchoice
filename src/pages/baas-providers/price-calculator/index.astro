@@ -1,0 +1,11 @@
+---
+import { getCollection } from "astro:content";
+import MainLayout from "~/layouts/Layout.astro";
+import PricingCalculator from "~/components/BaaS/PricingCalculator.tsx";
+
+const baasProviders = await getCollection("baasProvider");
+---
+
+<MainLayout title="BaaS Price Calculator">
+  <PricingCalculator client:load baasProviders={baasProviders} />
+</MainLayout>
