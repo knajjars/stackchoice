@@ -3,7 +3,9 @@ import { getCollection } from "astro:content";
 import MainLayout from "~/layouts/Layout.astro";
 import PricingCalculator from "~/components/BaaS/PricingCalculator.tsx";
 
-const baasProviders = await getCollection("baasProvider");
+const baasProviders = (await getCollection("baasProvider")).filter(
+  (provider) => provider.data.pricing,
+);
 ---
 
 <MainLayout title="BaaS Price Calculator">
