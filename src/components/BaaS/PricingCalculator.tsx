@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from "react";
 import type { CollectionEntry } from "astro:content";
 import { getResourceUnit } from "~/lib/utils";
+import { cn } from "~/lib/cn";
 
 type Props = {
   baasProviders: Array<CollectionEntry<"baasProvider">>;
@@ -100,6 +101,7 @@ const calculatePrice = (
   const pricedTier = pricing.pricedTier;
   const overagePricing = pricing.overagePricing;
   let hasPricedTier = false;
+  const breakdown: Record<string, number> = {};
 
   // Calculate price for each resource
   Object.keys(scenario).forEach((key) => {
@@ -126,6 +128,7 @@ const calculatePrice = (
       if (!hasPricedTier && pricedTier.Price) {
         // Subscribe to priced tier if not already subscribed
         totalPrice += pricedTier.Price;
+        breakdown["Subscription"] = pricedTier.Price;
         hasPricedTier = true;
       }
 
@@ -138,11 +141,13 @@ const calculatePrice = (
 
     if (billableUsage > 0 && overageRate !== null) {
       const overageUnits = Math.ceil(billableUsage / overageEvery);
-      totalPrice += overageUnits * overageRate;
+      const overagePrice = overageUnits * overageRate;
+      totalPrice += overagePrice;
+      breakdown[resourceKey] = overagePrice;
     }
   });
 
-  return totalPrice;
+  return { totalPrice, breakdown };
 };
 
 const PricingCalculator: React.FC<Props> = ({ baasProviders }) => {
@@ -154,11 +159,15 @@ const PricingCalculator: React.FC<Props> = ({ baasProviders }) => {
   );
 
   const providerPrices = useMemo(() => {
-    return baasProviders.map((provider) => ({
-      name: provider.data.name,
-      price: calculatePrice(provider, customScenario),
-      img: provider.data.logo,
-    }));
+    return baasProviders.map((provider) => {
+      const result = calculatePrice(provider, customScenario);
+      return {
+        name: provider.data.name,
+        price: result?.totalPrice || 0,
+        breakdown: result?.breakdown || {},
+        img: provider.data.logo,
+      };
+    });
   }, [baasProviders, customScenario]);
 
   const handleSliderChange = (key: keyof Scenario, value: number) => {
@@ -166,11 +175,12 @@ const PricingCalculator: React.FC<Props> = ({ baasProviders }) => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h2 className="mb-6 text-2xl font-bold">BaaS Pricing Calculator</h2>
-      <div className="mb-8">
-        <h3 className="mb-4 text-xl font-semibold">Select a scenario:</h3>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+    <div className="flex h-full w-full flex-col">
+      <div className="mb-12">
+        <h3 className="mb-6 text-2xl font-semibold text-gray-800">
+          Select a scenario:
+        </h3>
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {defaultScenarios.map((scenario) => (
             <button
               key={scenario.name}
@@ -178,106 +188,127 @@ const PricingCalculator: React.FC<Props> = ({ baasProviders }) => {
                 setSelectedScenario(scenario);
                 setCustomScenario(scenario);
               }}
-              className={`group block h-full transform rounded-lg border-2 p-4 shadow-md transition duration-300 hover:scale-105 ${
+              className={cn(
+                "group flex h-full transform flex-col rounded-lg border-2 p-4 shadow-md transition duration-300 hover:scale-105",
                 selectedScenario.name === scenario.name
                   ? "border-purple-500 bg-purple-100"
-                  : "border-purple-300 bg-purple-100 hover:border-purple-500"
-              }`}
+                  : "border-purple-300 bg-purple-100 hover:border-purple-500",
+              )}
             >
-              <h4 className="mb-2 text-xl font-bold text-gray-800 transition-colors duration-300 group-hover:text-purple-600">
+              <h4 className="text-left text-xl font-bold text-gray-800 transition-colors duration-300 group-hover:text-purple-600">
                 {scenario.name}
               </h4>
-              <p className="text-gray-600 transition-colors duration-300 group-hover:text-gray-800">
+              <p className="mt-4 text-left text-sm text-gray-600 transition-colors duration-300 group-hover:text-gray-800">
                 {scenario.description}
               </p>
             </button>
           ))}
         </div>
       </div>
-      <div className="flex flex-col md:flex-row md:space-x-8">
-        <div className="md:w-1/2">
-          <div className="block h-full rounded-lg border border-purple-200 bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-md">
-            <h3 className="mb-3 text-xl font-semibold text-gray-800">
-              Customize Scenario
-            </h3>
-            <p className="mb-4 text-gray-600">
-              Adjust the values to your needs
-            </p>
-            <div className="flex flex-col gap-y-8">
-              {Object.entries(customScenario).map(([key, value]) => {
-                if (key === "name" || key === "description") return null;
-                const max = maxValues[key as keyof typeof maxValues];
-                return (
-                  <div key={key} className="mb-6">
-                    <div className="mb-2 flex items-center justify-between">
-                      <label
-                        htmlFor={key}
-                        className="text-lg font-semibold text-gray-800"
-                      >
-                        {key}
-                      </label>
-                      <div className="text-right">
-                        <span className="text-xl font-bold text-purple-600">
-                          {value.toLocaleString()}
-                        </span>
-                        <span className="ml-1 text-sm text-gray-600">
-                          {getResourceUnit(key)}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="relative pt-1">
-                      <input
-                        type="range"
-                        id={key}
-                        name={key}
-                        min={0}
-                        max={max}
-                        value={value}
-                        onChange={(e) =>
-                          handleSliderChange(
-                            key as keyof Scenario,
-                            Number(e.target.value),
-                          )
-                        }
-                        className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-purple-200 accent-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50"
-                      />
-                      <div className="mt-2 flex justify-between text-xs text-gray-600">
-                        <span>0</span>
-                        <span>{max.toLocaleString()}</span>
-                      </div>
+      <div className="flex flex-grow flex-col gap-12 lg:flex-row">
+        <div className="h-full w-full overflow-y-auto rounded-lg border border-purple-200 bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-md">
+          <h3 className="mb-6 text-2xl font-semibold text-gray-800">
+            Customize Scenario
+          </h3>
+          <p className="mb-8 text-gray-600">Adjust the values to your needs</p>
+          <h4 className="mb-6 text-xl font-semibold text-purple-700">
+            Resource Sliders
+          </h4>
+          <div className="flex flex-col gap-y-8">
+            {Object.entries(customScenario).map(([key, value]) => {
+              if (key === "name" || key === "description") return null;
+              const max = maxValues[key as keyof typeof maxValues];
+              return (
+                <div key={key} className="mb-6">
+                  <div className="mb-4 flex items-center justify-between">
+                    <label
+                      htmlFor={key}
+                      className="text-lg font-semibold text-gray-800"
+                    >
+                      {key}
+                    </label>
+                    <div className="text-right">
+                      <span className="text-xl font-bold text-purple-600">
+                        {value.toLocaleString()}
+                      </span>
+                      <span className="ml-2 text-sm text-gray-600">
+                        {getResourceUnit(key)}
+                      </span>
                     </div>
                   </div>
-                );
-              })}
-            </div>
+                  <div className="relative pt-2">
+                    <input
+                      type="range"
+                      id={key}
+                      name={key}
+                      min={0}
+                      max={max}
+                      value={value}
+                      onChange={(e) =>
+                        handleSliderChange(
+                          key as keyof Scenario,
+                          Number(e.target.value),
+                        )
+                      }
+                      className={cn(
+                        "h-3 w-full cursor-pointer appearance-none rounded-lg bg-purple-200 accent-purple-600",
+                        "focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50",
+                      )}
+                    />
+                    <div className="mt-3 flex justify-between text-xs text-gray-600">
+                      <span>0</span>
+                      <span>{max.toLocaleString()}</span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
-        <div className="mt-8 md:mt-0 md:w-1/2">
-          <h3 className="mb-4 text-xl font-semibold">
-            Estimated Prices per Provider
-          </h3>
-          <div className="space-y-4">
-            {providerPrices.map(({ name, price, img }) => (
-              <div
-                key={name}
-                className="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-4"
-              >
-                <div className="flex items-center space-x-3">
+        <div className="w-full space-y-6">
+          {providerPrices.map(({ name, price, breakdown, img }) => (
+            <div
+              key={name}
+              className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-md"
+            >
+              <div className="mb-4 flex items-center justify-between">
+                <div className="flex items-center space-x-4">
                   <img
                     src={img.src}
                     alt={`${name} logo`}
-                    className="h-8 w-8 object-contain"
+                    className="h-10 w-10 object-contain"
                   />
-                  <h4 className="text-lg font-semibold text-gray-800">
+                  <h4 className="text-xl font-semibold text-gray-800">
                     {name}
                   </h4>
                 </div>
-                <p className="text-xl font-bold text-purple-600">
-                  {formatPrice(price || 0)}/month
+                <p className="text-2xl font-bold text-purple-600">
+                  {formatPrice(price)}/month
                 </p>
               </div>
-            ))}
-          </div>
+              <div>
+                <h5 className="mb-3 font-semibold text-gray-700">
+                  Price Breakdown:
+                </h5>
+                <ul className="space-y-2 text-sm">
+                  {Object.entries(breakdown).map(([key, value]) => (
+                    <li
+                      key={key}
+                      className={cn(
+                        "flex items-center justify-between border-b border-gray-100 py-2",
+                        "last:border-b-0",
+                      )}
+                    >
+                      <span className="text-gray-600">{key}:</span>
+                      <span className="font-medium text-gray-800">
+                        {formatPrice(value)}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
