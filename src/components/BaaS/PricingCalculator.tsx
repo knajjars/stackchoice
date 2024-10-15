@@ -167,9 +167,15 @@ const calculatePrice = (
     const { totalCost: totalExtraCost, breakdown: extraCostBreakdown } =
       firebaseCustomAuthCalculator(scenario["Function calls"]);
     totalPrice += totalExtraCost;
-    breakdown["DB reads"] = extraCostBreakdown["reads"];
-    breakdown["DB writes"] = extraCostBreakdown["writes"];
-    breakdown["DB deletes"] = extraCostBreakdown["deletes"];
+    if (extraCostBreakdown["reads"]) {
+      breakdown["DB reads"] = extraCostBreakdown["reads"];
+    }
+    if (extraCostBreakdown["writes"]) {
+      breakdown["DB writes"] = extraCostBreakdown["writes"];
+    }
+    if (extraCostBreakdown["deletes"]) {
+      breakdown["DB deletes"] = extraCostBreakdown["deletes"];
+    }
   }
 
   if (provider.data.name === "Convex") {
