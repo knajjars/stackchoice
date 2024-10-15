@@ -22,23 +22,23 @@ const { baasProviders } = Astro.props;
   </header>
 
   <div class="mb-8 flex items-center justify-between">
-    <p class="text-lg font-medium text-gray-700">
+    <p class="hidden text-lg font-medium text-gray-700 lg:block">
       {baasProviders.length} providers available
     </p>
-    <div class="flex items-center gap-x-4">
+    <div class="flex items-center gap-x-2">
       <a
         href="/baas-providers/compare"
         class="flex items-center rounded-full bg-purple-100 px-4 py-2 text-sm font-medium text-purple-700 transition-colors hover:bg-purple-200"
       >
         <Icon name="mdi:boxing-glove" class="mr-2 h-5 w-5" />
-        Compare Providers
+        Compare
       </a>
       <a
         href="/baas-providers/compare/price-calculator"
         class="flex items-center rounded-full bg-purple-100 px-4 py-2 text-sm font-medium text-purple-700 transition-colors hover:bg-purple-200"
       >
         <Icon name="mdi:calculator" class="mr-2 h-5 w-5" />
-        Price Calculator
+        Price calculator
       </a>
     </div>
   </div>

@@ -37,7 +37,7 @@
       "projects": "unlimited",
       "authUsers": 75000,
       "fileStorage": 2,
-      "dbStorage": null,
+      "dbStorage": 2,
       "dbBandwidth": 10,
       "fileBandwidth": 10,
       "functionCalls": 750000,

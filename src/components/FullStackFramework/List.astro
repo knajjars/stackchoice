@@ -23,7 +23,7 @@ const { fullStackFrameworks } = Astro.props;
   </header>
 
   <div class="mb-8 flex items-center justify-between">
-    <p class="text-lg font-medium text-gray-700">
+    <p class="hidden text-lg font-medium text-gray-700 lg:block">
       {fullStackFrameworks.length} frameworks available
     </p>
     <a
@@ -31,7 +31,7 @@ const { fullStackFrameworks } = Astro.props;
       class="flex items-center rounded-full bg-purple-100 px-4 py-2 text-sm font-medium text-purple-700 transition-colors hover:bg-purple-200"
     >
       <Icon name="mdi:boxing-glove" class="mr-2 h-5 w-5" />
-      Compare Frameworks
+      Compare
     </a>
   </div>
 

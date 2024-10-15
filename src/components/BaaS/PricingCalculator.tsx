@@ -2,6 +2,7 @@ import React, { useState, useMemo } from "react";
 import type { CollectionEntry } from "astro:content";
 import { getResourceUnit } from "~/lib/utils";
 import { cn } from "~/lib/cn";
+import clone from "lodash/clone";
 
 type Props = {
   baasProviders: Array<CollectionEntry<"baasProvider">>;
@@ -20,14 +21,14 @@ type Scenario = {
 
 const defaultScenarios: Scenario[] = [
   {
-    name: "Hobby/Starter",
+    name: "Hobby",
     description: "For very small projects or prototypes",
     "Auth users": 500,
-    "DB storage": 0.5,
-    "DB bandwidth": 1,
-    "File storage": 1,
-    "File bandwidth": 1,
-    "Function calls": 50000,
+    "DB storage": 0.2,
+    "DB bandwidth": 0.5,
+    "File storage": 0.4,
+    "File bandwidth": 0.4,
+    "Function calls": 50_000,
   },
   {
     name: "Small Business",
@@ -80,6 +81,53 @@ const unitRate: Record<keyof Omit<Scenario, "name" | "description">, number> = {
   "Function calls": 1_000_000,
 };
 
+// for Convex, the Auth is not billed separately, but it consumes DB storage, bandwidth and function calls.
+// every 1000 auth users, it consumes 5 MB storage, 850 MB bandwidth and 160,000 function calls.
+const convexCustomAuthCalculator = (
+  authUsers: number,
+): {
+  dbStorage: number;
+  dbBandwidth: number;
+  functionCalls: number;
+} => {
+  const authUsersInThousands = Math.ceil(authUsers / 1000);
+  const dbStorage = (authUsersInThousands * 5) / 1024; // Convert MB to GB
+  const dbBandwidth = (authUsersInThousands * 850) / 1024; // Convert MB to GB
+  const functionCalls = authUsersInThousands * 160_000;
+  return { dbStorage, dbBandwidth, functionCalls };
+};
+
+// for Firebase, the function calls are billed additionally for reads, writes and deletes.
+// 0.031 USD per 100K reads, 0.094 USD per 100K writes, 0.01 USD per 100K deletes.
+// we assume 10% of the requests are deletes.
+// we assume 20% of the requests are writes.
+// we assume 70% of the requests are reads.
+// and we assume 80% of the function calls DB operations.
+const READS_PRICE_PER_100K = 0.031;
+const WRITES_PRICE_PER_100K = 0.094;
+const DELETES_PRICE_PER_100K = 0.01;
+const firebaseCustomAuthCalculator = (functionCalls: number) => {
+  const dbOperations = functionCalls * 0.8;
+  const reads = dbOperations * 0.7;
+  const writes = dbOperations * 0.2;
+  const deletes = dbOperations * 0.1;
+
+  const readsCost = (reads / 100000) * READS_PRICE_PER_100K;
+  const writesCost = (writes / 100000) * WRITES_PRICE_PER_100K;
+  const deletesCost = (deletes / 100000) * DELETES_PRICE_PER_100K;
+
+  const totalCost = readsCost + writesCost + deletesCost;
+
+  return {
+    totalCost,
+    breakdown: {
+      reads: readsCost,
+      writes: writesCost,
+      deletes: deletesCost,
+    },
+  };
+};
+
 const formatPrice = (price: number) => {
   return Intl.NumberFormat("en-US", {
     style: "currency",
@@ -91,7 +139,7 @@ const formatPrice = (price: number) => {
 
 const calculatePrice = (
   provider: CollectionEntry<"baasProvider">,
-  scenario: Scenario,
+  s: Scenario,
 ) => {
   const pricing = provider.data.pricing;
   if (!pricing) return null;
@@ -102,11 +150,27 @@ const calculatePrice = (
   const overagePricing = pricing.overagePricing;
   let hasPricedTier = false;
   const breakdown: Record<string, number> = {};
+  const scenario = clone(s);
 
-  // Calculate price for each resource
+  if (provider.data.name === "Firebase") {
+    const { totalCost: totalExtraCost, breakdown: extraCostBreakdown } =
+      firebaseCustomAuthCalculator(scenario["Function calls"]);
+    totalPrice += totalExtraCost;
+    breakdown["DB reads"] = extraCostBreakdown["reads"];
+    breakdown["DB writes"] = extraCostBreakdown["writes"];
+    breakdown["DB deletes"] = extraCostBreakdown["deletes"];
+  }
+
+  if (provider.data.name === "Convex") {
+    const { dbStorage, dbBandwidth, functionCalls } =
+      convexCustomAuthCalculator(scenario["Auth users"]);
+    scenario["DB storage"] += dbStorage;
+    scenario["DB bandwidth"] += dbBandwidth;
+    scenario["Function calls"] += functionCalls;
+  }
+
   Object.keys(scenario).forEach((key) => {
     if (key === "name" || key === "description") return;
-
     const resourceKey = key as keyof Omit<Scenario, "name" | "description">;
     const usage = scenario[resourceKey] as number;
     const freeLimit = freeTierLimits && freeTierLimits[resourceKey];
@@ -286,7 +350,9 @@ const PricingCalculator: React.FC<Props> = ({ baasProviders }) => {
                   {formatPrice(price)}/month
                 </p>
               </div>
-              <div>
+              <div
+                className={cn({ hidden: Object.keys(breakdown).length === 0 })}
+              >
                 <h5 className="mb-3 font-semibold text-gray-700">
                   Price Breakdown:
                 </h5>
