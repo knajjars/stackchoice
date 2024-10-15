@@ -25,7 +25,7 @@ const defaultScenarios: Scenario[] = [
     description: "For very small projects or prototypes",
     "Auth users": 500,
     "DB storage": 0.2,
-    "DB bandwidth": 0.5,
+    "DB bandwidth": 0.4,
     "File storage": 0.4,
     "File bandwidth": 0.4,
     "Function calls": 50_000,
@@ -90,7 +90,7 @@ const convexCustomAuthCalculator = (
   dbBandwidth: number;
   functionCalls: number;
 } => {
-  const authUsersInThousands = Math.ceil(authUsers / 1000);
+  const authUsersInThousands = authUsers / 1000;
   const dbStorage = (authUsersInThousands * 5) / 1024; // Convert MB to GB
   const dbBandwidth = (authUsersInThousands * 850) / 1024; // Convert MB to GB
   const functionCalls = authUsersInThousands * 160_000;
@@ -112,9 +112,20 @@ const firebaseCustomAuthCalculator = (functionCalls: number) => {
   const writes = dbOperations * 0.2;
   const deletes = dbOperations * 0.1;
 
-  const readsCost = (reads / 100000) * READS_PRICE_PER_100K;
-  const writesCost = (writes / 100000) * WRITES_PRICE_PER_100K;
-  const deletesCost = (deletes / 100000) * DELETES_PRICE_PER_100K;
+  let readsCost = 0;
+  let writesCost = 0;
+  let deletesCost = 0;
+
+  if (reads >= 1_500_000) {
+    readsCost = (reads / 100000) * READS_PRICE_PER_100K;
+  }
+
+  if (writes >= 600_000) {
+    writesCost = (writes / 100000) * WRITES_PRICE_PER_100K;
+  }
+  if (deletes >= 600_000) {
+    deletesCost = (deletes / 100000) * DELETES_PRICE_PER_100K;
+  }
 
   const totalCost = readsCost + writesCost + deletesCost;
 
