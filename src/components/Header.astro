@@ -16,10 +16,12 @@ const navItems = [
     icon: "mdi:layers-triple",
   },
 ];
+
+const githubRepoUrl = "https://github.com/knajjars/stackchoice";
 ---
 
 <header
-  class="sticky top-0 z-50 bg-purple-50/80 px-4 py-4 backdrop-blur-md md:px-8"
+  class="sticky top-0 z-50 bg-purple-50/80 px-4 py-4 backdrop-blur-md lg:px-8"
 >
   <nav class="flex items-center justify-between px-4">
     <a
@@ -30,11 +32,11 @@ const navItems = [
       StackChoice<span class="text-gray-600">.dev</span>
     </a>
     <input type="checkbox" id="menu-toggle" class="hidden" />
-    <label for="menu-toggle" class="cursor-pointer md:hidden">
+    <label for="menu-toggle" class="cursor-pointer lg:hidden">
       <Icon name="mdi:menu" class="h-6 w-6 text-purple-600" />
     </label>
     <ul
-      class="hidden space-y-2 bg-white/80 backdrop-blur-md md:flex md:space-x-1 md:space-y-0 md:bg-transparent md:backdrop-blur-none"
+      class="hidden space-y-2 bg-white backdrop-blur-md lg:flex lg:space-x-1 lg:space-y-0 lg:bg-transparent lg:backdrop-blur-none"
     >
       {
         navItems.map((item) => (
@@ -56,6 +58,16 @@ const navItems = [
           </li>
         ))
       }
+      <li>
+        <a
+          href={githubRepoUrl}
+          target="_blank"
+          class="flex items-center rounded-full bg-white px-3 py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-100 hover:text-purple-600"
+        >
+          <Icon name="mdi:github" class="mr-2 h-5 w-5" />
+          GitHub
+        </a>
+      </li>
     </ul>
   </nav>
 </header>
