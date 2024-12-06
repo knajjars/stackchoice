@@ -83,8 +83,8 @@
     },
     "functions": {
       "triggers": true,
-      "queueing": false,
-      "scheduling": false,
+      "queueing": true,
+      "scheduling": true,
       "runtime": [
         "Deno"
       ]
