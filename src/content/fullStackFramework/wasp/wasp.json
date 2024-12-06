@@ -1,0 +1,38 @@
+{
+  "$schema": "../../../../.astro/collections/fullStackFramework.schema.json",
+  "slug": "wasp",
+  "website": "https://wasp-lang.dev/",
+  "name": "Wasp",
+  "description": "Wasp (Web Application Specification) is a Rails-like framework for React, Node.js, and Prisma that enables rapid development of full-stack web applications. It uses a declarative approach to eliminate boilerplate code while providing powerful features out of the box. With its expressive syntax, developers can create and deploy production-ready applications with minimal code. The framework emphasizes developer productivity through its concise syntax and built-in features, making it possible to build complete web applications quickly without sacrificing control.",
+  "shortDescription": "Wasp is a Rails-like framework for React, Node.js and Prisma. Build your app in a day and deploy it with a single CLI command.",
+  "logo": "./wasp.png",
+  "language": "TypeScript",
+  "uniqueFeatures": [
+    "Typesafe RPC layer for seamless client-server communication",
+    "Built-in features like API routes, database seeding, and automatic cache invalidation",
+    "Flexible deployment with CLI helpers for popular platforms"
+  ],
+  "repository": "https://github.com/wasp-lang/wasp",
+  "features": {
+    "adminInterface": false,
+    "routing": true,
+    "orm": true,
+    "authentication": true,
+    "authorization": true,
+    "templateEngine": false,
+    "modernJavaScriptFrameworkIntegration": true,
+    "migrations": true,
+    "caching": true,
+    "testing": true,
+    "cli": true,
+    "restApi": true,
+    "realtime": true,
+    "queueing": false,
+    "scheduling": true,
+    "i18n": false,
+    "emailHandling": true,
+    "storage": false,
+    "validation": true,
+    "logging": true
+  }
+}
