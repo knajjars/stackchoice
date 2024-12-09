@@ -27,7 +27,7 @@
     "cli": true,
     "restApi": true,
     "realtime": true,
-    "queueing": false,
+    "queueing": true,
     "scheduling": true,
     "i18n": false,
     "emailHandling": true,
